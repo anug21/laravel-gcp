@@ -1,4 +1,4 @@
-FROM devopsfnl/image:php-8.2-np
+FROM devopsfnl/image:php-8.2.11-np
 
 WORKDIR /var/www/html
 

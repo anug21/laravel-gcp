@@ -1,4 +1,4 @@
-FROM devopsfnl/image:php-8.2
+FROM devopsfnl/image:php-8.2.11
 
 COPY php.ini /usr/local/etc/php/
 
