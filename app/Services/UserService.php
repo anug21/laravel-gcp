@@ -7,6 +7,7 @@ use App\Jobs\RemoveFileJob;
 use App\Jobs\VerifyEmailJob;
 use App\Models\User;
 use App\Traits\ActivityLog;
+use Cache;
 use Config;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
@@ -56,7 +57,12 @@ class UserService
             return null;
         }
         if (Storage::providesTemporaryUrls()) {
-            return Storage::temporaryUrl($path . $filename, now()->addHour());
+            if (Cache::has($path . $filename)) {
+                return Cache::get($path . $filename);
+            }
+            $temporaryUrl = Storage::temporaryUrl($path . $filename, now()->addHour());
+            Cache::put($path . $filename, $temporaryUrl, 3000);
+            return $temporaryUrl;
         }
         return Storage::url($path . $filename);
     }
