@@ -118,9 +118,14 @@ class SearchService
             return $builder;
         }
         if ($this->partWordSearch) {
+            $query_bindings_count = 0;
+
             foreach ($fields as $field) {
-                $builder->orWhere($field, 'ilike', '%' . $query . '%');
+                $builder->orWhere($field, 'ILIKE', ':?');
+                $query_bindings_count++;
             }
+
+            $builder->setBindings(array_fill(0, $query_bindings_count, "%{$query}%"));
             return $builder;
         }
         return $builder->whereFullText($fields, $query);
