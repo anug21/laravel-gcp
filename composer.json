@@ -103,7 +103,8 @@
             "@security-checker"
         ],
         "pre-push": [
-            "@pest"
+            "@pest",
+            "@php artisan enlightn"
         ],
         "post-merge": [
             "composer install",
@@ -112,7 +113,8 @@
         ],
         "tests": [
             "@pre-commit",
-            "@pre-push"
+            "@pest",
+            "@php artisan enlightn --ci"
         ],
         "ci": [
             "@tests"
