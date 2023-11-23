@@ -27,7 +27,12 @@ return [
 
     // If you wish to skip running some analyzers in CI mode, list the classes below.
     'ci_mode_exclude_analyzers' => [
-        'Enlightn\Enlightn\Analyzers\Reliability\EnvExampleAnalyzer'
+        'Enlightn\Enlightn\Analyzers\Performance\CacheDriverAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Performance\QueueDriverAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Performance\SessionDriverAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Reliability\EnvFileAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Reliability\EnvExampleAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Reliability\EnvVariableAnalyzer'
     ],
 
     /*
