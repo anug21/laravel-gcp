@@ -30,6 +30,7 @@
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
         "brainmaestro/composer-git-hooks": "dev-master",
+        "enlightn/enlightn": "^2.6",
         "enlightn/security-checker": "^1.10",
         "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.20",
