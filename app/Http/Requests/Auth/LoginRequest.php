@@ -16,6 +16,13 @@ class LoginRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'email' => strtolower($this->email),
+        ]);
+    }
+
     /**
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */

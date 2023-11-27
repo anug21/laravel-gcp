@@ -10,6 +10,13 @@ use Illuminate\Validation\Rules;
 
 class RegisterUserRequest extends FormRequest
 {
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'email' => strtolower($this->email),
+        ]);
+    }
+
     public function rules(): array
     {
         return [
