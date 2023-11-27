@@ -451,16 +451,17 @@
 										{
 											"listen": "prerequest",
 											"script": {
+												"id": "60cbc745-77c7-4591-98c0-a12dd036c733",
 												"exec": [
 													""
 												],
-												"type": "text/javascript",
-												"id": "60cbc745-77c7-4591-98c0-a12dd036c733"
+												"type": "text/javascript"
 											}
 										},
 										{
 											"listen": "test",
 											"script": {
+												"id": "94b83010-bcdf-4102-8460-07e1c13c8b1a",
 												"exec": [
 													"pm.test('Reponse code to be 200', function () {",
 													"    pm.expect(pm.response.code).to.be.equal(200);",
@@ -473,8 +474,7 @@
 													"",
 													"pm.environment.set('user_token', jsonData.data.token);"
 												],
-												"type": "text/javascript",
-												"id": "94b83010-bcdf-4102-8460-07e1c13c8b1a"
+												"type": "text/javascript"
 											}
 										}
 									],
@@ -490,12 +490,12 @@
 											"formdata": [
 												{
 													"key": "email",
-													"value": "{{user_email}}",
+													"value": "michal@yopmail.com",
 													"type": "text"
 												},
 												{
 													"key": "password",
-													"value": "{{user_password}}",
+													"value": "Test@1234!",
 													"type": "text"
 												}
 											]
@@ -3332,16 +3332,19 @@
 	],
 	"variable": [
 		{
+			"id": "36a7f4f8-db9f-4206-8f31-f5039e3cbe48",
 			"key": "base_url",
 			"value": "http://10.10.1.1/api/v1",
 			"type": "string"
 		},
 		{
+			"id": "6fa69cd1-bdae-4224-a120-5342ff2cdce6",
 			"key": "web_url",
 			"value": "http://10.10.1.1",
 			"type": "string"
 		},
 		{
+			"id": "e3404df5-d908-4950-a499-0993b508d4a2",
 			"key": "admin_url",
 			"value": "http://10.10.1.1/admin",
 			"type": "string"
