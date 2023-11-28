@@ -16,6 +16,8 @@ class PasswordValidationServiceProvider extends ServiceProvider
         // Eliminating sequential increasing/decreasing chars, as per NIST Special Publication 800-63B section 5.1.1.2:
         $this->extendPasswordValidatorWithSequentialCharsRule();
 
+        $this->extendPasswordValidatorWithKeyboardSequenceRule();
+
         Password::defaults(function () {
             return Password::min(8)
                 ->letters()
@@ -24,7 +26,8 @@ class PasswordValidationServiceProvider extends ServiceProvider
                 ->symbols()
                 ->rules([
                     'max_consecutive:2',
-                    'max_sequential:2'
+                    'max_sequential:2',
+                    'max_keyboard_sequential:4'
                 ])
                 ->uncompromised(5);
         });
@@ -79,6 +82,48 @@ class PasswordValidationServiceProvider extends ServiceProvider
         Validator::replacer('max_sequential', function ($message, $attribute, $rule, $parameters) {
             $max_sequential_chars = $parameters[0] ?? 2;
             return __('passwords.sequential_chars', ['count' => $max_sequential_chars]);
+        });
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    private function extendPasswordValidatorWithKeyboardSequenceRule()
+    {
+        Validator::extend('max_keyboard_sequential', function ($attribute, $value, $parameters, $validator) {
+            $max_keyboard_chars = $parameters[0] ?? 2;
+            // currently QWERTY keyboard only
+            $keyboard_sequences = [
+                '~!@#$%^&*()_+',
+                'qwertyuiop[]\\',
+                'QWERTYUIOP{}|',
+                'asdfghjkl;\'',
+                'ASDFGHJKL:"',
+                'zxcvbnm,./',
+                'ZXCVBNM<>?'
+            ];
+
+            foreach ($keyboard_sequences as $sequence) {
+                if (strlen($sequence) <= $max_keyboard_chars) {
+                    continue;
+                }
+
+                for ($i = 0, $loop_length = strlen($sequence) - $max_keyboard_chars; $i < $loop_length; $i++) {
+                    if (str_contains($value, substr($sequence, $i, $max_keyboard_chars + 1))) {
+                        return false;
+                    }
+                    if (str_contains($value, strrev(substr($sequence, $i, $max_keyboard_chars + 1)))) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        });
+
+        Validator::replacer('max_keyboard_sequential', function ($message, $attribute, $rule, $parameters) {
+            $max_keyboard_chars = $parameters[0] ?? 2;
+            return __('passwords.keyboard_sequential_chars', ['count' => $max_keyboard_chars]);
         });
     }
 }
