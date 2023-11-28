@@ -1,8 +1,8 @@
 <?php
 
 beforeEach(function () {
-    $this->admin = createSuperAdmin(password: 'Password@123');
-    $this->user = createUser(password: 'Password@123');
+    $this->admin = createSuperAdmin(password: 'Password@12-3');
+    $this->user = createUser(password: 'Password@12-3');
 });
 
 test('Super admin can see profile', function () {
@@ -52,9 +52,9 @@ test('Super Admin can update profile e-mail', function () {
 test('Super Admin can update profile password', function () {
     $response = $this->actingAs($this->admin)
         ->put(route('admin.password.update'), [
-            'current_password' => 'Password@123',
-            'password' => 'Password@1234',
-            'password_confirmation' => 'Password@1234'
+            'current_password' => 'Password@12-3',
+            'password' => 'Password@12-34',
+            'password_confirmation' => 'Password@12-34'
         ]);
     $response->assertValid(['current_password', 'password'], 'updatePassword');
 });
@@ -103,7 +103,7 @@ test('Super Admin can delete profile', function () {
     $id = $this->admin->id;
     $this->actingAs($this->admin)
         ->delete(route('admin.profile.destroy'), [
-            'password' => 'Password@123',
+            'password' => 'Password@12-3',
         ])
         ->assertRedirect(route('admin.login'));
     expect($this->isAuthenticated())->toBeFalse();

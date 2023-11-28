@@ -1,13 +1,13 @@
 <?php
 
 beforeEach(function () {
-    $this->user = createUser('user@example.com', 'Password@123');
+    $this->user = createUser('user@example.com', 'Password@12-3');
 });
 
 test('users can authenticate using the login screen', function () {
     $this->post(route('login'), [
         'email' => $this->user->email,
-        'password' => 'Password@123',
+        'password' => 'Password@12-3',
     ])
         ->assertJsonStructure(
             [
@@ -38,7 +38,7 @@ test('Users can not authenticate with invalid password', function () {
 test('Users can logout', function () {
     $response = $this->post(route('login'), [
         'email' => $this->user->email,
-        'password' => 'Password@123',
+        'password' => 'Password@12-3',
     ]);
     $token = json_decode($response->content(), true)['data']['token'];
     $this->withHeaders([

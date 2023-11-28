@@ -5,7 +5,7 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 
 beforeEach(function () {
-    $this->admin = createSuperAdmin('test@example.com', 'Password@123');
+    $this->admin = createSuperAdmin('test@example.com', 'Password@12-3');
 });
 
 test('See forgot password form', function () {
@@ -28,8 +28,8 @@ test('Email password reset', function () {
             $this->post(route('admin.password.store'), [
                 'token' => $notification->token,
                 'email' => $admin->email,
-                'password' => 'Password@1234',
-                'password_confirmation' => 'Password@1234',
+                'password' => 'Password@12-34',
+                'password_confirmation' => 'Password@12-34',
             ])
                 ->assertValid()
                 ->assertSessionHasNoErrors()
@@ -50,8 +50,8 @@ test('Cannot email password reset if no token', function () {
         function (object $notification) use ($admin) {
             $this->post(route('admin.password.store'), [
                 'email' => $admin->email,
-                'password' => 'Password@1234',
-                'password_confirmation' => 'Password@1234',
+                'password' => 'Password@12-34',
+                'password_confirmation' => 'Password@12-34',
             ])
                 ->assertInvalid();
             return true;

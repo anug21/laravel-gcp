@@ -4,8 +4,8 @@ test('New users can register', function () {
     $response = $this->post(route('register'), [
         'first_name' => 'Test',
         'email' => 'test@founderandlightning.com',
-        'password' => 'Admin@123',
-        'password_confirmation' => 'Admin@123',
+        'password' => 'Admin@12-3',
+        'password_confirmation' => 'Admin@12-3',
     ]);
 
     $response->assertCreated();
@@ -61,11 +61,38 @@ test('Password format validations', function () {
 
     $response_small_password->assertInvalid();
 
+    $response_consecutive_chars_password = $this->post(route('register'), [
+        'first_name' => 'Test',
+        'email' => 'test@founderandlightning.com',
+        'password' => 'P@sssword1',
+        'password_confirmation' => 'P@sssword1',
+    ]);
+
+    $response_consecutive_chars_password->assertInvalid();
+
+    $response_sequential_inc_chars_password = $this->post(route('register'), [
+        'first_name' => 'Test',
+        'email' => 'test@founderandlightning.com',
+        'password' => 'P@ssword123',
+        'password_confirmation' => 'P@sssword123',
+    ]);
+
+    $response_sequential_inc_chars_password->assertInvalid();
+
+    $response_sequential_dec_chars_password = $this->post(route('register'), [
+        'first_name' => 'Test',
+        'email' => 'test@founderandlightning.com',
+        'password' => 'P@ssword321',
+        'password_confirmation' => 'P@sssword321',
+    ]);
+
+    $response_sequential_dec_chars_password->assertInvalid();
+
     $response_valid_password = $this->post(route('register'), [
         'first_name' => 'Test',
         'email' => 'test@founderandlightning.com',
-        'password' => 'PASSword@123',
-        'password_confirmation' => 'PASSword@123',
+        'password' => 'PASSword@12-3',
+        'password_confirmation' => 'PASSword@12-3',
     ]);
 
     $response_valid_password->assertCreated();

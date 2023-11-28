@@ -165,8 +165,8 @@ test('Super Admin can store users', function () {
             'first_name' => 'example',
             'last_name' => 'test',
             'email' => 'example_test@founderandlightning.com',
-            'password' => 'Password@123',
-            'password_confirmation' => 'Password@123',
+            'password' => 'Password@12-3',
+            'password_confirmation' => 'Password@12-3',
             'role' => ['user'],
         ])
         ->assertValid();

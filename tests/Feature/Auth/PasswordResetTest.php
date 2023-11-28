@@ -46,8 +46,8 @@ test('Password can be reset with valid token', function () {
         $response = $this->post(route('password.store'), [
             'token' => $notification->token,
             'email' => $user->email,
-            'password' => 'Password@123',
-            'password_confirmation' => 'Password@123',
+            'password' => 'Password@12-3',
+            'password_confirmation' => 'Password@12-3',
         ]);
         Event::assertDispatched(PasswordReset::class);
         $response->assertSessionHasNoErrors();
