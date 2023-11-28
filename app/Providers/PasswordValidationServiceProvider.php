@@ -54,7 +54,7 @@ class PasswordValidationServiceProvider extends ServiceProvider
         Validator::extend('max_sequential', function ($attribute, $value, $parameters, $validator) {
             $max_sequential_chars = $parameters[0] ?? 2;
 
-            for ($i = 0; $i < strlen($value) - $max_sequential_chars; $i++) {
+            for ($i = 0, $loop_length = strlen($value) - $max_sequential_chars; $i < $loop_length; $i++) {
                 $increasing = true;
                 $decreasing = true;
 
