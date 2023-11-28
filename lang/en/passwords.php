@@ -18,5 +18,7 @@ return [
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that email address.",
+    'consecutive_chars' => 'The :attribute must not contain more than :count consecutive identical characters.',
+    'sequential_chars' => 'The :attribute must not contain more than :count sequential increasing/decreasing characters.',
 
 ];
