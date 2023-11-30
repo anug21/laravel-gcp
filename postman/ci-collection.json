@@ -184,8 +184,8 @@
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
 													"pm.variables.set(\"email\", email);\r",
-													"pm.variables.set(\"password\", \"Admin@12345\");\r",
-													"pm.variables.set(\"password_confirmation\", \"Admin@12345\");\r",
+													"pm.variables.set(\"password\", \"Admin@12465\");\r",
+													"pm.variables.set(\"password_confirmation\", \"Admin@12465\");\r",
 													"pm.variables.set(\"first_name\", \"Platform\");\r",
 													"pm.variables.set(\"last_name\", \"user\");"
 												],
@@ -471,8 +471,8 @@
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
 													"pm.variables.set(\"email\", email);\r",
-													"pm.variables.set(\"password\", \"Admin@12345\");\r",
-													"pm.variables.set(\"password_confirmation\", \"Admin@12345\");\r",
+													"pm.variables.set(\"password\", \"Admin@12465\");\r",
+													"pm.variables.set(\"password_confirmation\", \"Admin@12465\");\r",
 													"pm.variables.set(\"first_name\", \"John\");\r",
 													"pm.variables.set(\"last_name\", \"\");\r",
 													""
@@ -994,7 +994,7 @@
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
 													"pm.environment.set(\"email\", email);\r",
-													"pm.environment.set(\"password\", \"Admin@12345\");"
+													"pm.environment.set(\"password\", \"Admin@12465\");"
 												],
 												"type": "text/javascript"
 											}
@@ -3668,8 +3668,8 @@
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
 													"pm.variables.set(\"email\", email);\r",
-													"pm.variables.set(\"password\", \"Admin@12345\");\r",
-													"pm.variables.set(\"password_confirmation\", \"Admin@12345\");\r",
+													"pm.variables.set(\"password\", \"Admin@12465\");\r",
+													"pm.variables.set(\"password_confirmation\", \"Admin@12465\");\r",
 													"pm.variables.set(\"first_name\", \"Platform\");\r",
 													"pm.variables.set(\"last_name\", \"user\");"
 												],
