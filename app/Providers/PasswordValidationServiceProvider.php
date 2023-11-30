@@ -36,38 +36,35 @@ class PasswordValidationServiceProvider extends ServiceProvider
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    private function extendPasswordValidatorWithConsecutiveCharsRule()
+    private function extendPasswordValidatorWithConsecutiveCharsRule(): void
     {
         Validator::extend('max_consecutive', function ($attribute, $value, $parameters, $validator) {
-            $max_consecutive_chars = $parameters[0] ?? 2;
-            return !preg_match('/([a-zA-Z0-9])\1{' . $max_consecutive_chars . ',}/', $value);
+            $maxConsecutiveChars = $parameters[0] ?? 2;
+            return !preg_match('/([a-zA-Z0-9])\1{' . $maxConsecutiveChars . ',}/', $value);
         });
 
         Validator::replacer('max_consecutive', function ($message, $attribute, $rule, $parameters) {
-            $max_consecutive_chars = $parameters[0] ?? 2;
-            return __('passwords.consecutive_chars', ['count' => $max_consecutive_chars]);
+            $maxConsecutiveChars = $parameters[0] ?? 2;
+            return __('passwords.consecutive_chars', ['count' => $maxConsecutiveChars]);
         });
     }
 
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    private function extendPasswordValidatorWithSequentialCharsRule()
+    private function extendPasswordValidatorWithSequentialCharsRule(): void
     {
         Validator::extend('max_sequential', function ($attribute, $value, $parameters, $validator) {
-            $max_sequential_chars = $parameters[0] ?? 2;
+            $maxSequentialChars = $parameters[0] ?? 2;
 
-            for ($i = 0, $loop_length = strlen($value) - $max_sequential_chars; $i < $loop_length; $i++) {
+            for ($i = 0, $loopLength = strlen($value) - $maxSequentialChars; $i < $loopLength; $i++) {
                 $increasing = true;
                 $decreasing = true;
 
-                for ($j = 0; $j < $max_sequential_chars; $j++) {
-                    if (ord($value[$i + $j]) != ord($value[$i + $j + 1]) + 1) {
-                        $increasing = false;
-                    }
-                    if (ord($value[$i + $j]) != ord($value[$i + $j + 1]) - 1) {
-                        $decreasing = false;
-                    }
+                for ($j = 0; $j < $maxSequentialChars; $j++) {
+                    $increasing = ord($value[$i + $j]) === ord($value[$i + $j + 1]) + 1;
+                    $decreasing = ord($value[$i + $j]) === ord($value[$i + $j + 1]) - 1;
+
                     if (!$increasing && !$decreasing) {
                         break;
                     }
@@ -80,20 +77,20 @@ class PasswordValidationServiceProvider extends ServiceProvider
         });
 
         Validator::replacer('max_sequential', function ($message, $attribute, $rule, $parameters) {
-            $max_sequential_chars = $parameters[0] ?? 2;
-            return __('passwords.sequential_chars', ['count' => $max_sequential_chars]);
+            $maxSequentialChars = $parameters[0] ?? 2;
+            return __('passwords.sequential_chars', ['count' => $maxSequentialChars]);
         });
     }
 
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    private function extendPasswordValidatorWithKeyboardSequenceRule()
+    private function extendPasswordValidatorWithKeyboardSequenceRule(): void
     {
         Validator::extend('max_keyboard_sequential', function ($attribute, $value, $parameters, $validator) {
-            $max_keyboard_chars = $parameters[0] ?? 2;
+            $maxKeyboardChars = $parameters[0] ?? 2;
             // currently QWERTY keyboard only
-            $keyboard_sequences = [
+            $keyboardSequences = [
                 '~!@#$%^&*()_+',
                 'qwertyuiop[]\\',
                 'QWERTYUIOP{}|',
@@ -103,16 +100,16 @@ class PasswordValidationServiceProvider extends ServiceProvider
                 'ZXCVBNM<>?'
             ];
 
-            foreach ($keyboard_sequences as $sequence) {
-                if (strlen($sequence) <= $max_keyboard_chars) {
+            foreach ($keyboardSequences as $sequence) {
+                if (strlen($sequence) <= $maxKeyboardChars) {
                     continue;
                 }
 
-                for ($i = 0, $loop_length = strlen($sequence) - $max_keyboard_chars; $i < $loop_length; $i++) {
-                    if (str_contains($value, substr($sequence, $i, $max_keyboard_chars + 1))) {
+                for ($i = 0, $loopLength = strlen($sequence) - $maxKeyboardChars; $i < $loopLength; $i++) {
+                    if (str_contains($value, substr($sequence, $i, $maxKeyboardChars + 1))) {
                         return false;
                     }
-                    if (str_contains($value, strrev(substr($sequence, $i, $max_keyboard_chars + 1)))) {
+                    if (str_contains($value, strrev(substr($sequence, $i, $maxKeyboardChars + 1)))) {
                         return false;
                     }
                 }
@@ -122,8 +119,8 @@ class PasswordValidationServiceProvider extends ServiceProvider
         });
 
         Validator::replacer('max_keyboard_sequential', function ($message, $attribute, $rule, $parameters) {
-            $max_keyboard_chars = $parameters[0] ?? 2;
-            return __('passwords.keyboard_sequential_chars', ['count' => $max_keyboard_chars]);
+            $maxKeyboardChars = $parameters[0] ?? 2;
+            return __('passwords.keyboard_sequential_chars', ['count' => $maxKeyboardChars]);
         });
     }
 }
