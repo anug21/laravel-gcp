@@ -62,7 +62,7 @@ services:
 #      - "9200:9200"
 #      - "9300:9300"
 #    volumes:
-#      - elasticsearch:/usr/share/elasticsearch/data
+#      - lbp-elasticsearch-disk:/usr/share/elasticsearch/data
 #    networks:
 #      lbp-network:
 #        ipv4_address: 10.10.1.7
@@ -99,7 +99,7 @@ services:
 # On-disk storage of DB data, when containers are stopped
 volumes:
   lbp-pg-disk: {}
-  elasticsearch:
+  lbp-elasticsearch-disk:
     driver: local
 
 # Local network for services running using this docker-compose config
