@@ -18,6 +18,7 @@ class PasswordValidationServiceProvider extends ServiceProvider
 
         $this->extendPasswordValidatorWithKeyboardSequenceRule();
         $this->extendPasswordValidatorWithCurrentPasswordRule();
+        $this->extendPasswordValidatorWithEmailRule();
 
         Password::defaults(function () {
             return Password::min(8)
@@ -27,6 +28,7 @@ class PasswordValidationServiceProvider extends ServiceProvider
                 ->symbols()
                 ->rules([
                     'not_current',
+                    'no_email',
                     'max_consecutive:2',
                     'max_sequential:2',
                     'max_keyboard_sequential:4'
@@ -143,6 +145,26 @@ class PasswordValidationServiceProvider extends ServiceProvider
 
         Validator::replacer('not_current', function ($message, $attribute, $rule, $parameters) {
             return __('passwords.equals_current');
+        });
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    private function extendPasswordValidatorWithEmailRule()
+    {
+        Validator::extend('no_email', function ($attribute, $value, $parameters, $validator) {
+            $data = $validator->getData();
+            if (!isset($data['email'])) {
+                return true; // when "email" attribute is not required, skip rule
+            }
+
+            $email_prefix = explode('@', $data['email'])[0];
+            return !str_contains(strtolower($value), strtolower($email_prefix));
+        });
+
+        Validator::replacer('no_email', function ($message, $attribute, $rule, $parameters) {
+            return __('passwords.contains_email');
         });
     }
 }
