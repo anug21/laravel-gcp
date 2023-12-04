@@ -17,6 +17,7 @@ class PasswordValidationServiceProvider extends ServiceProvider
         $this->extendPasswordValidatorWithSequentialCharsRule();
 
         $this->extendPasswordValidatorWithKeyboardSequenceRule();
+        $this->extendPasswordValidatorWithCurrentPasswordRule();
 
         Password::defaults(function () {
             return Password::min(8)
@@ -25,6 +26,7 @@ class PasswordValidationServiceProvider extends ServiceProvider
                 ->numbers()
                 ->symbols()
                 ->rules([
+                    'not_current',
                     'max_consecutive:2',
                     'max_sequential:2',
                     'max_keyboard_sequential:4'
@@ -121,6 +123,26 @@ class PasswordValidationServiceProvider extends ServiceProvider
         Validator::replacer('max_keyboard_sequential', function ($message, $attribute, $rule, $parameters) {
             $maxKeyboardChars = $parameters[0] ?? 2;
             return __('passwords.keyboard_sequential_chars', ['count' => $maxKeyboardChars]);
+        });
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    private function extendPasswordValidatorWithCurrentPasswordRule()
+    {
+        Validator::extend('not_current', function ($attribute, $value, $parameters, $validator) {
+            $data = $validator->getData();
+            if (!isset($data['current_' . $attribute])) {
+                return true; // when "current_*" attribute is not required, skip rule
+            }
+
+            $current = $data['current_' . $attribute];
+            return $value !== $current;
+        });
+
+        Validator::replacer('not_current', function ($message, $attribute, $rule, $parameters) {
+            return __('passwords.equals_current');
         });
     }
 }

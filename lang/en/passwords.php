@@ -21,5 +21,5 @@ return [
     'consecutive_chars' => 'The :attribute must not contain more than :count consecutive identical characters.',
     'sequential_chars' => 'The :attribute must not contain more than :count sequential increasing/decreasing characters.',
     'keyboard_sequential_chars' => 'The :attribute must not contain more than :count sequential characters on the keyboard.',
-
+    'equals_current' => 'The new :attribute must not be the same as the current :attribute',
 ];
