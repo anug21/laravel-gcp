@@ -106,6 +106,15 @@ test('Password format validations', function () {
 
     $responseSequentialDecKeyboardCharsPassword->assertInvalid();
 
+    $responsePasswordContainingEmail = $this->post(route('register'), [
+        'first_name' => 'Test',
+        'email' => 'test@founderandlightning.com',
+        'password' => 'PAss-test-word@12-3',
+        'password_confirmation' => 'PAss-test-word@12-3',
+    ]);
+
+    $responsePasswordContainingEmail->assertInvalid();
+
     $responseValidPassword = $this->post(route('register'), [
         'first_name' => 'Test',
         'email' => 'test@founderandlightning.com',

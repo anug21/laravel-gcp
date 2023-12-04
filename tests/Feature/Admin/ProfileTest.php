@@ -109,6 +109,17 @@ test('Super Admin cannot update profile password if the same as current password
         ->assertInvalid(['password'], 'updatePassword');
 });
 
+test('Super Admin cannot update profile password if containing email username', function () {
+    $email_prefix = explode('@', $this->admin->email)[0];
+    $this->actingAs($this->admin)
+        ->put(route('admin.password.update'), [
+            'current_password' => 'Password@12-3',
+            'password' => 'Ax-' . $email_prefix . '-1',
+            'password_confirmation' => 'Ax-' . $email_prefix . '-1'
+        ])
+        ->assertInvalid(['password'], 'updatePassword');
+});
+
 test('Super Admin can delete profile', function () {
     $id = $this->admin->id;
     $this->actingAs($this->admin)
