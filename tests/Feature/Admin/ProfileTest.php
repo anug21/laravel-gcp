@@ -62,9 +62,9 @@ test('Super Admin can update profile password', function () {
 test('User cannot update profile password', function () {
     $this->actingAs($this->user)
         ->put(route('admin.password.update'), [
-            'current_password' => 'Password@123',
-            'password' => 'Password@1234',
-            'password_confirmation' => 'Password@1234'
+            'current_password' => 'Password@12-3',
+            'password' => 'Password@12-34',
+            'password_confirmation' => 'Password@12-34'
         ])
         ->assertForbidden();
 });
@@ -72,7 +72,7 @@ test('User cannot update profile password', function () {
 test('Super Admin cannot update profile password if not match', function () {
     $this->actingAs($this->admin)
         ->put(route('admin.password.update'), [
-            'current_password' => 'Password@123',
+            'current_password' => 'Password@12-3',
             'password' => 'password',
             'password_confirmation' => 'password_not_match'
         ])
@@ -82,7 +82,7 @@ test('Super Admin cannot update profile password if not match', function () {
 test('Super Admin cannot update profile password if not pass requirements', function () {
     $this->actingAs($this->admin)
         ->put(route('admin.password.update'), [
-            'current_password' => 'Password@123',
+            'current_password' => 'Password@12-3',
             'password' => 'password',
             'password_confirmation' => 'password'
         ])
@@ -93,8 +93,8 @@ test('Super Admin cannot update profile password if current password is incorrec
     $this->actingAs($this->admin)
         ->put(route('admin.password.update'), [
             'current_password' => 'wrong_password',
-            'password' => 'Password@123123',
-            'password_confirmation' => 'Password@123123'
+            'password' => 'Password@12-312-3',
+            'password_confirmation' => 'Password@12-312-3'
         ])
         ->assertInvalid(['current_password'], 'updatePassword');
 });
