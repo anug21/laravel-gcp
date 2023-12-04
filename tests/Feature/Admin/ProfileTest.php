@@ -99,6 +99,16 @@ test('Super Admin cannot update profile password if current password is incorrec
         ->assertInvalid(['current_password'], 'updatePassword');
 });
 
+test('Super Admin cannot update profile password if the same as current password', function () {
+    $this->actingAs($this->admin)
+        ->put(route('admin.password.update'), [
+            'current_password' => 'Password@12-3',
+            'password' => 'Password@12-3',
+            'password_confirmation' => 'Password@12-3'
+        ])
+        ->assertInvalid(['password'], 'updatePassword');
+});
+
 test('Super Admin can delete profile', function () {
     $id = $this->admin->id;
     $this->actingAs($this->admin)
