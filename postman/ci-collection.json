@@ -5848,12 +5848,9 @@
 											"script": {
 												"id": "990e5e57-b150-4232-a44c-c90299e10c88",
 												"exec": [
-													"pm.variables.set(\"password\", \"User_@5481\");\r",
-													"pm.variables.set(\"password_confirmation\",\"User_@5481\");\r",
-													"pm.environment.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
-													"var uid = pm.environment.get(\"UID\");\r",
-													"var email = 'user_' + uid + '@yopmail.com';\r",
-													"pm.environment.set(\"email\", email);\r",
+													"pm.variables.set(\"password\", \"User@5481\");\r",
+													"pm.variables.set(\"password_confirmation\",\"User@5481\");\r",
+													"pm.environment.set(\"email\", \"user@yopmail.com\");\r",
 													""
 												],
 												"type": "text/javascript"
