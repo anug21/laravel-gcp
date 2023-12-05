@@ -5848,9 +5848,9 @@
 											"script": {
 												"id": "990e5e57-b150-4232-a44c-c90299e10c88",
 												"exec": [
-													"pm.variables.set(\"password\", \"User@5481\");\r",
-													"pm.variables.set(\"password_confirmation\",\"User@5481\");\r",
-													"pm.environment.set(\"email\", \"user@yopmail.com\");\r",
+													"pm.variables.set(\"password\", \"Pest@5481\");\r",
+													"pm.variables.set(\"password_confirmation\",\"Pest@5481\");\r",
+													"pm.environment.set(\"email\", \"Pest@yopmail.com\");\r",
 													""
 												],
 												"type": "text/javascript"
