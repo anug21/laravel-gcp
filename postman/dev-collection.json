@@ -707,7 +707,7 @@
 										"auth": {
 											"type": "bearer",
 											"bearer": {
-												"token": "2|laravel_sanctum_kb1Iuk9xYXzvL6k8Wos0Ne0xXpMmVHMhCW40ZBPr5a34fde2"
+												"token": "{{user_token}}"
 											}
 										},
 										"method": "GET",
@@ -3332,16 +3332,19 @@
 	],
 	"variable": [
 		{
+			"id": "36a7f4f8-db9f-4206-8f31-f5039e3cbe48",
 			"key": "base_url",
 			"value": "http://10.10.1.1/api/v1",
 			"type": "string"
 		},
 		{
+			"id": "6fa69cd1-bdae-4224-a120-5342ff2cdce6",
 			"key": "web_url",
 			"value": "http://10.10.1.1",
 			"type": "string"
 		},
 		{
+			"id": "e3404df5-d908-4950-a499-0993b508d4a2",
 			"key": "admin_url",
 			"value": "http://10.10.1.1/admin",
 			"type": "string"
