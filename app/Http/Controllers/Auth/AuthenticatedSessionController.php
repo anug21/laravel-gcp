@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use DateTime;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,7 +30,8 @@ class AuthenticatedSessionController extends Controller
                 httpCode: Response::HTTP_FORBIDDEN
             );
         }
-        $token = $user->createToken(request()->userAgent())->plainTextToken;
+        $expiration = (new DateTime())->modify('+' . config('sanctum.expiration') . 'minutes');
+        $token = $user->createToken(request()->userAgent(), expiresAt: $expiration)->plainTextToken;
         $this->activity('Log in', $user, $user);
 
         return $this->response(

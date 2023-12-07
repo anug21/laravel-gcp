@@ -27,6 +27,20 @@ test('users can authenticate using the login screen', function () {
     $this->assertAuthenticated();
 });
 
+test('personal access token is created with expiration timestamp', function () {
+    $response = $this->post(route('login'), [
+        'email' => $this->user->email,
+        'password' => 'Password@12-3',
+    ])
+        ->assertOk();
+
+    $this->assertDatabaseHas('personal_access_tokens', [
+        'tokenable_id' => $response['data']['id'],
+        'tokenable_type' => 'App\Models\User',
+        ['expires_at', '<>', null]
+    ]);
+});
+
 test('Users can not authenticate with invalid password', function () {
     $this->post(route('login'), [
         'email' => $this->user->email,
