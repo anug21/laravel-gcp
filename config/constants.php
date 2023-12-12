@@ -29,7 +29,8 @@ return [
                 'height_px' => 32,
             ],
             'max_file_size' => 10240,
-        ]
+        ],
+        'invitation_lifetime' => env('USER_INVITATION_LIFETIME', 2880),
     ],
     'pagination' => [
         'default_per_page' => 10,
