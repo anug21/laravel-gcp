@@ -5,6 +5,7 @@ use App\Http\Controllers\v1\Profile\ProfileImageController;
 use App\Http\Controllers\v1\Profile\ProfileNotificationController;
 use App\Http\Controllers\v1\Profile\ProfileSubscriptionController;
 use App\Http\Controllers\v1\UserController;
+use App\Http\Controllers\v1\UserInvitationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +41,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::patch('/profile/notifications', [ProfileNotificationController::class, 'update'])
         ->name('profile-notification.update');
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view users');
+
+    Route::post('/users/invite', [UserInvitationController::class, 'store'])->name('users.invite')->can('create users');
 });
 
 Route::get('/', function () {
