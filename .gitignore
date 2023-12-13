@@ -25,3 +25,4 @@ _ide_helper_models.php
 docker-compose.override.yml
 /wiki
 .DS_Store
+/fl-web-boilerplate
