@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleListController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PasswordResetLinkController;
+use App\Http\Controllers\v1\UserInvitationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,9 @@ Route::get('/', function () {
 Route::get('/api', function () {
     return redirect()->route('home.api');
 })->name('api');
+
+// route for user invitation
+Route::get('/invitation/{signature}', [UserInvitationController::class, 'verify'])->name('users.invitation.verify');
 
 Route::prefix('/admin')->group(function() {
     Route::middleware('guest')->group(function () {

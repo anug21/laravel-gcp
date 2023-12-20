@@ -11,6 +11,8 @@ return [
      |
      */
 
-    'verified_email_redirect' => '/account/confirmed'
+    'verified_email_redirect' => '/account/confirmed',
+    'invitation_success_redirect' => '/account/password-create',
+    'invitation_fail_redirect' => '/account/signup-verification-expired',
     
 ];
