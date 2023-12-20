@@ -14,7 +14,9 @@ return [
         'remove_account_confirmation' => 'Are you sure you want to delete this account?',
         'remove_account_consequences' => 'Once account is deleted, all of its resources and data will be permanently deleted.',
         'search_error' => 'Search error',
-        'invitation_created' => 'Invitation created for :email, active until :expiration.'
+        'invitation_created' => 'Invitation created for :email, active until :expiration.',
+        'invitation_email_subject' => 'You are invited to register at :service'
+
     ],
     'profile' => [
         'updated' => 'Profile updated successfully.',
