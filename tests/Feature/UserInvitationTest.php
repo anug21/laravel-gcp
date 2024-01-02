@@ -1,7 +1,7 @@
 <?php
 
 test('Can verify invitation with correct signature', function () {
-    $invitation = (new \App\Services\UserInvitationService())->create([
+    $invitation = \App\Services\UserInvitationService::create([
         'email' => 'test@laravel.com',
         'role' => 'user',
     ]);
@@ -17,7 +17,7 @@ test('Cannot verify invitation with incorrect signature', function () {
 });
 
 test('Cannot verify expired invitation', function () {
-    $invitation = (new \App\Services\UserInvitationService())->create([
+    $invitation = \App\Services\UserInvitationService::create([
         'email' => 'test@laravel.com',
         'role' => 'user',
     ]);

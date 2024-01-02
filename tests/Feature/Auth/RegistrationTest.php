@@ -2,7 +2,6 @@
 
 test('New users can register', function () {
     $response = $this->post(route('register'), [
-        'first_name' => 'Test',
         'email' => 'test@founderandlightning.com',
         'password' => 'Admin@12-3',
         'password_confirmation' => 'Admin@12-3',
@@ -11,7 +10,26 @@ test('New users can register', function () {
     $response->assertCreated();
     $response->assertSee(__('messages.user.registered'));
     $this->assertDatabaseHas('users', [
-        'first_name' => 'Test'
+        'email' => 'test@founderandlightning.com'
+    ]);
+});
+
+test('Users with invitation can register', function () {
+    $invitation = \App\Services\UserInvitationService::create([
+        'email' => 'test@founderandlightning.com',
+        'role' => 'user',
+    ]);
+
+    $response = $this->post(route('register'), [
+        'invitation_key' => $invitation->signature,
+        'password' => 'Admin@12-3',
+        'password_confirmation' => 'Admin@12-3',
+    ]);
+
+    $response->assertCreated();
+    $response->assertSee(__('messages.user.registered'));
+    $this->assertDatabaseHas('users', [
+        'email' => 'test@founderandlightning.com'
     ]);
 });
 

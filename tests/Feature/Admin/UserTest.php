@@ -162,8 +162,6 @@ test('User with permissions can add users', function () {
 test('Super Admin can store users', function () {
     $this->actingAs($this->admin)
         ->post(route('admin.users.store'), [
-            'first_name' => 'example',
-            'last_name' => 'test',
             'email' => 'example_test@founderandlightning.com',
             'password' => 'Password@12-3',
             'password_confirmation' => 'Password@12-3',
@@ -171,8 +169,6 @@ test('Super Admin can store users', function () {
         ])
         ->assertValid();
     $this->assertDatabaseHas('users', [
-        'first_name' => 'example',
-        'last_name' => 'test',
         'email' => 'example_test@founderandlightning.com',
     ]);
 });
