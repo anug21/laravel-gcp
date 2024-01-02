@@ -28,6 +28,8 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: testing
+    ports:
+      - "5444:5432"
     networks:
       lbp-network:
         ipv4_address: 10.10.1.2
@@ -36,6 +38,8 @@ services:
     image: 'axllent/mailpit:latest'
     container_name: lbp-mailpit
     restart: always
+    ports:
+      - "1011:8025"
     networks:
       lbp-network:
         ipv4_address: 10.10.1.3
