@@ -8,6 +8,13 @@ use Illuminate\Validation\Rule;
 
 class UserInvitationRequest extends FormRequest
 {
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'email' => strtolower($this->email),
+        ]);
+    }
+
     public function rules(): array
     {
         return [
