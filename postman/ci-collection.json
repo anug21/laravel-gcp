@@ -5545,7 +5545,7 @@
 													"    pm.response.to.have.status(422);",
 													"});",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.text()).to.include(\"The email field is required.\");",
+													"    pm.expect(pm.response.text()).to.include(\"The email field is required when invitation key is not present.\");",
 													"});",
 													"    pm.test(\"Content-Type is present\", function () {",
 													"        pm.response.to.have.header(\"Content-Type\");",
