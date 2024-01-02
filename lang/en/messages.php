@@ -15,8 +15,9 @@ return [
         'remove_account_consequences' => 'Once account is deleted, all of its resources and data will be permanently deleted.',
         'search_error' => 'Search error',
         'invitation_created' => 'Invitation created for :email, active until :expiration.',
-        'invitation_email_subject' => 'You are invited to register at :service'
-
+        'invitation_email_subject' => 'You are invited to register at :service',
+        'invitation_invalid_or_expired' => 'The :attribute is invalid or expired.',
+        'invitation_user_already_exists' => 'The :attribute points to a user that already exists in the database. Invitation will be invalidated.'
     ],
     'profile' => [
         'updated' => 'Profile updated successfully.',
