@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Traits\ActivityLog;
 use Cache;
 use Config;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class UserService
     {
         return User::create(
             [
-                'first_name' => $userInfo['first_name'],
+                'first_name' => $userInfo['first_name'] ?? null,
                 'last_name' => $userInfo['last_name'] ?? null,
                 'email' => $userInfo['email'],
                 'password' => Hash::make($userInfo['password']),
@@ -31,8 +32,13 @@ class UserService
 
     public function register(array $userInfo): array
     {
-        $user = $this->create($userInfo);
-        $user->assignRole(Config::get('constants.roles.user'));
+        if (array_key_exists('invitation_key', $userInfo)) {
+            $user = $this->registerWithInvitation($userInfo);
+            $user->markEmailAsVerified();
+            return $user->toArray();
+        }
+
+        $user = $this->registerWithEmail($userInfo);
         dispatch(new VerifyEmailJob($user))->onQueue('default');
         return $user->toArray();
     }
@@ -86,5 +92,21 @@ class UserService
     public function getAllUsers(): AnonymousResourceCollection
     {
         return UserResource::collection(User::all());
+    }
+
+    private function registerWithEmail(array $userInfo): User
+    {
+        $user = $this->create($userInfo);
+        $user->assignRole(Config::get('constants.roles.user'));
+        return $user;
+    }
+
+    private function registerWithInvitation(array $userInfo): User
+    {
+        $userInfo['email'] = UserInvitationService::invalidateAndFetchEmail($userInfo['invitation_key']);
+        if (is_null($userInfo['email'])) {
+            throw new InvalidArgumentException('Correct invitation not found for invalidation');
+        }
+        return $this->registerWithEmail($userInfo);
     }
 }
