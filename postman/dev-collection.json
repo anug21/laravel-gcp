@@ -155,21 +155,22 @@
 										{
 											"listen": "prerequest",
 											"script": {
+												"id": "ea8ad62e-2b13-43b2-8dd6-c2c0a16a6a46",
 												"exec": [
 													"",
 													"pm.environment.set('first_name', 'John');",
 													"pm.environment.set('last_name', 'Doe');",
 													"pm.environment.set('user_email', 'john_doe+' +  Math.floor((Math.random() * 10000) + 1) + '@jdecode.dev' );",
-													"pm.environment.set('user_password', 'JohnDoe@123');",
+													"pm.environment.set('user_password', 'JohnDoe@124');",
 													""
 												],
-												"type": "text/javascript",
-												"id": "ea8ad62e-2b13-43b2-8dd6-c2c0a16a6a46"
+												"type": "text/javascript"
 											}
 										},
 										{
 											"listen": "test",
 											"script": {
+												"id": "2122c66c-91e3-47aa-ba06-b1296210326c",
 												"exec": [
 													"pm.test('Reponse code to be 201', function () {",
 													"    pm.expect(pm.response.code).to.be.equal(201);",
@@ -178,8 +179,7 @@
 													"",
 													""
 												],
-												"type": "text/javascript",
-												"id": "2122c66c-91e3-47aa-ba06-b1296210326c"
+												"type": "text/javascript"
 											}
 										}
 									],
@@ -490,12 +490,12 @@
 											"formdata": [
 												{
 													"key": "email",
-													"value": "",
+													"value": "{{user_email}}",
 													"type": "text"
 												},
 												{
 													"key": "password",
-													"value": "Test@1234!",
+													"value": "{{user_password}}",
 													"type": "text"
 												}
 											]
