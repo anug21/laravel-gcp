@@ -28,7 +28,7 @@ class RegisterUserRequest extends FormRequest
                 'string',
                 'size:64',
                 function ($attribute, $value, $fail) {
-                    $invitation = UserInvitationService::getBySignature($value);
+                    $invitation = (new UserInvitationService())->getBySignature($value);
 
                     if (is_null($invitation)) {
                         $fail(__('messages.user.invitation_invalid_or_expired', ['attribute' => $attribute]));

@@ -103,7 +103,7 @@ class UserService
 
     private function registerWithInvitation(array $userInfo): User
     {
-        $userInfo['email'] = UserInvitationService::invalidateAndFetchEmail($userInfo['invitation_key']);
+        $userInfo['email'] = (new UserInvitationService())->invalidateAndFetchEmail($userInfo['invitation_key']);
         if (is_null($userInfo['email'])) {
             throw new InvalidArgumentException('Correct invitation not found for invalidation');
         }

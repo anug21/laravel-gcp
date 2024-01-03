@@ -1,8 +1,11 @@
 <?php
 
+use App\Services\UserInvitationService;
+
 test('New users can register', function () {
+    $email = fake()->freeEmail;
     $response = $this->post(route('register'), [
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'Admin@12-3',
         'password_confirmation' => 'Admin@12-3',
     ]);
@@ -10,13 +13,15 @@ test('New users can register', function () {
     $response->assertCreated();
     $response->assertSee(__('messages.user.registered'));
     $this->assertDatabaseHas('users', [
-        'email' => 'test@founderandlightning.com'
+        'email' => $email
     ]);
 });
 
 test('Users with invitation can register', function () {
-    $invitation = \App\Services\UserInvitationService::create([
-        'email' => 'test@founderandlightning.com',
+    $email = fake()->freeEmail;
+
+    $invitation = (new UserInvitationService())->create([
+        'email' => $email,
         'role' => 'user',
     ]);
 
@@ -29,14 +34,16 @@ test('Users with invitation can register', function () {
     $response->assertCreated();
     $response->assertSee(__('messages.user.registered'));
     $this->assertDatabaseHas('users', [
-        'email' => 'test@founderandlightning.com'
+        'email' => $email
     ]);
 });
 
 test('Password format validations', function () {
+    $email = fake()->freeEmail;
+
     $responseLowerCasePassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'password',
         'password_confirmation' => 'password',
     ]);
@@ -45,7 +52,7 @@ test('Password format validations', function () {
 
     $responseUpperCasePassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'PASSWORD',
         'password_confirmation' => 'PASSWORD',
     ]);
@@ -54,7 +61,7 @@ test('Password format validations', function () {
 
     $responseMixedCasePassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'PASSword',
         'password_confirmation' => 'PASSword',
     ]);
@@ -63,7 +70,7 @@ test('Password format validations', function () {
 
     $responseMixedCaseAndNumberPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'PASSword1',
         'password_confirmation' => 'PASSword1',
     ]);
@@ -72,7 +79,7 @@ test('Password format validations', function () {
 
     $responseSmallPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'Sword1@',
         'password_confirmation' => 'Sword1@',
     ]);
@@ -81,7 +88,7 @@ test('Password format validations', function () {
 
     $responseConsecutiveCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'P@sssword1',
         'password_confirmation' => 'P@sssword1',
     ]);
@@ -90,7 +97,7 @@ test('Password format validations', function () {
 
     $responseSequentialIncCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'P@ssword123',
         'password_confirmation' => 'P@sssword123',
     ]);
@@ -99,7 +106,7 @@ test('Password format validations', function () {
 
     $responseSequentialDecCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'P@ssword321',
         'password_confirmation' => 'P@sssword321',
     ]);
@@ -108,7 +115,7 @@ test('Password format validations', function () {
 
     $responseSequentialIncKeyboardCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'P@ssword1qwer',
         'password_confirmation' => 'P@sssword1qwer',
     ]);
@@ -117,7 +124,7 @@ test('Password format validations', function () {
 
     $responseSequentialDecKeyboardCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'P@ssword1/.,m',
         'password_confirmation' => 'P@sssword1/.,m',
     ]);
@@ -126,8 +133,8 @@ test('Password format validations', function () {
 
     $responsePasswordContainingEmail = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
-        'password' => 'PAss-test-word@12-3',
+        'email' => $email,
+        'password' => 'PAss-' . explode('@', $email)[0] . '-word@12-3',
         'password_confirmation' => 'PAss-test-word@12-3',
     ]);
 
@@ -135,7 +142,7 @@ test('Password format validations', function () {
 
     $responseValidPassword = $this->post(route('register'), [
         'first_name' => 'Test',
-        'email' => 'test@founderandlightning.com',
+        'email' => $email,
         'password' => 'PASSword@12-3',
         'password_confirmation' => 'PASSword@12-3',
     ]);

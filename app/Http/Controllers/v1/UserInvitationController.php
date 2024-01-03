@@ -16,9 +16,9 @@ class UserInvitationController extends Controller
 {
     use HttpResponse;
 
-    public function store(UserInvitationRequest $request): JsonResponse
+    public function store(UserInvitationRequest $request, UserInvitationService $userInvitationService): JsonResponse
     {
-        $invitation = UserInvitationService::create($request->safe()->toArray());
+        $invitation = $userInvitationService->create($request->safe()->toArray());
 
         return $this->response(
             [],

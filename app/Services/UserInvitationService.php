@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Role;
 
 class UserInvitationService
 {
-    public static function create(array $data): UserInvitation
+    public function create(array $data): UserInvitation
     {
         UserInvitation::where('email', $data['email'])->delete(); // invalidate previous by SoftDelete
 
@@ -32,16 +32,16 @@ class UserInvitationService
         return $invitation;
     }
 
-    public static function getBySignature(string $signature): ?UserInvitation
+    public function getBySignature(string $signature): ?UserInvitation
     {
         return UserInvitation::where('signature', $signature)
             ->where('expires_at', '>=', Carbon::now())
             ->first();
     }
 
-    public static function invalidateAndFetchEmail(string $signature): ?string
+    public function invalidateAndFetchEmail(string $signature): ?string
     {
-        $invitation = self::getBySignature($signature);
+        $invitation = $this->getBySignature($signature);
 
         if (is_null($invitation)) {
             return null;
