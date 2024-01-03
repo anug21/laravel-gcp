@@ -1254,7 +1254,7 @@
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
 													"pm.environment.set(\"email\", email);\r",
-													"pm.environment.set(\"password\", \"Admin@12345\");"
+													"pm.environment.set(\"password\", \"Admin@12465\");"
 												],
 												"type": "text/javascript"
 											}
