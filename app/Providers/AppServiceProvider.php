@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -31,15 +32,21 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production') || $this->app->environment('staging')) {
             URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');
-
-            $this->features();
         }
+
+        $this->features();
     }
 
     private function features(): void
     {
+        try {
+            $features = DB::select("SELECT * FROM features WHERE scope='__global'");
+        } catch (QueryException $e) {
+            // application in pre-initialised state, drop attempt
+            return;
+        }
+
         // define global (artificial Pennant scope) features for the current user scope
-        $features = DB::select("SELECT * FROM features WHERE scope='__global'");
         foreach ($features as $feature) {
             Feature::define($feature->name, $feature->value === 'true');
         }
