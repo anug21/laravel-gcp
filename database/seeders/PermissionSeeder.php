@@ -27,6 +27,9 @@ class PermissionSeeder extends Seeder
             'view logs',
             // roles
             'view roles',
+            // features
+            'view features',
+            'edit features',
         ];
 
         foreach ($permissions as $permission) {
