@@ -18,6 +18,7 @@ test('New users can register', function () {
 });
 
 test('Users with invitation can register', function () {
+    $this->be(createSuperAdmin());
     $email = fake()->freeEmail;
 
     $invitation = (new UserInvitationService())->create([
@@ -25,14 +26,16 @@ test('Users with invitation can register', function () {
         'role' => 'user',
     ]);
 
-    $response = $this->post(route('register'), [
+    Auth::logout();
+
+    $this->post(route('register'), [
         'invitation_key' => $invitation->signature,
         'password' => 'Admin@12-3',
         'password_confirmation' => 'Admin@12-3',
-    ]);
+    ])
+        ->assertCreated()
+        ->assertSee(__('messages.user.registered'));
 
-    $response->assertCreated();
-    $response->assertSee(__('messages.user.registered'));
     $this->assertDatabaseHas('users', [
         'email' => $email
     ]);

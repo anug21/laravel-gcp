@@ -14,10 +14,6 @@ return [
         'remove_account_confirmation' => 'Are you sure you want to delete this account?',
         'remove_account_consequences' => 'Once account is deleted, all of its resources and data will be permanently deleted.',
         'search_error' => 'Search error',
-        'invitation_created' => 'Invitation created for :email, active until :expiration.',
-        'invitation_email_subject' => 'You are invited to register at :service',
-        'invitation_invalid_or_expired' => 'The :attribute is invalid or expired.',
-        'invitation_user_already_exists' => 'The :attribute points to a user that already exists in the database. Invitation will be invalidated.'
     ],
     'profile' => [
         'updated' => 'Profile updated successfully.',
@@ -63,5 +59,14 @@ return [
         'name_cannot_be_empty' => 'Feature name cannot be empty',
         'name_already_exists' => 'Feature with that name already exists',
         'remove_feature_confirmation' => 'Are you sure you want to delete this feature?',
+    ],
+    'invitation' => [
+        'created' => 'Invitation created for :email, active until :expiration.',
+        'invalid_or_expired' => 'The :attribute is invalid or expired.',
+        'user_already_exists' => 'The :attribute points to a user that already exists in the database. Invitation will be invalidated.',
+        'mail' => [
+            'subject' => 'You are invited to register at :service',
+            'content' => ':admin_name has invited you to join :service as a :user_role. Join them to collaborate and reach new productivity peaks'
+        ]
     ]
 ];

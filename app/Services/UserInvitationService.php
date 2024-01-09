@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Mail\UserInvitationMail;
 use App\Models\UserInvitation;
+use App\Notifications\UserInvitationCreated;
 use Carbon\Carbon;
 use DateTime;
-use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
+use Str;
 
 class UserInvitationService
 {
@@ -27,7 +27,12 @@ class UserInvitationService
 
         $invitation->save();
 
-        Mail::to($data['email'])->send(new UserInvitationMail(['signature' => $signature]));
+        $invitation->notify(
+            new UserInvitationCreated(
+                auth()->user()->fullName,
+                Str::headline($data['role'])
+            )
+        );
 
         return $invitation;
     }

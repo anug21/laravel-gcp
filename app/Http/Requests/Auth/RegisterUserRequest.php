@@ -31,14 +31,14 @@ class RegisterUserRequest extends FormRequest
                     $invitation = (new UserInvitationService())->getBySignature($value);
 
                     if (is_null($invitation)) {
-                        $fail(__('messages.user.invitation_invalid_or_expired', ['attribute' => $attribute]));
+                        $fail(__('messages.invitation.invalid_or_expired', ['attribute' => $attribute]));
                         return;
                     }
 
                     $user = User::where('email', $invitation->email)->first();
                     if (!is_null($user)) {
                         $invitation->delete();
-                        $fail(__('messages.user.invitation_user_already_exists', ['attribute' => $attribute]));
+                        $fail(__('messages.invitation.user_already_exists', ['attribute' => $attribute]));
                     }
                 }
             ],

@@ -30,7 +30,6 @@ Route::get('/api', function () {
     return redirect()->route('home.api');
 })->name('api');
 
-// route for user invitation
 Route::get('/invitation/{signature}', [UserInvitationController::class, 'verify'])->name('users.invitation.verify');
 
 Route::prefix('/admin')->group(function () {

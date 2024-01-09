@@ -22,7 +22,7 @@ class UserInvitationController extends Controller
 
         return $this->response(
             [],
-            __('messages.user.invitation_created', [
+            __('messages.invitation.created', [
                 'email' => $invitation->email,
                 'expiration' => $invitation->expires_at->format('r')
             ])
@@ -31,6 +31,7 @@ class UserInvitationController extends Controller
 
     public function verify(Request $request): RedirectResponse
     {
+
         $url = config('app.frontend_url');
         $pathSuccess = config('frontend.invitation_success_redirect');
         $pathFail = config('frontend.invitation_fail_redirect');
@@ -39,11 +40,11 @@ class UserInvitationController extends Controller
             ->where('expires_at', '>=', now())->first();
 
         if (is_null($invitation)) {
-            return redirect()->intended($url . $pathFail);
+            return redirect($url . $pathFail);
         }
 
         $param = Arr::query(['signature' => $invitation->signature]);
 
-        return redirect()->intended($url . $pathSuccess . "?$param");
+        return redirect($url . $pathSuccess . "?$param");
     }
 }

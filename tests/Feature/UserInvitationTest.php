@@ -3,10 +3,14 @@
 use App\Services\UserInvitationService;
 
 test('Can verify invitation with correct signature', function () {
+    $this->be(createSuperAdmin());
+
     $invitation = (new UserInvitationService())->create([
         'email' => 'test@laravel.com',
         'role' => 'user',
     ]);
+
+    Auth::logout();
 
     $this->get(route('users.invitation.verify', $invitation->signature))
         ->assertRedirectContains(config('frontend.invitation_success_redirect'))
@@ -19,6 +23,8 @@ test('Cannot verify invitation with incorrect signature', function () {
 });
 
 test('Cannot verify expired invitation', function () {
+    $this->be(createSuperAdmin());
+
     $invitation = (new UserInvitationService())->create([
         'email' => 'test@laravel.com',
         'role' => 'user',
@@ -26,6 +32,8 @@ test('Cannot verify expired invitation', function () {
 
     $invitation->expires_at = (new DateTime())->modify('-1second');
     $invitation->save();
+
+    Auth::logout();
 
     $this->get(route('users.invitation.verify', $invitation->signature))
         ->assertRedirectContains(config('frontend.invitation_fail_redirect'));
