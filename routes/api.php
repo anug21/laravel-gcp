@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\v1\FeatureController;
 use App\Http\Controllers\v1\Profile\ProfileController;
 use App\Http\Controllers\v1\Profile\ProfileImageController;
 use App\Http\Controllers\v1\Profile\ProfileNotificationController;
@@ -44,6 +45,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::post('/users/invite', [UserInvitationController::class, 'store'])->name('users.invite')->can('create users');
 });
+
+Route::get('/features', [FeatureController::class, 'index'])->name('features.index');
 
 Route::get('/', function () {
     return ['Symfony' => 2.9];
