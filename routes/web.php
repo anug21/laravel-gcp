@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ActivityLogController;
+use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\NewPasswordController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -32,7 +33,7 @@ Route::get('/api', function () {
 // route for user invitation
 Route::get('/invitation/{signature}', [UserInvitationController::class, 'verify'])->name('users.invitation.verify');
 
-Route::prefix('/admin')->group(function() {
+Route::prefix('/admin')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/login', [LoginController::class, 'index'])->name('admin.login');
         Route::post('/login', [LoginController::class, 'store'])->name('admin.login.store');
@@ -46,8 +47,7 @@ Route::prefix('/admin')->group(function() {
             ->name('admin.password.store');
     });
 
-    Route::middleware('permission:view dashboard')->group(function() {
-
+    Route::middleware('permission:view dashboard')->group(function () {
         Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/', function () {
                 return view('dashboard');
@@ -60,7 +60,7 @@ Route::prefix('/admin')->group(function() {
 
             Route::controller(UserController::class)
                 ->prefix('/users')
-                ->group( function() {
+                ->group(function () {
                     Route::get('/add', 'create')
                         ->name('admin.users.create')
                         ->can('create user');
@@ -82,6 +82,26 @@ Route::prefix('/admin')->group(function() {
                     Route::delete('/{user}', 'destroy')
                         ->name('admin.users.destroy')
                         ->can('delete user');
+                });
+
+            Route::controller(FeatureController::class)
+                ->prefix('/features')
+                ->group(function () {
+                    Route::get('/', 'index')
+                        ->name('admin.features.index')
+                        ->can('view features');
+                    Route::post('/toggle', 'toggle')
+                        ->name('admin.features.toggle')
+                        ->can('edit features');
+                    Route::get('/add', 'create')
+                        ->name('admin.features.create')
+                        ->can('edit features');
+                    Route::post('/', 'store')
+                        ->name('admin.features.store')
+                        ->can('edit features');
+                    Route::delete('/', 'destroy')
+                        ->name('admin.features.destroy')
+                        ->can('edit features');
                 });
 
             Route::get('/roles', RoleListController::class)

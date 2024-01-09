@@ -33,5 +33,10 @@ return [
     'subject' => 'Subject',
     'subject_type' => 'Subject type',
     'properties' => 'Properties',
-    'when' => 'When'
+    'when' => 'When',
+    'confirm' => 'Confirm',
+    'name' => 'Name',
+    'features' => 'Features',
+    'create_feature' => 'Create feature',
+    'delete_feature' => 'Delete feature',
 ];
