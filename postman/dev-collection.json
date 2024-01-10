@@ -150,6 +150,283 @@
 							"name": "User Register and Login",
 							"item": [
 								{
+									"name": "Register +ve cases",
+									"item": [
+										{
+											"name": "sign up api creates user account successfully with valid data",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "4ff481b7-bb36-4407-acf2-9ef05facb0d1",
+														"exec": [
+															"pm.test(\"Response status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"     pm.environment.set(\"verification_url\", encodeURI(pm.cookies.get(\"verification_url\")));",
+															"});",
+															"",
+															"pm.test(\"Response has all required fields\", function () {",
+															"    const responseData = pm.response.json();",
+															"",
+															"    pm.expect(responseData).to.be.an('object');",
+															"    pm.expect(responseData.data).to.be.an('object');",
+															"    pm.expect(responseData.data.email).to.exist;",
+															"    pm.expect(responseData.data.created_at).to.exist;",
+															"    pm.expect(responseData.data.id).to.exist;",
+															"    pm.expect(responseData.message).to.exist;",
+															"});",
+															"",
+															"pm.test(\"Response time is less than 200ms\", function () {",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4eb1ae30-5bd0-4b11-8c63-f3fac1ca9b09",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"id": "188c5677-d11a-4414-9b58-a44d91261dbe",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "first_name",
+															"value": "{{first_name}}",
+															"type": "text",
+															"disabled": true
+														},
+														{
+															"key": "email",
+															"value": "{{email}}",
+															"type": "text"
+														},
+														{
+															"key": "password",
+															"value": "{{password}}",
+															"type": "text"
+														},
+														{
+															"key": "password_confirmation",
+															"value": "{{password_confirmation}}",
+															"type": "text"
+														},
+														{
+															"key": "last_name",
+															"value": "{{last_name}}",
+															"type": "text",
+															"disabled": true
+														}
+													]
+												},
+												"url": "{{base_url}}/register",
+												"description": "Except the last name, other fields are mandatory. Besides it, User must add a password having:\n- One lowercase character\n- One uppercase character\n- One number\n- One special character\n- 8 characters minimum\n- User must confirm their password\n- Passwords must match"
+											},
+											"response": [
+												{
+													"id": "eb62a239-abc4-46f8-a7ae-d77ea9b4bb86",
+													"name": "Validation failure",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "formdata",
+															"formdata": [
+																{
+																	"key": "name",
+																	"value": "Fage",
+																	"type": "text"
+																}
+															]
+														},
+														"url": "{{API_URL}}/register"
+													},
+													"status": "Unprocessable Content",
+													"code": 422,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Thu, 20 Apr 2023 02:27:04 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Apache/2.4.56 (Debian)"
+														},
+														{
+															"key": "X-Powered-By",
+															"value": "PHP/8.2.4"
+														},
+														{
+															"key": "Cache-Control",
+															"value": "no-cache, private"
+														},
+														{
+															"key": "X-RateLimit-Limit",
+															"value": "60"
+														},
+														{
+															"key": "X-RateLimit-Remaining",
+															"value": "59"
+														},
+														{
+															"key": "Access-Control-Allow-Origin",
+															"value": "http://10.10.1.6:3000"
+														},
+														{
+															"key": "Access-Control-Allow-Credentials",
+															"value": "true"
+														},
+														{
+															"key": "Keep-Alive",
+															"value": "timeout=5, max=100"
+														},
+														{
+															"key": "Connection",
+															"value": "Keep-Alive"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n    \"message\": \"The email field is required. (and 1 more error)\",\n    \"errors\": {\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+												},
+												{
+													"id": "07356726-6273-4fd0-8277-e836f9808aa2",
+													"name": "Successful Registration",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "formdata",
+															"formdata": [
+																{
+																	"key": "first_name",
+																	"value": "Platform",
+																	"type": "text"
+																},
+																{
+																	"key": "email",
+																	"value": "platform-user@yopmail.com",
+																	"type": "text"
+																},
+																{
+																	"key": "password",
+																	"value": "User@12345",
+																	"type": "text"
+																},
+																{
+																	"key": "password_confirmation",
+																	"value": "User@12345",
+																	"type": "text"
+																},
+																{
+																	"key": "last_name",
+																	"value": "User",
+																	"type": "text"
+																}
+															]
+														},
+														"url": "{{API_URL}}/register"
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Connection",
+															"value": "keep-alive"
+														},
+														{
+															"key": "Date",
+															"value": "Sat, 22 Apr 2023 08:05:42 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Apache"
+														},
+														{
+															"key": "Cache-Control",
+															"value": "no-cache, private"
+														},
+														{
+															"key": "X-Ratelimit-Limit",
+															"value": "60"
+														},
+														{
+															"key": "X-Ratelimit-Remaining",
+															"value": "59"
+														},
+														{
+															"key": "Access-Control-Allow-Origin",
+															"value": "http://localhost:3000"
+														},
+														{
+															"key": "Access-Control-Allow-Credentials",
+															"value": "true"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														},
+														{
+															"key": "Via",
+															"value": "1.1 vegur"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n    \"data\": {\n        \"first_name\": \"Platform\",\n        \"last_name\": \"User\",\n        \"email\": \"platform-user@yopmail.com\",\n        \"updated_at\": \"2023-04-22T08:05:42.000000Z\",\n        \"created_at\": \"2023-04-22T08:05:42.000000Z\",\n        \"id\": 3\n    },\n    \"message\": \"User registered successfully.\"\n}"
+												}
+											]
+										}
+									],
+									"id": "492ad8ba-a51a-48d4-879f-02455c784b19"
+								},
+								{
 									"name": "Register",
 									"event": [
 										{
