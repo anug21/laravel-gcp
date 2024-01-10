@@ -41,6 +41,6 @@ class UserInvitationCreated extends Notification
                     'user_role' => $this->roleName
                 ])
             )
-            ->action('Accept invitation', route('users.invitation.verify', $notifiable->signature));
+            ->action(__('messages.invitation.mail.action'), route('users.invitation.verify', $notifiable->signature));
     }
 }
