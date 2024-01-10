@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view users');
 
     Route::get('/invitations', [UserInvitationController::class, 'index'])->name('invitations.index')->can('view users');
-    Route::post('/invitations', [UserInvitationController::class, 'store'])->name('invitations.store')->can('create users');
+    Route::post('/invitations', [UserInvitationController::class, 'store'])->name('invitations.store')->can('create user');
 });
 
 Route::get('/features', [FeatureController::class, 'index'])->name('features.index');
