@@ -1540,6 +1540,12 @@
 													"value": "2",
 													"type": "text",
 													"disabled": true
+												},
+												{
+													"key": "search",
+													"value": "@",
+													"type": "text",
+													"disabled": true
 												}
 											]
 										}
