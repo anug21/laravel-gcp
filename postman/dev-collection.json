@@ -6812,6 +6812,70 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Invite user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+												"exec": [
+													"pm.test('Reponse code to be 200', function () {",
+													"    pm.expect(pm.response.code).to.be.equal(200);",
+													"});",
+													"",
+													"pm.test(\"Body is present\", function () {",
+													"    ((responseBody) !== undefined && (responseBody.length > 1));",
+													"    jsonData = JSON.parse(responseBody);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "6b94405b-d1dd-447c-9a47-ad18528490ba",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{base_url}}/invitations",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"invitations"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "perPage",
+													"value": "2",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "search",
+													"value": "@",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"id": "16a37861-380b-4a93-afb9-2f2ac4315716",
