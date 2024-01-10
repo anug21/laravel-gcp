@@ -2,6 +2,41 @@
 
 use App\Services\UserInvitationService;
 
+test('Get user invitations list', function () {
+    $this->actingAs(createSuperAdmin())
+        ->get(route('invitations.index'))
+        ->assertOk()
+        ->assertResourcePagination();
+});
+
+test('Cannot get user invitations list without permission', function () {
+    $this->roleUser = getRoleUser();
+    $this->roleUser->revokePermissionTo('view users');
+
+    $this->actingAs(createUser())
+        ->get(route('invitations.index'))
+        ->assertForbidden();
+});
+
+test('New invitation shows on list', function () {
+    $this->be(createSuperAdmin());
+    $email = fake()->email;
+
+    $this->post(route('invitations.store'), [
+        'email' => $email,
+        'role' => 'user'
+    ])
+        ->assertValid();
+
+    $this->assertDatabaseHas('user_invitations', ['email' => $email]);
+
+    $this->get(route('invitations.index'))
+        ->assertOk()
+        ->assertJsonFragment([
+            'email' => $email
+        ]);
+});
+
 test('Can verify invitation with correct signature', function () {
     $this->be(createSuperAdmin());
 
