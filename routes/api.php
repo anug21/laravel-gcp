@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('profile-notification.update');
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view users');
 
+    Route::get('/invitations', [UserInvitationController::class, 'index'])->name('invitations.index')->can('view users');
     Route::post('/invitations', [UserInvitationController::class, 'store'])->name('invitations.store')->can('create users');
 });
 
