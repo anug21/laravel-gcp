@@ -6832,6 +6832,17 @@
 												],
 												"type": "text/javascript"
 											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
+												"exec": [
+													"pm.environment.set('user_email', encodeURIComponent('john_doe+' +  Math.floor((Math.random() * 10000) + 1) + '@jdecode.dev'));\r",
+													""
+												],
+												"type": "text/javascript"
+											}
 										}
 									],
 									"id": "6b94405b-d1dd-447c-9a47-ad18528490ba",
@@ -6839,14 +6850,14 @@
 										"disableBodyPruning": true
 									},
 									"request": {
-										"method": "GET",
+										"method": "POST",
 										"header": [],
 										"body": {
 											"mode": "formdata",
 											"formdata": []
 										},
 										"url": {
-											"raw": "{{base_url}}/invitations",
+											"raw": "{{base_url}}/invitations?email={{user_email}}&role=user",
 											"host": [
 												"{{base_url}}"
 											],
@@ -6855,22 +6866,14 @@
 											],
 											"query": [
 												{
-													"key": "page",
-													"value": "1",
-													"type": "text",
-													"disabled": true
+													"key": "email",
+													"value": "{{user_email}}",
+													"type": "text"
 												},
 												{
-													"key": "perPage",
-													"value": "2",
-													"type": "text",
-													"disabled": true
-												},
-												{
-													"key": "search",
-													"value": "@",
-													"type": "text",
-													"disabled": true
+													"key": "role",
+													"value": "user",
+													"type": "text"
 												}
 											]
 										}
