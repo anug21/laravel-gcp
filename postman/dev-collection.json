@@ -1484,6 +1484,98 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "User Invitation",
+							"item": [
+								{
+									"name": "User Invitations",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+												"exec": [
+													"pm.test('Reponse code to be 200', function () {",
+													"    pm.expect(pm.response.code).to.be.equal(200);",
+													"});",
+													"",
+													"pm.test(\"Body is present\", function () {",
+													"    ((responseBody) !== undefined && (responseBody.length > 1));",
+													"    jsonData = JSON.parse(responseBody);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "20580dff-c707-44c2-a262-36d30a9c5827",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{base_url}}/invitations",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"invitations"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "perPage",
+													"value": "2",
+													"type": "text",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"id": "16a37861-380b-4a93-afb9-2f2ac4315716",
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{user_token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "daa4d569-e9c9-4dd2-beab-c5bb4a1e51e0",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "73939461-014d-4ae8-b618-1fa5b90fbf6d",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
 						}
 					],
 					"id": "b1a4465b-5b8c-466a-9028-a19736c76ca5",
