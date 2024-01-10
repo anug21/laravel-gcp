@@ -6838,7 +6838,6 @@
 											"script": {
 												"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
 												"exec": [
-													"pm.environment.set('user_email', encodeURIComponent('john_doe+' +  Math.floor((Math.random() * 10000) + 1) + '@jdecode.dev'));\r",
 													""
 												],
 												"type": "text/javascript"
@@ -6857,7 +6856,7 @@
 											"formdata": []
 										},
 										"url": {
-											"raw": "{{base_url}}/invitations?email={{user_email}}&role=user",
+											"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
 											"host": [
 												"{{base_url}}"
 											],
@@ -6867,13 +6866,11 @@
 											"query": [
 												{
 													"key": "email",
-													"value": "{{user_email}}",
-													"type": "text"
+													"value": "{{$randomEmail}}"
 												},
 												{
 													"key": "role",
-													"value": "user",
-													"type": "text"
+													"value": "user"
 												}
 											]
 										}
