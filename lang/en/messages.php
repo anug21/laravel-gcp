@@ -66,7 +66,7 @@ return [
         'user_already_exists' => 'The :attribute points to a user that already exists in the database. Invitation will be invalidated.',
         'mail' => [
             'subject' => 'You are invited to register at :service',
-            'content' => ':admin_name has invited you to join :service as a :user_role. Join them to collaborate and reach new productivity peaks'
+            'content' => ':admin_name has invited you to join :service as a :user_role. Join them to collaborate and reach new productivity peaks.'
         ]
     ]
 ];
