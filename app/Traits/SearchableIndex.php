@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Services\SearchService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ trait SearchableIndex
     private readonly string $searchClass;
     private readonly string $searchResourceClass;
 
-    private function searchIndex(Request $request, SearchService $service)
+    private function searchIndex(Request $request, SearchService $service, Builder $builder = null)
     {
         $sortBy = $request->validated('sortBy');
         $orderBy = $request->validated('orderBy');
@@ -21,7 +22,7 @@ trait SearchableIndex
         $search = $request->validated('search');
 
         try {
-            $builder = $service->search($this->searchClass, $search);
+            $builder = $builder ?? $service->search($this->searchClass, $search);
             if ($sortBy && $orderBy) {
                 $builder->orderBy($sortBy, $orderBy);
             }
