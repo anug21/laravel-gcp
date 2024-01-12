@@ -43,17 +43,4 @@ class UserInvitationService
             ->where('expires_at', '>=', Carbon::now())
             ->first();
     }
-
-    public function invalidateAndFetchEmail(string $signature): ?string
-    {
-        $invitation = $this->getBySignature($signature);
-
-        if (is_null($invitation)) {
-            return null;
-        }
-
-        $email = $invitation->email;
-        $invitation->delete();
-        return $email;
-    }
 }

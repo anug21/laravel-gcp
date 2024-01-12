@@ -94,19 +94,20 @@ class UserService
         return UserResource::collection(User::all());
     }
 
-    private function registerWithEmail(array $userInfo): User
+    private function registerWithEmail(array $userInfo, int $role_id = null): User
     {
         $user = $this->create($userInfo);
-        $user->assignRole(Config::get('constants.roles.user'));
+        $user->assignRole($role_id ?? Config::get('constants.roles.user'));
         return $user;
     }
 
     private function registerWithInvitation(array $userInfo): User
     {
-        $userInfo['email'] = (new UserInvitationService())->invalidateAndFetchEmail($userInfo['invitation_key']);
-        if (is_null($userInfo['email'])) {
+        $invitation = (new UserInvitationService())->getBySignature($userInfo['invitation_key']);
+        if (is_null($invitation)) {
             throw new InvalidArgumentException('Correct invitation not found for invalidation');
         }
-        return $this->registerWithEmail($userInfo);
+        $userInfo['email'] = $invitation->email;
+        return $this->registerWithEmail($userInfo, $invitation->role_id);
     }
 }
