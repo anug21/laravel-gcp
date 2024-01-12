@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'has_subscribed' => $this->subscribed(),
             'image' => $this->image,
             'image_thumbnail' => $this->image_thumbnail,
+            'onboarded' => $this->onboarded,
         ];
     }
 }

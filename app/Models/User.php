@@ -55,6 +55,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'roles',
     ];
 
+    protected $onboard_attributes = [
+        'email',
+        'first_name',
+        'last_name',
+    ];
+
+    protected $appends = ['onboarded'];
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -125,6 +133,18 @@ class User extends Authenticatable implements MustVerifyEmail
                 $firstLetter = $firstLetter === '?' ? 'X' : $firstLetter;
                 $secondLetter = $secondLetter === '?' ? 'X' : $secondLetter;
                 return $firstLetter . $secondLetter;
+            }
+        );
+    }
+
+    protected function onboarded(): Attribute
+    {
+        // check if all `onboard_attributes` are not empty
+        return Attribute::make(
+            get: function () {
+                return array_reduce($this->onboard_attributes, function ($carry, $attribute) {
+                    return $carry && !empty($this->$attribute);
+                }, true);
             }
         );
     }
