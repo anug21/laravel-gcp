@@ -62,6 +62,7 @@ return [
     ],
     'invitation' => [
         'created' => 'Invitation created for :email, active until :expiration.',
+        'deleted' => 'Invitation deleted.',
         'invalid_or_expired' => 'The :attribute is invalid or expired.',
         'user_already_exists' => 'The :attribute points to a user that already exists in the database. Invitation will be invalidated.',
         'mail' => [

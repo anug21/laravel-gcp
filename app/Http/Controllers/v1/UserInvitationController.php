@@ -67,4 +67,13 @@ class UserInvitationController extends Controller
 
         return redirect($url . $pathSuccess . "?$param");
     }
+
+    public function destroy(UserInvitation $invitation)
+    {
+        $invitation->delete();
+        return $this->response(
+            [],
+            __('messages.invitation.deleted')
+        );
+    }
 }
