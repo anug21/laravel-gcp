@@ -40,7 +40,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'email_verified_at',
         'image_filename',
-        'image_upload_status'
+        'image_upload_status',
+        'birth_date',
     ];
 
     /**
@@ -59,6 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'first_name',
         'last_name',
+        'birth_date',
     ];
 
     protected $appends = ['onboarded'];
@@ -86,7 +88,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'trial_ends_at' => 'date',
-        'image_upload_status' => ProfileImageUploadStatusEnum::class
+        'image_upload_status' => ProfileImageUploadStatusEnum::class,
     ];
 
     protected static function booted(): void

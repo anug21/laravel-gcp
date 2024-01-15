@@ -13,6 +13,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'first_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
+            'birth_date' => ['nullable', 'date_format:Y-m-d'],
             'email' => ['email:rfc,dns', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
     }
