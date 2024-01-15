@@ -6277,7 +6277,7 @@
 													"pm.environment.set('first_name', 'Updated_John');",
 													"pm.environment.set('last_name', 'Updated_Doe');",
 													"pm.environment.set('user_email', 'disha+' +  Math.floor((Math.random() * 10000) + 1) + '@yopmail.com');",
-													"pm.environment.set('user_birth_date', Math.floor(Math.random()*1000)+'-'+Math.floor(Math.random()*10)+'-'+Math.floor(Math.random()*10));"
+													"pm.environment.set('user_birth_date', (new Date()).toISOString().split('T')[0]);"
 												],
 												"type": "text/javascript"
 											}
