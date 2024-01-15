@@ -13,6 +13,7 @@ use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class UserService
 {
@@ -108,6 +109,8 @@ class UserService
             throw new InvalidArgumentException('Correct invitation not found for invalidation');
         }
         $userInfo['email'] = $invitation->email;
-        return $this->registerWithEmail($userInfo, $invitation->role_id);
+        $user = $this->registerWithEmail($userInfo, $invitation->role_id);
+        $invitation->delete();
+        return $user;
     }
 }
