@@ -6815,6 +6815,167 @@
 							"name": "Invite user",
 							"item": [
 								{
+									"name": "User Login  -successful login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a276ed75-7a1f-4c87-b51e-5ded61e53e44",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Body matches string\", function () {",
+													"    pm.expect(pm.response.text()).to.include(\"User logged in successfully.\");",
+													"    });",
+													"pm.test(\"Content-Type is present\", function () {",
+													"    pm.response.to.have.header(\"Content-Type\");",
+													"});",
+													"pm.test(\"Response time is less than 600ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);",
+													"});",
+													"jsonData = JSON.parse(responseBody);",
+													"pm.test(\"Token set\", function () {",
+													"pm.collectionVariables.set(\"user_token\", jsonData.data.token);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d2ebf584-e76c-40bc-808c-0de61814ff09",
+												"exec": [
+													"pm.variables.set(\"email\", \"adminaccount@yopmail.com\");\r",
+													"pm.variables.set(\"password\", \"Test@1246\");\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "bfca4eae-c347-4007-a8dc-0d817b89b677",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "{{email}}",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "{{password}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{base_url}}/login",
+										"description": "The api expects a valid registered user's email and correct password provided during the registration!"
+									},
+									"response": [
+										{
+											"id": "9d5aa92d-fffa-4f09-b8aa-762e7fbdae57",
+											"name": "User Login",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "email",
+															"value": "platform-user@yopmail.com",
+															"type": "text"
+														},
+														{
+															"key": "password",
+															"value": "User@12345",
+															"type": "text"
+														}
+													]
+												},
+												"url": "{{API_URL}}/login"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 22 Apr 2023 09:09:55 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Apache"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "X-Ratelimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-Ratelimit-Remaining",
+													"value": "59"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "http://localhost:3000"
+												},
+												{
+													"key": "Access-Control-Allow-Credentials",
+													"value": "true"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Via",
+													"value": "1.1 vegur"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"data\": {\n        \"token\": \"1|B3aQPO7ErI4AvlF3uiXCZJKxbrVydKzKTxFrIIng\"\n    },\n    \"message\": \"User logged in successfully.\"\n}"
+										}
+									]
+								},
+								{
 									"name": "Invite user -Admin",
 									"event": [
 										{
