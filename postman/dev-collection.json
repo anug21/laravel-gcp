@@ -6276,7 +6276,8 @@
 												"exec": [
 													"pm.environment.set('first_name', 'Updated_John');",
 													"pm.environment.set('last_name', 'Updated_Doe');",
-													"pm.environment.set('user_email', 'disha+' +  Math.floor((Math.random() * 10000) + 1) + '@yopmail.com');"
+													"pm.environment.set('user_email', 'disha+' +  Math.floor((Math.random() * 10000) + 1) + '@yopmail.com');",
+													"pm.environment.set('user_birth_date', Math.floor(Math.random()*1000)+'-'+Math.floor(Math.random()*10)+'-'+Math.floor(Math.random()*10));"
 												],
 												"type": "text/javascript"
 											}
@@ -6301,13 +6302,15 @@
 											"urlencoded": [
 												{
 													"key": "first_name",
-													"value": "{{first_name}}",
-													"type": "text"
+													"value": "meh",
+													"type": "text",
+													"disabled": true
 												},
 												{
 													"key": "last_name",
-													"value": "{{last_name}}",
-													"type": "text"
+													"value": "meh",
+													"type": "text",
+													"disabled": true
 												},
 												{
 													"key": "password",
@@ -6324,7 +6327,25 @@
 												{
 													"key": "email",
 													"value": "{{user_email}}",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "roles[]",
+													"value": "super_admin",
+													"type": "text",
+													"disabled": true
+												},
+												{
+													"key": "birth_date",
+													"value": "{{user_birth_date}}",
 													"type": "text"
+												},
+												{
+													"key": "birth_date",
+													"value": "2020-01-01",
+													"type": "text",
+													"disabled": true
 												}
 											]
 										},
