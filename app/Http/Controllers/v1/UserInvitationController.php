@@ -68,7 +68,7 @@ class UserInvitationController extends Controller
         return redirect($url . $pathSuccess . "?$param");
     }
 
-    public function destroy(UserInvitation $invitation)
+    public function destroy(UserInvitation $invitation): JsonResponse
     {
         $invitation->delete();
         return $this->response(

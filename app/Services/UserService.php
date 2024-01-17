@@ -105,7 +105,7 @@ class UserService
     {
         $invitation = (new UserInvitationService())->getBySignature($userInfo['invitation_key']);
         if (is_null($invitation)) {
-            throw new InvalidArgumentException('Correct invitation not found for invalidation');
+            throw new InvalidArgumentException(__('messages.invitation.not_found_for_invalidation'));
         }
         $userInfo['email'] = $invitation->email;
         $user = $this->registerWithEmail($userInfo, $invitation->role_id);

@@ -4,6 +4,8 @@ namespace App\Traits;
 
 use App\Services\SearchService;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
@@ -14,7 +16,7 @@ trait SearchableIndex
     private readonly string $searchClass;
     private readonly string $searchResourceClass;
 
-    private function searchIndex(Request $request, SearchService $service, Builder $builder = null)
+    private function searchIndex(Request $request, SearchService $service, Builder $builder = null): AnonymousResourceCollection|JsonResponse
     {
         $sortBy = $request->validated('sortBy');
         $orderBy = $request->validated('orderBy');

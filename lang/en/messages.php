@@ -65,6 +65,7 @@ return [
         'deleted' => 'Invitation deleted.',
         'invalid_or_expired' => 'The :attribute is invalid or expired.',
         'user_already_exists' => 'The :attribute points to a user that already exists in the database. Invitation will be invalidated.',
+        'not_found_for_invalidation' => 'Correct invitation not found for invalidation',
         'mail' => [
             'subject' => 'You are invited to register at :service',
             'content' => ':admin_name has invited you to join :service as a :user_role. Join them to collaborate and reach new productivity peaks.',
