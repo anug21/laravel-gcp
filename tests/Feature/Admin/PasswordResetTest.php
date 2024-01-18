@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 
 beforeEach(function () {

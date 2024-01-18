@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\User;
 use Config;
 use Gate;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

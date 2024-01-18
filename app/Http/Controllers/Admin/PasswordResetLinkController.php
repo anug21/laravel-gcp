@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordResetLinkRequest;
 use App\Models\User;
 use App\ValueObjects\Admin\NotificationVO;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPassword;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;

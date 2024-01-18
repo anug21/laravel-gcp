@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ProfileImageUploadStatusEnum;
+use App\Notifications\ResetPassword;
 use App\Services\UserService;
 use App\Traits\Searchable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -158,5 +159,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'last_name' => $this->last_name,
             'email' => $this->email
         ];
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

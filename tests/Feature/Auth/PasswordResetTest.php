@@ -2,7 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPassword;
 
 test('Reset password link can be requested', function () {
     Notification::fake();
