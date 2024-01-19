@@ -7,7 +7,8 @@ use App\Http\Controllers\Admin\NewPasswordController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleListController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\PasswordResetLinkController;
+use App\Http\Controllers\Admin\PasswordResetLinkController as AdminPasswordResetLinkController;
+use App\Http\Controllers\Auth\PasswordResetLinkController as UserPasswordResetLinkController;
 use App\Http\Controllers\v1\UserInvitationController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,14 +32,15 @@ Route::get('/api', function () {
 })->name('api');
 
 Route::get('/invitation/{signature}', [UserInvitationController::class, 'verify'])->name('users.invitation.verify');
+Route::get('/password-reset/{token}', [UserPasswordResetLinkController::class, 'verify'])->name('password.reset.verify');
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/login', [LoginController::class, 'index'])->name('admin.login');
         Route::post('/login', [LoginController::class, 'store'])->name('admin.login.store');
-        Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+        Route::get('/forgot-password', [AdminPasswordResetLinkController::class, 'create'])
             ->name('admin.password.request');
-        Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+        Route::post('forgot-password', [AdminPasswordResetLinkController::class, 'store'])
             ->name('admin.password.email');
         Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
             ->name('admin.password.reset');
