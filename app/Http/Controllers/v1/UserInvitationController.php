@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserInvitationDeleteRequest;
 use App\Http\Requests\UserInvitationListRequest;
 use App\Http\Requests\UserInvitationRequest;
 use App\Http\Resources\UserInvitationResource;
@@ -68,9 +69,9 @@ class UserInvitationController extends Controller
         return redirect($url . $pathSuccess . "?$param");
     }
 
-    public function destroy(UserInvitation $invitation): JsonResponse
+    public function destroy(UserInvitationDeleteRequest $request): JsonResponse
     {
-        $invitation->delete();
+        UserInvitation::where('id', $request->validated()['id'])->delete();
         return $this->response(
             [],
             __('messages.invitation.deleted')

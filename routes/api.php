@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('invitations.index')->can('view users');
             Route::post('/', 'store')->name('invitations.store')->can('create user');
-            Route::delete('/{invitation}', 'destroy')->name('invitations.destroy')->can('create user');
+            Route::delete('/{id}', 'destroy')->name('invitations.destroy')->can('create user');
         });
 });
 
