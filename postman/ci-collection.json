@@ -6810,6 +6810,555 @@
 								}
 							],
 							"id": "5448ac9a-6ef1-4828-b3fc-a374413b99cf"
+						},
+						{
+							"name": "Invite user",
+							"item": [
+								{
+									"name": "User Login  -successful login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "a276ed75-7a1f-4c87-b51e-5ded61e53e44",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"pm.test(\"Body matches string\", function () {",
+													"    pm.expect(pm.response.text()).to.include(\"User logged in successfully.\");",
+													"    });",
+													"pm.test(\"Content-Type is present\", function () {",
+													"    pm.response.to.have.header(\"Content-Type\");",
+													"});",
+													"pm.test(\"Response time is less than 600ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);",
+													"});",
+													"jsonData = JSON.parse(responseBody);",
+													"pm.test(\"Token set\", function () {",
+													"pm.collectionVariables.set(\"user_token\", jsonData.data.token);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d2ebf584-e76c-40bc-808c-0de61814ff09",
+												"exec": [
+													"pm.variables.set(\"email\", \"admin@example.com\");\r",
+													"pm.variables.set(\"password\", \"Password@123\");\r",
+													"\r",
+													"\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "e0320846-2f3b-47b5-a00f-ef01c047d580",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "{{email}}",
+													"type": "text"
+												},
+												{
+													"key": "password",
+													"value": "{{password}}",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{base_url}}/login",
+										"description": "The api expects a valid registered user's email and correct password provided during the registration!"
+									},
+									"response": [
+										{
+											"id": "95359409-d399-43b1-8b69-4670afe73b86",
+											"name": "User Login",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "email",
+															"value": "platform-user@yopmail.com",
+															"type": "text"
+														},
+														{
+															"key": "password",
+															"value": "User@12345",
+															"type": "text"
+														}
+													]
+												},
+												"url": "{{API_URL}}/login"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Date",
+													"value": "Sat, 22 Apr 2023 09:09:55 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Apache"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "X-Ratelimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-Ratelimit-Remaining",
+													"value": "59"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "http://localhost:3000"
+												},
+												{
+													"key": "Access-Control-Allow-Credentials",
+													"value": "true"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Via",
+													"value": "1.1 vegur"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"data\": {\n        \"token\": \"1|B3aQPO7ErI4AvlF3uiXCZJKxbrVydKzKTxFrIIng\"\n    },\n    \"message\": \"User logged in successfully.\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Invite user -Admin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "61c0d1cd-9058-40db-b518-0e93b11643a8",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Invitation created for\");\r",
+													"});\r",
+													"pm.test(\"Content-Type is present\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});\r",
+													"pm.test(\"Response time is less than 600ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+													"});\r",
+													"\r",
+													"       pm.test(\"datatype email is string\", function () {\r",
+													"        pm.expect(pm.response.json().last_name).toString('email')\r",
+													"    }); \r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "8db540c7-c0e5-4c50-b3a9-97e215550d52",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "{{$randomEmail}}",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "super_admin",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=admin",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"invitations"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "{{$randomEmail}}"
+												},
+												{
+													"key": "role",
+													"value": "admin"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Invite user - Member",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "61c0d1cd-9058-40db-b518-0e93b11643a8",
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Invitation created \");\r",
+													"});\r",
+													"pm.test(\"Content-Type is present\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});\r",
+													"pm.test(\"Response time is less than 600ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+													"});\r",
+													"\r",
+													"       pm.test(\"datatype email is string\", function () {\r",
+													"        pm.expect(pm.response.json().last_name).toString('email')\r",
+													"    }); "
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "b02b5875-d772-4887-b812-bf5a88f04670",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "{{$randomEmail}}",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "user",
+													"type": "text"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"invitations"
+											],
+											"query": [
+												{
+													"key": "email",
+													"value": "{{$randomEmail}}"
+												},
+												{
+													"key": "role",
+													"value": "user"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Invite user - Throws error when email is missing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "61c0d1cd-9058-40db-b518-0e93b11643a8",
+												"exec": [
+													"pm.test(\"Status code is 422\", function () {\r",
+													"    pm.response.to.have.status(422);\r",
+													"});\r",
+													"pm.test(\"Content-Type is present\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});\r",
+													"pm.test(\"Response time is less than 600ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"The email field is required.\");\r",
+													"    });\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "0a05f830-2bf2-4d33-aa95-3f20b1d090f9",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "user",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{base_url}}/invitations"
+									},
+									"response": []
+								},
+								{
+									"name": "Invite user - Throws error when email is  invalid",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "61c0d1cd-9058-40db-b518-0e93b11643a8",
+												"exec": [
+													"pm.test(\"Status code is 422\", function () {\r",
+													"    pm.response.to.have.status(422);\r",
+													"});\r",
+													"pm.test(\"Content-Type is present\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});\r",
+													"pm.test(\"Response time is less than 600ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"The email field must be a valid email address.\");\r",
+													"    });"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "e6cc4f2a-0c4b-4aa6-96a1-2a532f9147b8",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "testuser@yopmail",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "user",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{base_url}}/invitations"
+									},
+									"response": []
+								},
+								{
+									"name": "Invite user - Throws error when role is missing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "61c0d1cd-9058-40db-b518-0e93b11643a8",
+												"exec": [
+													"pm.test(\"Status code is 422\", function () {\r",
+													"    pm.response.to.have.status(422);\r",
+													"});\r",
+													"pm.test(\"Content-Type is present\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});\r",
+													"pm.test(\"Response time is less than 600ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"The role field is required.\");\r",
+													"    });"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "272ea977-ae05-4097-aa0f-f70db7f87f29",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "{{$randomEmail}}",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{base_url}}/invitations"
+									},
+									"response": []
+								},
+								{
+									"name": "Invite user - Throws error when role is  invalid",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "61c0d1cd-9058-40db-b518-0e93b11643a8",
+												"exec": [
+													"pm.test(\"Status code is 422\", function () {\r",
+													"    pm.response.to.have.status(422);\r",
+													"});\r",
+													"pm.test(\"Content-Type is present\", function () {\r",
+													"    pm.response.to.have.header(\"Content-Type\");\r",
+													"});\r",
+													"pm.test(\"Response time is less than 600ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+													"});\r",
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"The selected role is invalid.\");\r",
+													"    });\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "d1670094-5f46-4e1c-aa54-31cea2acc687",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "{{$randomEmail}}",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "Doll",
+													"type": "text"
+												}
+											]
+										},
+										"url": "{{base_url}}/invitations"
+									},
+									"response": []
+								}
+							],
+							"id": "777557da-3718-4d6a-b6ce-1813b718b2dd",
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{user_token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "dbcb6f5e-f344-435a-96f4-889b99096175",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "8443649f-95b3-48be-a905-3ec0771e69cd",
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
 						}
 					],
 					"id": "b92b8244-f5f8-4aec-88e6-22a36216d89c"
