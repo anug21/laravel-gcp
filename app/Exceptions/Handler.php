@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use Log;
 
@@ -44,6 +46,10 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             Log::info($e->getMessage());
+        });
+
+        $this->renderable(function(ThrottleRequestsException $e) {
+            return response()->json(['status' => __('messages.error.too_many_attempts')], Response::HTTP_TOO_MANY_REQUESTS);
         });
     }
 }

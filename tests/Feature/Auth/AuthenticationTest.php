@@ -63,7 +63,7 @@ test('Users can logout', function () {
         ->assertSee(__('messages.user.logged_out'));
 });
 
-test('User should be prevented from making too many attempts', function () {
+test('User should be prevented from making too many login attempts', function () {
     for ($i = 0; $i < 5; $i++) {
         $this->post(route('login'), [
             'email' => $this->user->email,
@@ -75,4 +75,17 @@ test('User should be prevented from making too many attempts', function () {
         'email' => $this->user->email,
         'password' => 'wrong-password',
     ])->assertSessionHasErrors();
+});
+
+
+test('User should be prevented from making too many password reset attempts', function () {
+    for ($i = 0; $i < 3; $i++) {
+        $this->post(route('password.email'), [
+            'email' => $this->user->email,
+        ])->assertOk();
+    }
+
+    $this->post(route('password.email'), [
+        'email' => $this->user->email,
+    ])->assertStatus(429);
 });
