@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordResetLinkRequest;
+use App\Services\PasswordResetService;
 use App\Traits\ActivityLog;
 use Carbon\Carbon;
 use DB;
@@ -34,18 +35,13 @@ class PasswordResetLinkController extends Controller
         return response()->json(['status' => __('passwords.sent')]);
     }
 
-    public function verify(Request $request, string $token_signature): RedirectResponse
+    public function verify(Request $request, string $token_signature, PasswordResetService $service): RedirectResponse
     {
         $url = config('app.frontend_url');
         $pathSuccess = config('frontend.password_reset_success_redirect');
         $pathFail = config('frontend.password_reset_fail_redirect');
 
-        $token = DB::table(config('auth.passwords.users.table'))
-            ->where('email', $request->email)
-            ->where('created_at', '>=', Carbon::now()->subMinutes(config('auth.passwords.users.expire')))
-            ->first();
-
-        if (is_null($token) || !Hash::check($token_signature, $token->token)) {
+        if (!$service->verify($request->email, $token_signature)) {
             return redirect($url . $pathFail);
         }
 
