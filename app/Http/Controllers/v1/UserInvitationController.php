@@ -69,12 +69,9 @@ class UserInvitationController extends Controller
         return redirect($url . $pathSuccess . "?$param");
     }
 
-    public function destroy(UserInvitationDeleteRequest $request): JsonResponse
+    public function destroy(UserInvitationDeleteRequest $request, UserInvitationService $service): JsonResponse
     {
-        UserInvitation::where('id', $request->validated()['id'])->delete();
-        return $this->response(
-            [],
-            __('messages.invitation.deleted')
-        );
+        $service->invalidate($request->validated()['id']);
+        return $this->response([], __('messages.invitation.deleted'));
     }
 }

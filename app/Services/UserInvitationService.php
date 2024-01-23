@@ -37,6 +37,11 @@ class UserInvitationService
         return $invitation;
     }
 
+    public function invalidate(int $id): int
+    {
+        return UserInvitation::where('id', $id)->delete();
+    }
+
     public function getBySignature(string $signature): ?UserInvitation
     {
         return UserInvitation::where('signature', $signature)
