@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (ThrottleRequestsException $e) {
-            return response()->json(['status' => __('messages.error.too_many_attempts')], Response::HTTP_TOO_MANY_REQUESTS);
+            return response()->json(['message' => __('messages.error.too_many_attempts')], Response::HTTP_TOO_MANY_REQUESTS);
         });
     }
 }
