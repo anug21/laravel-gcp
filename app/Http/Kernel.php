@@ -11,6 +11,7 @@ use App\Http\Middleware\RefreshToken;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\ValidateSignature;
 use App\Http\Middleware\VerifyCsrfToken;
+use Bugsnag\BugsnagLaravel\OomBootstrapper;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\RequirePassword;
@@ -92,4 +93,12 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
     ];
+
+    protected function bootstrappers()
+    {
+        return array_merge(
+            [OomBootstrapper::class],
+            parent::bootstrappers(),
+        );
+    }
 }

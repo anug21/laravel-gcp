@@ -62,7 +62,6 @@ return [
             'NEW_RELIC_LICENSE_KEY',
             'PAPERTRAIL_API_TOKEN',
             'POSTMARK_TOKEN',
-            'ROLLBAR_ACCESS_TOKEN',
             'REDIS_HOST',
             'REDIS_PASSWORD',
             'MAIL_HOST',
@@ -79,6 +78,7 @@ return [
             'VITE_PUSHER_HOST',
             'ENLIGHTN_USERNAME',
             'ENLIGHTN_API_TOKEN',
+            'BUGSNAG_API_KEY',
         ],
 
         '_SERVER' => [
@@ -99,7 +99,6 @@ return [
             'NEW_RELIC_LICENSE_KEY',
             'PAPERTRAIL_API_TOKEN',
             'POSTMARK_TOKEN',
-            'ROLLBAR_ACCESS_TOKEN',
             'REDIS_HOST',
             'REDIS_PASSWORD',
             'MAIL_HOST',
@@ -116,6 +115,7 @@ return [
             'VITE_PUSHER_HOST',
             'ENLIGHTN_USERNAME',
             'ENLIGHTN_API_TOKEN',
+            'BUGSNAG_API_KEY',
         ],
 
         '_POST' => [
@@ -267,8 +267,8 @@ return [
         /*
          * Package Service Providers...
          */
-        Rollbar\Laravel\RollbarServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -295,7 +295,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ])->toArray(),
 
 ];
