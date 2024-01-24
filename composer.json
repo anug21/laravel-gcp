@@ -8,7 +8,6 @@
         "php": "^8.2",
         "ext-gd": "*",
         "ext-openssl": "*",
-        "ext-http": "*",
         "doctrine/dbal": "^3.6",
         "elasticsearch/elasticsearch": "^8.9",
         "guzzlehttp/guzzle": "^7.2",
