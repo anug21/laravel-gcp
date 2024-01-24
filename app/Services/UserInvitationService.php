@@ -20,10 +20,10 @@ class UserInvitationService
 
         $invitation = new UserInvitation([
             'email' => $data['email'],
-            'role_id' => Role::where('name', $data['role'])->first()->id,
             'expires_at' => $expiration,
             'signature' => $signature,
         ]);
+        $invitation->role_id = Role::where('name', $data['role'])->first()->id;
 
         $invitation->save();
 

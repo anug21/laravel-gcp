@@ -20,7 +20,6 @@ class UserInvitation extends Model
     protected $fillable = [
         'email',
         'signature',
-        'role_id',
         'expires_at'
     ];
 
