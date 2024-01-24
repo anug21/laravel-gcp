@@ -21,7 +21,9 @@ return [
         'Enlightn\Enlightn\Analyzers\Security\StableDependencyAnalyzer',
         'Enlightn\Enlightn\Analyzers\Security\FilePermissionsAnalyzer',
         'Enlightn\Enlightn\Analyzers\Security\PHPIniAnalyzer',
-        'Enlightn\Enlightn\Analyzers\Security\XSSAnalyzer'
+        'Enlightn\Enlightn\Analyzers\Security\XSSAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Reliability\InvalidPropertyAccessAnalyzer',
+        'Enlightn\Enlightn\Analyzers\Reliability\InvalidMethodCallAnalyzer',
 
     ],
 
