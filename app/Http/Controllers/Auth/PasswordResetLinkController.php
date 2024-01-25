@@ -37,12 +37,11 @@ class PasswordResetLinkController extends Controller
         $url = config('app.frontend_url');
         $pathSuccess = config('frontend.password_reset_success_redirect');
         $pathFail = config('frontend.password_reset_fail_redirect');
+        $param = Arr::query(['email' => $request->email]);
 
         if (!$service->verify($request->email, $token_signature)) {
-            return redirect($url . $pathFail);
+            return redirect("{$url}{$pathFail}?{$param}");
         }
-
-        $param = Arr::query(['email' => $request->email]);
-        return redirect($url . $pathSuccess . "/{$token_signature}?$param");
+        return redirect("{$url}{$pathSuccess}/{$token_signature}?{$param}");
     }
 }
