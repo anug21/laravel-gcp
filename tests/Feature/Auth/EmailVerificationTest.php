@@ -22,8 +22,8 @@ test('Email can be verified', function () {
     Event::assertDispatched(Verified::class);
     $this->assertTrue($user->fresh()->hasVerifiedEmail());
     $url = config('app.frontend_url');
-    $path = config('frontend.verified_email_redirect');
-    $param = Arr::query(['user_name' => $user->first_name]);
+    $path = config('frontend.verified_email_success_redirect');
+    $param = Arr::query(['user_name' => $this->user->first_name]);
     $response->assertRedirect($url . $path . "?$param");
 });
 
@@ -39,7 +39,7 @@ test('Email cannot be verified more then once', function () {
     Event::assertNotDispatched(Verified::class);
     $this->assertTrue($user->fresh()->hasVerifiedEmail());
     $url = config('app.frontend_url');
-    $path = config('frontend.verified_email_redirect');
+    $path = config('frontend.verified_email_success_redirect');
     $param = Arr::query(['user_name' => $user->first_name]);
     $response->assertRedirect($url . $path . "?$param");
 });
