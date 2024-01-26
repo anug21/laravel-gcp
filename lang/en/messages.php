@@ -8,6 +8,8 @@ return [
         'logged_in' => 'User logged in successfully.',
         'logged_out' => 'User logged out successfully.',
         'email_verified' => 'User e-mail marked as verified',
+        'verification_link_sent' => 'Verification link sent',
+        'email_already_verified' => 'User e-mail already marked as verified',
         'email_not_verified' => 'Your email address is not verified.',
         'cannot_remove_yourself' => 'You cannot remove yourself',
         'forgot_password_instruction' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
