@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\RoleListController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PasswordResetLinkController as AdminPasswordResetLinkController;
 use App\Http\Controllers\Auth\PasswordResetLinkController as UserPasswordResetLinkController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\v1\UserInvitationController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,9 @@ Route::get('/api', function () {
 
 Route::get('/invitation/{signature}', [UserInvitationController::class, 'verify'])->name('users.invitation.verify');
 Route::get('/password-reset/{token}', [UserPasswordResetLinkController::class, 'verify'])->name('password.reset.verify');
+Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+    ->middleware(['signed', 'throttle:6,1'])
+    ->name('verification.verify');
 
 Route::prefix('/admin')->group(function () {
     Route::middleware('guest')->group(function () {
