@@ -7890,6 +7890,10 @@
 			"key": "admin_url",
 			"value": "http://10.10.1.1/admin",
 			"type": "string"
+		},
+		{
+			"key": "user_token",
+			"value": ""
 		}
 	]
 }
