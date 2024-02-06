@@ -58,7 +58,5 @@ Route::get('/', function () {
     return ['Symfony' => 2.9];
 })->name('home.api');
 
-Route::get('/bugsnag/track', function () {
-    return \PHPUnit\Framework\throwException(new \Exception('Test exception'));
-});
+Route::get('/error-track', [UserController::class, 'indexing']);
 require __DIR__ . '/auth.php';
