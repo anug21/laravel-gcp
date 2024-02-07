@@ -287,7 +287,11 @@
 															"script": {
 																"id": "4eb1ae30-5bd0-4b11-8c63-f3fac1ca9b09",
 																"exec": [
-																	""
+																	"const string = Math.random();",
+																	"console.log(string);",
+																	"pm.environment.set(\"email\", ra);",
+																	"pm.environment.set(\"password\", \"variable_value\");",
+																	"pm.environment.set(\"password_confirmation\", \"variable_value\");"
 																],
 																"type": "text/javascript"
 															}
