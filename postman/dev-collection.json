@@ -287,11 +287,20 @@
 															"script": {
 																"id": "4eb1ae30-5bd0-4b11-8c63-f3fac1ca9b09",
 																"exec": [
-																	"const string = Math.random();",
-																	"console.log(string);",
-																	"pm.environment.set(\"email\", ra);",
-																	"pm.environment.set(\"password\", \"variable_value\");",
-																	"pm.environment.set(\"password_confirmation\", \"variable_value\");"
+																	"// const string = (Math.random() + 1).toString(36).substring(7);",
+																	"// const email = string + '@yopmail.com';",
+																	"// const password = 'PaF@&-5-2-3'",
+																	"// const first_name = 'PMFname-';",
+																	"// const last_name = 'PMLname-'",
+																	"",
+																	"// pm.environment.set(\"email\", email);",
+																	"// pm.environment.set(\"password\", password);",
+																	"// pm.environment.set(\"password_confirmation\", password);",
+																	"",
+																	"// pm.globals.set(\"user_email\", email);",
+																	"// pm.globals.set(\"user_password\", password);",
+																	"",
+																	""
 																],
 																"type": "text/javascript"
 															}
