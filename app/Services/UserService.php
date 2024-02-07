@@ -10,6 +10,7 @@ use App\Traits\ActivityLog;
 use Cache;
 use Config;
 use http\Exception\InvalidArgumentException;
+use App\Notifications\ProfileImageUploadNotification;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -35,6 +36,7 @@ class UserService
         if (array_key_exists('invitation_key', $userInfo)) {
             $user = $this->registerWithInvitation($userInfo);
             $user->markEmailAsVerified();
+            $user->notify(new ProfileImageUploadNotification());
             return $user->toArray();
         }
 
