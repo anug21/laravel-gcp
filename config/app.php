@@ -280,8 +280,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\PasswordValidationServiceProvider::class,
-        \Modules\Team\Providers\TeamServiceProvider::class,
-        \Modules\Profile\Providers\ProfileServiceProvider::class,
+        /*
+         * FL- Custom Module Service Providers.
+         */
+        \Modules\ModuleServiceProvider::class,
 
     ],
 
