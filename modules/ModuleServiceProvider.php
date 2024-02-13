@@ -13,5 +13,6 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->app->register(TeamServiceProvider::class);
         $this->app->register(ProfileServiceProvider::class);
+        $this->app->register(UserInvitationServiceProvider::class);
     }
 }
