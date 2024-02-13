@@ -13,7 +13,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use stdClass;
 
-class SearchService
+class SearchService extends \App\Services\SearchService
 {
     private int $searchSize = 10000;
 
