@@ -6850,6 +6850,39 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "user",
+									"id": "cbb48647-126e-4d3c-a3f6-ee40412883b5",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "first_name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "last_name",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "role",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"url": "https://2b7bad73-affe-46be-a95d-4b2db1a61cb0.mock.pstmn.io/user/1"
+									},
+									"response": []
 								}
 							],
 							"id": "31f16d8e-4607-4732-b446-96e0dc7b592f",
