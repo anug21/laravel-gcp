@@ -6850,6 +6850,71 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Edit User",
+									"id": "70112d20-3f06-418f-97da-68a242e2e0f5",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "37|RCtZMUMAIRFy72Ikj25Q5x6pfFIaQWcysg3F3mm6ff6af525"
+											}
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": "{{base_url}}/users/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Update User",
+									"id": "3b8c169d-3bbe-4ade-ad87-5936c90e911a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/users/1?first_name=fname&last_name=fname&role=super_admin",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"users",
+												"1"
+											],
+											"query": [
+												{
+													"key": "first_name",
+													"value": "fname"
+												},
+												{
+													"key": "last_name",
+													"value": "fname"
+												},
+												{
+													"key": "role",
+													"value": "super_admin"
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"id": "31f16d8e-4607-4732-b446-96e0dc7b592f",
