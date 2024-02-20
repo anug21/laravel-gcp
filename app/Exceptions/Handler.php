@@ -7,7 +7,6 @@ use App\Traits\RestExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Http\JsonResponse;
 use Throwable;
 use Log;
 
