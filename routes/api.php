@@ -41,6 +41,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('profile-notification.show');
     Route::patch('/profile/notifications', [ProfileNotificationController::class, 'update'])
         ->name('profile-notification.update');
+
+    Route::put('/users/{id}', [UserController::class, 'updateUser'])->name('users.update')->can('view users');
+    Route::get('/users/{id}', [UserController::class, 'get'])->name('users.get')->can('view users');
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view users');
 
     Route::controller(UserInvitationController::class)
