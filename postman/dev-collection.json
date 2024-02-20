@@ -6898,8 +6898,17 @@
 										},
 										"method": "PUT",
 										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"first_name\":\"fname\",\n    \"last_name\": \"last_name\",\n    \"role\": \"super_admin\"\n}\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
-											"raw": "{{base_url}}/users/1?first_name=fname&last_name=fname&role=super_admin",
+											"raw": "{{base_url}}/users/1",
 											"host": [
 												"{{base_url}}"
 											],
@@ -6910,15 +6919,21 @@
 											"query": [
 												{
 													"key": "first_name",
-													"value": "fname"
+													"value": "fname",
+													"type": "text",
+													"disabled": true
 												},
 												{
 													"key": "last_name",
-													"value": "fname"
+													"value": "fname",
+													"type": "text",
+													"disabled": true
 												},
 												{
 													"key": "role",
-													"value": "super_admin"
+													"value": "super_admin",
+													"type": "text",
+													"disabled": true
 												}
 											]
 										}
