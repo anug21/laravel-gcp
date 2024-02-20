@@ -2,14 +2,19 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use App\Traits\RestExceptionHandler;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 use Log;
 
 class Handler extends ExceptionHandler
 {
+    use RestExceptionHandler;
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -51,5 +56,12 @@ class Handler extends ExceptionHandler
         $this->renderable(function (ThrottleRequestsException $e) {
             return response()->json(['message' => __('messages.error.too_many_attempts')], Response::HTTP_TOO_MANY_REQUESTS);
         });
+    }
+
+    public function render($request, Exception|Throwable $e):Response|JsonResponse
+    {
+        return $request->is('api/v*')
+            ? $this->getJsonResponseForException($e)
+            : parent::render($request, $e);
     }
 }
