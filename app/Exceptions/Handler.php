@@ -57,11 +57,4 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => __('messages.error.too_many_attempts')], Response::HTTP_TOO_MANY_REQUESTS);
         });
     }
-
-    public function render($request, Exception|Throwable $e): Response|JsonResponse
-    {
-        return $request->is('api/v*')
-            ? $this->getJsonResponseForException($e)
-            : parent::render($request, $e);
-    }
 }
