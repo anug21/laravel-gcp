@@ -48,9 +48,12 @@ class UserController extends Controller
         $data = $request->validated();
         $user = User::find($data['id']);
         if ($user) {
-            $user->roles()->detach();
-            $user->assignRole($data['role']);
-            unset($data['id'], $data['role']);
+            if (!empty($data['role'])) {
+                $user->roles()->detach();
+                $user->assignRole($data['role']);
+                unset($data['role']);
+            }
+            unset($data['id']);
             $user->update($data);
             return $this->response($request->validated(), '', Response::HTTP_OK);
         }
