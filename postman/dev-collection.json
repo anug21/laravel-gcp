@@ -5848,7 +5848,8 @@
 													"    jsonData = JSON.parse(responseBody);",
 													"});",
 													"",
-													"pm.environment.set('user_token', jsonData.data.token);"
+													"pm.environment.set('user_token', jsonData.data.token);",
+													"//console.log(pm.environment.get(\"user_token\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -5866,13 +5867,15 @@
 											"formdata": [
 												{
 													"key": "email",
-													"value": "{{user_email}}",
-													"type": "text"
+													"value": "admin@example.com",
+													"type": "text",
+													"description": "{{user_email}}"
 												},
 												{
 													"key": "password",
-													"value": "{{user_password}}",
-													"type": "text"
+													"value": "Password@123",
+													"type": "text",
+													"description": "{{user_password}}"
 												}
 											]
 										},
@@ -6861,7 +6864,7 @@
 										"auth": {
 											"type": "bearer",
 											"bearer": {
-												"token": "37|RCtZMUMAIRFy72Ikj25Q5x6pfFIaQWcysg3F3mm6ff6af525"
+												"token": "{{user_token}}"
 											}
 										},
 										"method": "GET",
@@ -6887,6 +6890,12 @@
 										"disableBodyPruning": true
 									},
 									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user_token}}"
+											}
+										},
 										"method": "PUT",
 										"header": [],
 										"url": {
