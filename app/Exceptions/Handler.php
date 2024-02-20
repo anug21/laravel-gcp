@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Exception|Throwable $e):Response|JsonResponse
+    public function render($request, Exception|Throwable $e): Response|JsonResponse
     {
         return $request->is('api/v*')
             ? $this->getJsonResponseForException($e)
