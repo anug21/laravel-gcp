@@ -7897,6 +7897,25 @@
 								}
 							],
 							"id": "203145eb-795e-48e0-a855-5d34e15fab2f"
+						},
+						{
+							"name": "Delete User Copy",
+							"id": "2af7bf99-8e45-4d57-8bfc-472569c34e34",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "{{user_token}}"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": "{{base_url}}/users/12"
+							},
+							"response": []
 						}
 					],
 					"id": "b1a4465b-5b8c-466a-9028-a19736c76ca5",
