@@ -19,7 +19,7 @@ class UpdateUserProfileRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer', Rule::exists('users', 'id')],
-            'first_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['nullable', 'string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
             'role' => ['nullable', 'string', Rule::in(Config::get('constants.roles'))],
         ];

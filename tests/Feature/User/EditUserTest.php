@@ -43,25 +43,24 @@ test('Get profile successfully', function () {
 
 test('Update profile - with route url', function () {
     $this->withHeader('Accept', 'application/json')
-        ->put('api/v1/users/1')->assertUnauthorized();
+        ->patch('api/v1/users/1')->assertUnauthorized();
 });
 
 test('Update profile - with route name', function () {
     $this->withHeader('Accept', 'application/json')
-        ->put(route('users.update', ['id' => 1]))
+        ->patch(route('users.update', ['id' => 1]))
         ->assertUnauthorized();
 });
 
 test('Update profile user validation exception', function () {
     $this->actingAs($this->user)
         ->withHeader('Accept', 'application/json')
-        ->put(route('users.update', ['id' => fake()->randomDigitNot($this->user->id)]))
+        ->patch(route('users.update', ['id' => fake()->randomDigitNot($this->user->id)]))
         ->assertStatus(422)
         ->assertJsonStructure([
             'message',
             'errors' => [
-                'id',
-                'first_name'
+                'id'
             ],
         ]);
 });
@@ -69,7 +68,7 @@ test('Update profile user validation exception', function () {
 test('Update profile user validation exception - role not found', function () {
     $this->actingAs($this->user)
         ->withHeader('Accept', 'application/json')
-        ->put(route('users.update', [
+        ->patch(route('users.update', [
             'id' => $this->user->id,
             'first_name' => fake()->firstName,
             'role' => 'not-found'
@@ -86,7 +85,7 @@ test('Update profile user validation exception - role not found', function () {
 test('Update profile user successfully', function () {
     $this->actingAs($this->user)
         ->withHeader('Accept', 'application/json')
-        ->put(route('users.update', [
+        ->patch(route('users.update', [
             'id' => $this->user->id,
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
