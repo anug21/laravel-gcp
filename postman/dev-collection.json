@@ -6896,11 +6896,11 @@
 												"token": "{{user_token}}"
 											}
 										},
-										"method": "PUT",
+										"method": "PATCH",
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"first_name\":\"fname\",\n    \"last_name\": \"last_name\",\n    \"role\": \"super_admin\"\n}\n\n",
+											"raw": "{\n    \"first_name\":\"First name\",\n    \"last_name\": \"Last name\",\n    \"role\": \"super_admin\"\n}\n\n",
 											"options": {
 												"raw": {
 													"language": "json"
