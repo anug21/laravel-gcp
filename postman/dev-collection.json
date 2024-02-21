@@ -6873,19 +6873,28 @@
 														"exec": [
 															"pm.test(\"Response status code is 200\", function () {\r",
 															"    pm.response.to.have.status(200);\r",
-															"    \r",
 															"});\r",
 															"\r",
 															"pm.test(\"Response has all required fields\", function () {\r",
-															"    const responseData = pm.response.json();\r",
+															"    const responseData = pm.response.json().data;\r",
 															"\r",
 															"    pm.expect(responseData).to.be.an('object');\r",
-															"    pm.expect(responseData.data).to.be.an('object');\r",
-															"    pm.expect(responseData.data.roles).to.be.an('array').that.is.not.empty;\r",
-															"    pm.expect(responseData.data.onboarded).to.be.a('boolean');\r",
-															"    pm.expect(responseData.message).to.equal(\"\");\r",
+															"    pm.expect(responseData.email).to.exist;\r",
+															"    pm.expect(responseData.email_verified_at).to.exist;\r",
+															"    pm.expect(responseData.id).to.exist;\r",
+															"    pm.expect(responseData.created_at).to.exist;\r",
+															"    pm.expect(responseData.updated_at).to.exist;\r",
+															"    pm.expect(responseData.first_name).to.exist;\r",
+															"    pm.expect(responseData.last_name).to.exist;\r",
+															"    pm.expect(responseData.birth_date).to.exist;\r",
+															"    pm.expect(responseData.initials).to.exist;\r",
+															"    pm.expect(responseData.has_subscribed).to.be.a('boolean');\r",
+															"    pm.expect(responseData.roles).to.be.an('array').that.is.not.empty;\r",
+															"    pm.expect(responseData.onboarded).to.be.a('boolean');\r",
+															"    pm.expect(responseData.image).to.exist;\r",
+															"    pm.expect(responseData.image_thumbnail).to.exist;\r",
 															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-															"    //pm.expect(responseData.data.birth_date).to.satisfy((value) => value === null || !isNaN(Date.parse(value)), \"Birth date should be null or a valid date format\");\r",
+															"    pm.expect(responseData.birth_date).to.satisfy((value) => value === null || !isNaN(Date.parse(value)), \"Birth date should be null or a valid date format\");\r",
 															"});"
 														],
 														"type": "text/javascript"
@@ -6915,7 +6924,7 @@
 													"mode": "formdata",
 													"formdata": []
 												},
-												"url": "{{base_url}}/users/1"
+												"url": "{{base_url}}/users/1659"
 											},
 											"response": []
 										},
