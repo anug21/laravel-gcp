@@ -1,6 +1,5 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Response;
 
 beforeEach(function () {
     $this->user = createUser();
