@@ -6043,6 +6043,229 @@
 											"body": "{\n    \"message\": \"These credentials do not match our records.\",\n    \"errors\": {\n        \"email\": [\n            \"These credentials do not match our records.\"\n        ]\n    }\n}"
 										}
 									]
+								},
+								{
+									"name": "Login qa",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "60cbc745-77c7-4591-98c0-a12dd036c733",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "94b83010-bcdf-4102-8460-07e1c13c8b1a",
+												"exec": [
+													"pm.test('Reponse code to be 200', function () {",
+													"    pm.expect(pm.response.code).to.be.equal(200);",
+													"});",
+													"",
+													"pm.test(\"Body is present\", function () {",
+													"    ((responseBody) !== undefined && (responseBody.length > 1));",
+													"    jsonData = JSON.parse(responseBody);",
+													"});",
+													"",
+													"pm.environment.set('user_token', jsonData.data.token);",
+													"//console.log(pm.environment.get(\"user_token\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "4060b728-305f-422e-91cd-bb2a4fb9507d",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "email",
+													"value": "adminaccount@yopmail.com",
+													"type": "text",
+													"description": "{{user_email}}"
+												},
+												{
+													"key": "password",
+													"value": "Test@1246",
+													"type": "text",
+													"description": "{{user_password}}"
+												}
+											]
+										},
+										"url": "{{base_url}}/login"
+									},
+									"response": [
+										{
+											"id": "7823e909-2e80-4b45-a9f1-5b655635bc35",
+											"name": "Successful",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "email",
+															"value": "{{user_email}}",
+															"type": "text"
+														},
+														{
+															"key": "password",
+															"value": "{{user_password}}",
+															"type": "text"
+														}
+													]
+												},
+												"url": "{{base_url}}/login"
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Tue, 02 May 2023 07:58:30 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Apache/2.4.56 (Debian)"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.2.4"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "57"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "http://10.10.1.6:3000"
+												},
+												{
+													"key": "Access-Control-Allow-Credentials",
+													"value": "true"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5, max=100"
+												},
+												{
+													"key": "Connection",
+													"value": "Keep-Alive"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"data\": {\n        \"token\": \"3|P1H6sn7q0DTmN6LfEkckgyV4uWD5feYLyODNTHt2\"\n    },\n    \"message\": \"User logged in successfully.\"\n}"
+										},
+										{
+											"id": "0d2d047b-0d2c-4bb0-9712-22aaa9f79ef3",
+											"name": "Failure | Invalid credentials",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "email",
+															"value": "{{user_email}}",
+															"type": "text"
+														},
+														{
+															"key": "password",
+															"value": "{{user_password}}1",
+															"type": "text"
+														}
+													]
+												},
+												"url": "{{base_url}}/login"
+											},
+											"status": "Unprocessable Content",
+											"code": 422,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Tue, 02 May 2023 08:00:56 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Apache/2.4.56 (Debian)"
+												},
+												{
+													"key": "X-Powered-By",
+													"value": "PHP/8.2.4"
+												},
+												{
+													"key": "Cache-Control",
+													"value": "no-cache, private"
+												},
+												{
+													"key": "X-RateLimit-Limit",
+													"value": "60"
+												},
+												{
+													"key": "X-RateLimit-Remaining",
+													"value": "58"
+												},
+												{
+													"key": "Access-Control-Allow-Origin",
+													"value": "http://10.10.1.6:3000"
+												},
+												{
+													"key": "Access-Control-Allow-Credentials",
+													"value": "true"
+												},
+												{
+													"key": "Keep-Alive",
+													"value": "timeout=5, max=100"
+												},
+												{
+													"key": "Connection",
+													"value": "Keep-Alive"
+												},
+												{
+													"key": "Transfer-Encoding",
+													"value": "chunked"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"responseTime": null,
+											"body": "{\n    \"message\": \"These credentials do not match our records.\",\n    \"errors\": {\n        \"email\": [\n            \"These credentials do not match our records.\"\n        ]\n    }\n}"
+										}
+									]
 								}
 							],
 							"id": "d2d75c6e-f732-4afd-bd93-fdfa3da194c9"
@@ -6799,229 +7022,6 @@
 								{
 									"name": "User tests",
 									"item": [
-										{
-											"name": "Login Copy",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"id": "60cbc745-77c7-4591-98c0-a12dd036c733",
-														"exec": [
-															""
-														],
-														"type": "text/javascript"
-													}
-												},
-												{
-													"listen": "test",
-													"script": {
-														"id": "94b83010-bcdf-4102-8460-07e1c13c8b1a",
-														"exec": [
-															"pm.test('Reponse code to be 200', function () {",
-															"    pm.expect(pm.response.code).to.be.equal(200);",
-															"});",
-															"",
-															"pm.test(\"Body is present\", function () {",
-															"    ((responseBody) !== undefined && (responseBody.length > 1));",
-															"    jsonData = JSON.parse(responseBody);",
-															"});",
-															"",
-															"pm.environment.set('user_token', jsonData.data.token);",
-															"//console.log(pm.environment.get(\"user_token\"));"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "4060b728-305f-422e-91cd-bb2a4fb9507d",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"method": "POST",
-												"header": [],
-												"body": {
-													"mode": "formdata",
-													"formdata": [
-														{
-															"key": "email",
-															"value": "adminaccount@yopmail.com",
-															"type": "text",
-															"description": "{{user_email}}"
-														},
-														{
-															"key": "password",
-															"value": "Test@1246",
-															"type": "text",
-															"description": "{{user_password}}"
-														}
-													]
-												},
-												"url": "{{base_url}}/login"
-											},
-											"response": [
-												{
-													"id": "7823e909-2e80-4b45-a9f1-5b655635bc35",
-													"name": "Successful",
-													"originalRequest": {
-														"method": "POST",
-														"header": [],
-														"body": {
-															"mode": "formdata",
-															"formdata": [
-																{
-																	"key": "email",
-																	"value": "{{user_email}}",
-																	"type": "text"
-																},
-																{
-																	"key": "password",
-																	"value": "{{user_password}}",
-																	"type": "text"
-																}
-															]
-														},
-														"url": "{{base_url}}/login"
-													},
-													"status": "OK",
-													"code": 200,
-													"_postman_previewlanguage": "json",
-													"header": [
-														{
-															"key": "Date",
-															"value": "Tue, 02 May 2023 07:58:30 GMT"
-														},
-														{
-															"key": "Server",
-															"value": "Apache/2.4.56 (Debian)"
-														},
-														{
-															"key": "X-Powered-By",
-															"value": "PHP/8.2.4"
-														},
-														{
-															"key": "Cache-Control",
-															"value": "no-cache, private"
-														},
-														{
-															"key": "X-RateLimit-Limit",
-															"value": "60"
-														},
-														{
-															"key": "X-RateLimit-Remaining",
-															"value": "57"
-														},
-														{
-															"key": "Access-Control-Allow-Origin",
-															"value": "http://10.10.1.6:3000"
-														},
-														{
-															"key": "Access-Control-Allow-Credentials",
-															"value": "true"
-														},
-														{
-															"key": "Keep-Alive",
-															"value": "timeout=5, max=100"
-														},
-														{
-															"key": "Connection",
-															"value": "Keep-Alive"
-														},
-														{
-															"key": "Transfer-Encoding",
-															"value": "chunked"
-														},
-														{
-															"key": "Content-Type",
-															"value": "application/json"
-														}
-													],
-													"cookie": [],
-													"responseTime": null,
-													"body": "{\n    \"data\": {\n        \"token\": \"3|P1H6sn7q0DTmN6LfEkckgyV4uWD5feYLyODNTHt2\"\n    },\n    \"message\": \"User logged in successfully.\"\n}"
-												},
-												{
-													"id": "0d2d047b-0d2c-4bb0-9712-22aaa9f79ef3",
-													"name": "Failure | Invalid credentials",
-													"originalRequest": {
-														"method": "POST",
-														"header": [],
-														"body": {
-															"mode": "formdata",
-															"formdata": [
-																{
-																	"key": "email",
-																	"value": "{{user_email}}",
-																	"type": "text"
-																},
-																{
-																	"key": "password",
-																	"value": "{{user_password}}1",
-																	"type": "text"
-																}
-															]
-														},
-														"url": "{{base_url}}/login"
-													},
-													"status": "Unprocessable Content",
-													"code": 422,
-													"_postman_previewlanguage": "json",
-													"header": [
-														{
-															"key": "Date",
-															"value": "Tue, 02 May 2023 08:00:56 GMT"
-														},
-														{
-															"key": "Server",
-															"value": "Apache/2.4.56 (Debian)"
-														},
-														{
-															"key": "X-Powered-By",
-															"value": "PHP/8.2.4"
-														},
-														{
-															"key": "Cache-Control",
-															"value": "no-cache, private"
-														},
-														{
-															"key": "X-RateLimit-Limit",
-															"value": "60"
-														},
-														{
-															"key": "X-RateLimit-Remaining",
-															"value": "58"
-														},
-														{
-															"key": "Access-Control-Allow-Origin",
-															"value": "http://10.10.1.6:3000"
-														},
-														{
-															"key": "Access-Control-Allow-Credentials",
-															"value": "true"
-														},
-														{
-															"key": "Keep-Alive",
-															"value": "timeout=5, max=100"
-														},
-														{
-															"key": "Connection",
-															"value": "Keep-Alive"
-														},
-														{
-															"key": "Transfer-Encoding",
-															"value": "chunked"
-														},
-														{
-															"key": "Content-Type",
-															"value": "application/json"
-														}
-													],
-													"cookie": [],
-													"responseTime": null,
-													"body": "{\n    \"message\": \"These credentials do not match our records.\",\n    \"errors\": {\n        \"email\": [\n            \"These credentials do not match our records.\"\n        ]\n    }\n}"
-												}
-											]
-										},
 										{
 											"name": "Users",
 											"event": [
