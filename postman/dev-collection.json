@@ -6939,6 +6939,25 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Delete User",
+									"id": "c9998008-51d3-4999-98ec-6ebddb155685",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user_token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base_url}}/users/12"
+									},
+									"response": []
 								}
 							],
 							"id": "31f16d8e-4607-4732-b446-96e0dc7b592f",
