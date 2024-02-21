@@ -6800,6 +6800,229 @@
 									"name": "User tests",
 									"item": [
 										{
+											"name": "Login Copy",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "60cbc745-77c7-4591-98c0-a12dd036c733",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "94b83010-bcdf-4102-8460-07e1c13c8b1a",
+														"exec": [
+															"pm.test('Reponse code to be 200', function () {",
+															"    pm.expect(pm.response.code).to.be.equal(200);",
+															"});",
+															"",
+															"pm.test(\"Body is present\", function () {",
+															"    ((responseBody) !== undefined && (responseBody.length > 1));",
+															"    jsonData = JSON.parse(responseBody);",
+															"});",
+															"",
+															"pm.environment.set('user_token', jsonData.data.token);",
+															"//console.log(pm.environment.get(\"user_token\"));"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"id": "4060b728-305f-422e-91cd-bb2a4fb9507d",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "formdata",
+													"formdata": [
+														{
+															"key": "email",
+															"value": "adminaccount@yopmail.com",
+															"type": "text",
+															"description": "{{user_email}}"
+														},
+														{
+															"key": "password",
+															"value": "Test@1246",
+															"type": "text",
+															"description": "{{user_password}}"
+														}
+													]
+												},
+												"url": "{{base_url}}/login"
+											},
+											"response": [
+												{
+													"id": "7823e909-2e80-4b45-a9f1-5b655635bc35",
+													"name": "Successful",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": [
+																{
+																	"key": "email",
+																	"value": "{{user_email}}",
+																	"type": "text"
+																},
+																{
+																	"key": "password",
+																	"value": "{{user_password}}",
+																	"type": "text"
+																}
+															]
+														},
+														"url": "{{base_url}}/login"
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Tue, 02 May 2023 07:58:30 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Apache/2.4.56 (Debian)"
+														},
+														{
+															"key": "X-Powered-By",
+															"value": "PHP/8.2.4"
+														},
+														{
+															"key": "Cache-Control",
+															"value": "no-cache, private"
+														},
+														{
+															"key": "X-RateLimit-Limit",
+															"value": "60"
+														},
+														{
+															"key": "X-RateLimit-Remaining",
+															"value": "57"
+														},
+														{
+															"key": "Access-Control-Allow-Origin",
+															"value": "http://10.10.1.6:3000"
+														},
+														{
+															"key": "Access-Control-Allow-Credentials",
+															"value": "true"
+														},
+														{
+															"key": "Keep-Alive",
+															"value": "timeout=5, max=100"
+														},
+														{
+															"key": "Connection",
+															"value": "Keep-Alive"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n    \"data\": {\n        \"token\": \"3|P1H6sn7q0DTmN6LfEkckgyV4uWD5feYLyODNTHt2\"\n    },\n    \"message\": \"User logged in successfully.\"\n}"
+												},
+												{
+													"id": "0d2d047b-0d2c-4bb0-9712-22aaa9f79ef3",
+													"name": "Failure | Invalid credentials",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": [
+																{
+																	"key": "email",
+																	"value": "{{user_email}}",
+																	"type": "text"
+																},
+																{
+																	"key": "password",
+																	"value": "{{user_password}}1",
+																	"type": "text"
+																}
+															]
+														},
+														"url": "{{base_url}}/login"
+													},
+													"status": "Unprocessable Content",
+													"code": 422,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Date",
+															"value": "Tue, 02 May 2023 08:00:56 GMT"
+														},
+														{
+															"key": "Server",
+															"value": "Apache/2.4.56 (Debian)"
+														},
+														{
+															"key": "X-Powered-By",
+															"value": "PHP/8.2.4"
+														},
+														{
+															"key": "Cache-Control",
+															"value": "no-cache, private"
+														},
+														{
+															"key": "X-RateLimit-Limit",
+															"value": "60"
+														},
+														{
+															"key": "X-RateLimit-Remaining",
+															"value": "58"
+														},
+														{
+															"key": "Access-Control-Allow-Origin",
+															"value": "http://10.10.1.6:3000"
+														},
+														{
+															"key": "Access-Control-Allow-Credentials",
+															"value": "true"
+														},
+														{
+															"key": "Keep-Alive",
+															"value": "timeout=5, max=100"
+														},
+														{
+															"key": "Connection",
+															"value": "Keep-Alive"
+														},
+														{
+															"key": "Transfer-Encoding",
+															"value": "chunked"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"responseTime": null,
+													"body": "{\n    \"message\": \"These credentials do not match our records.\",\n    \"errors\": {\n        \"email\": [\n            \"These credentials do not match our records.\"\n        ]\n    }\n}"
+												}
+											]
+										},
+										{
 											"name": "Users",
 											"event": [
 												{
@@ -6929,6 +7152,99 @@
 											"response": []
 										},
 										{
+											"name": "Update User -when  names are valid and  role is admin",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "772ce517-4e0f-4c88-a143-91a8b6ef6bad",
+														"exec": [
+															"pm.test(\"Response status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"    \r",
+															"});\r",
+															"\r",
+															"pm.test(\"Response has all required fields\", function () {\r",
+															"    const responseData = pm.response.json();\r",
+															"\r",
+															"    pm.expect(responseData).to.be.an('object');\r",
+															"    pm.expect(responseData.data).to.be.an('object');\r",
+															"    pm.expect(responseData.data.first_name).to.exist;\r",
+															"    pm.expect(responseData.data.last_name).to.exist;\r",
+															"    pm.expect(responseData.data.role).to.exist;\r",
+															"    \r",
+															"});\r",
+															"\r",
+															"pm.test(\"Response time is less than 500ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"id": "29aca164-3092-4ae8-80ac-463e0c9510d8",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user_token}}"
+													}
+												},
+												"method": "PATCH",
+												"header": [
+													{
+														"key": "Authorization",
+														"value": "",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"first_name\":\"Mateuz\",\n    \"last_name\": \"kuznik\",\n    \"role\": \"super_admin\"\n}\n\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{base_url}}/users/1",
+													"host": [
+														"{{base_url}}"
+													],
+													"path": [
+														"users",
+														"1"
+													],
+													"query": [
+														{
+															"key": "first_name",
+															"value": "fname",
+															"type": "text",
+															"disabled": true
+														},
+														{
+															"key": "last_name",
+															"value": "fname",
+															"type": "text",
+															"disabled": true
+														},
+														{
+															"key": "role",
+															"value": "super_admin",
+															"type": "text",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
 											"name": "Update User -when  names are valid and  role is user",
 											"event": [
 												{
@@ -7028,99 +7344,6 @@
 											"response": []
 										},
 										{
-											"name": "Update User -when  names are valid and  role is admin",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "772ce517-4e0f-4c88-a143-91a8b6ef6bad",
-														"exec": [
-															"pm.test(\"Response status code is 200\", function () {\r",
-															"    pm.response.to.have.status(200);\r",
-															"    \r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response has all required fields\", function () {\r",
-															"    const responseData = pm.response.json();\r",
-															"\r",
-															"    pm.expect(responseData).to.be.an('object');\r",
-															"    pm.expect(responseData.data).to.be.an('object');\r",
-															"    pm.expect(responseData.data.first_name).to.exist;\r",
-															"    pm.expect(responseData.data.last_name).to.exist;\r",
-															"    pm.expect(responseData.data.role).to.exist;\r",
-															"    \r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response time is less than 500ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "29aca164-3092-4ae8-80ac-463e0c9510d8",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"super_admin\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
 											"name": "Update User -when first name is blank",
 											"event": [
 												{
@@ -7129,7 +7352,7 @@
 														"id": "f606ff83-25ec-4ca5-8635-d9df6938126c",
 														"exec": [
 															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The first_name field is required\");\r",
+															"    pm.expect(pm.response.text()).to.include(\"The first name field is required.\");\r",
 															"    });\r",
 															"\r",
 															"    pm.test(\"Status code is 422\", function () {\r",
@@ -7217,7 +7440,7 @@
 														"id": "a81d676a-573b-4e83-98bd-9a88399a4dd2",
 														"exec": [
 															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The first_name canno be blank.\");\r",
+															"    pm.expect(pm.response.text()).to.include(\"The last name field is required.\");\r",
 															"    });\r",
 															"\r",
 															"    pm.test(\"Status code is 422\", function () {\r",
@@ -7305,7 +7528,7 @@
 														"id": "15528449-175d-44e6-a797-64a97c6ee071",
 														"exec": [
 															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The role cannot be blank.\");\r",
+															"    pm.expect(pm.response.text()).to.include(\"The role field is required.\");\r",
 															"    });\r",
 															"\r",
 															"    pm.test(\"Status code is 422\", function () {\r",
@@ -7511,7 +7734,7 @@
 												},
 												"method": "DELETE",
 												"header": [],
-												"url": "{{base_url}}/users/15"
+												"url": "{{base_url}}/users/1344"
 											},
 											"response": []
 										},
