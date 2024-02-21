@@ -59,4 +59,14 @@ class UserController extends Controller
         }
         return $this->response(null, '', Response::HTTP_NOT_FOUND);
     }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return $this->response(null, __('messages.resource.deleted'));
+        }
+        return $this->response(null, '', Response::HTTP_NOT_FOUND);
+    }
 }

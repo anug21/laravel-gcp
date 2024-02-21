@@ -74,5 +74,8 @@ return [
             'content' => ':admin_name has invited you to join :service as a :user_role. Join them to collaborate and reach new productivity peaks.',
             'action' => 'Accept invitation',
         ]
+    ],
+    'resource' => [
+        'deleted' => 'Resource deleted successfully.',
     ]
 ];

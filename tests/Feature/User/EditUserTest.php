@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Response;
+
 beforeEach(function () {
     $this->user = createUser();
 });
@@ -100,5 +102,38 @@ test('Update profile user successfully', function () {
                 'last_name',
                 'role'
             ],
+        ]);
+});
+
+test('Delete user route exists - route url', function () {
+    $this->withHeader('Accept', 'application/json')
+        ->delete('api/v1/users/1')->assertUnauthorized();
+});
+
+test('Delete user route exists - route name', function () {
+    $this->withHeader('Accept', 'application/json')
+        ->delete(route('users.get', ['id' => 1]))
+        ->assertUnauthorized();
+});
+
+test('Delete user validation exception - id not found', function () {
+    $this->actingAs($this->user)
+        ->withHeader('Accept', 'application/json')
+        ->delete(route('users.update', ['id' => fake()->randomDigitNot($this->user->id)]))
+        ->assertNotFound()
+        ->assertJsonStructure([
+            'message',
+            'data'
+        ]);
+});
+
+test('Delete user successfully', function () {
+    $this->actingAs($this->user)
+        ->withHeader('Accept', 'application/json')
+        ->delete(route('users.update', ['id' => $this->user->id]))
+        ->assertOk()
+        ->assertJsonStructure([
+            'message',
+            'data'
         ]);
 });
