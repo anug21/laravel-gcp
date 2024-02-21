@@ -7552,7 +7552,7 @@
 												"id": "f606ff83-25ec-4ca5-8635-d9df6938126c",
 												"exec": [
 													"pm.test(\"Body matches string\", function () {\r",
-													"    pm.expect(pm.response.text()).to.include(\"The first_name canno be blank.\");\r",
+													"    pm.expect(pm.response.text()).to.include(\"The first_name field is required\");\r",
 													"    });\r",
 													"\r",
 													"    pm.test(\"Status code is 422\", function () {\r",
