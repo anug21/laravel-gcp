@@ -67,6 +67,6 @@ class UserController extends Controller
             $user->delete();
             return $this->response(null, __('messages.resource.deleted'));
         }
-        return $this->response(null, '', Response::HTTP_NOT_FOUND);
+        return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
     }
 }

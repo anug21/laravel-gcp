@@ -77,5 +77,6 @@ return [
     ],
     'resource' => [
         'deleted' => 'Resource deleted successfully.',
+        'not_found' => 'Resource not found.',
     ]
 ];
