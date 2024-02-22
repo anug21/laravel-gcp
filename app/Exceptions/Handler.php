@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Exception;
 use App\Traits\RestExceptionHandler;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpFoundation\Response;
