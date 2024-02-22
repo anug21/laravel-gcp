@@ -4,11 +4,13 @@ namespace App\Exceptions;
 
 use Exception;
 use App\Traits\RestExceptionHandler;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 use Log;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -54,6 +56,10 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (ThrottleRequestsException $e) {
             return response()->json(['message' => __('messages.error.too_many_attempts')], Response::HTTP_TOO_MANY_REQUESTS);
+        });
+
+        $this->renderable(function (AccessDeniedHttpException $e) {
+            return response()->json(['message' => __('messages.error.access_denied')], Response::HTTP_FORBIDDEN);
         });
     }
 }

@@ -111,14 +111,14 @@ test('Delete user route exists - route url', function () {
 
 test('Delete user route exists - route name', function () {
     $this->withHeader('Accept', 'application/json')
-        ->delete(route('users.get', ['id' => 1]))
+        ->delete(route('users.delete', ['id' => 1]))
         ->assertUnauthorized();
 });
 
 test('Delete user validation exception - id not found', function () {
-    $this->actingAs($this->user)
+    $this->actingAs(createSuperAdmin())
         ->withHeader('Accept', 'application/json')
-        ->delete(route('users.update', ['id' => fake()->randomDigitNot($this->user->id)]))
+        ->delete(route('users.delete', ['id' => fake()->randomDigitNot($this->user->id)]))
         ->assertNotFound()
         ->assertJsonStructure([
             'message',
@@ -127,9 +127,10 @@ test('Delete user validation exception - id not found', function () {
 });
 
 test('User can not delete himself', function () {
-    $this->actingAs($this->user)
+    $user = createSuperAdmin();
+    $this->actingAs($user)
         ->withHeader('Accept', 'application/json')
-        ->delete(route('users.update', ['id' => $this->user->id]))
+        ->delete(route('users.delete', ['id' => $user->id]))
         ->assertForbidden()
         ->assertJsonStructure([
             'message',
@@ -138,10 +139,9 @@ test('User can not delete himself', function () {
 });
 
 test('Delete user successfully', function () {
-    $user = createUser();
-    $this->actingAs($this->user)
+    $this->actingAs(createSuperAdmin())
         ->withHeader('Accept', 'application/json')
-        ->delete(route('users.update', ['id' => $user->id]))
+        ->delete(route('users.delete', ['id' => $this->user->id]))
         ->assertOk()
         ->assertJsonStructure([
             'message',
