@@ -17,14 +17,16 @@ test('Get profile - with route name', function () {
 });
 
 test('Get profile user not found', function () {
-    $this->actingAs($this->user)
+    $user = createSuperAdmin();
+    $this->actingAs($user)
         ->withHeader('Accept', 'application/json')
         ->get(route('users.get', ['id' => fake()->randomDigitNot($this->user->id)]))
         ->assertNotFound();
 });
 
 test('Get profile successfully', function () {
-    $this->actingAs($this->user)
+    $user = createSuperAdmin();
+    $this->actingAs($user)
         ->withHeader('Accept', 'application/json')
         ->get(route('users.get', $this->user->id))
         ->assertOk()
@@ -54,7 +56,7 @@ test('Update profile - with route name', function () {
 });
 
 test('Update profile user validation exception', function () {
-    $this->actingAs($this->user)
+    $this->actingAs(createSuperAdmin())
         ->withHeader('Accept', 'application/json')
         ->patch(route('users.update', ['id' => fake()->randomDigitNot($this->user->id)]))
         ->assertStatus(422)
@@ -66,11 +68,19 @@ test('Update profile user validation exception', function () {
         ]);
 });
 
-test('Update profile user validation exception - role not found', function () {
+test('Non admin can not update profile', function () {
     $this->actingAs($this->user)
         ->withHeader('Accept', 'application/json')
+        ->patch(route('users.update', ['id' => fake()->randomDigitNot($this->user->id)]))
+        ->assertForbidden();
+});
+
+test('Update profile user validation exception - role not found', function () {
+    $user = createSuperAdmin();
+    $this->actingAs($user)
+        ->withHeader('Accept', 'application/json')
         ->patch(route('users.update', [
-            'id' => $this->user->id,
+            'id' => $user->id,
             'first_name' => fake()->firstName,
             'role' => 'not-found'
         ]))
@@ -84,10 +94,11 @@ test('Update profile user validation exception - role not found', function () {
 });
 
 test('Update profile user successfully', function () {
-    $this->actingAs($this->user)
+    $user = createSuperAdmin();
+    $this->actingAs($user)
         ->withHeader('Accept', 'application/json')
         ->patch(route('users.update', [
-            'id' => $this->user->id,
+            'id' => $user->id,
             'first_name' => fake()->firstName,
             'last_name' => fake()->lastName,
             'role' => Config::get('constants.roles')['super_admin']
@@ -146,5 +157,15 @@ test('Delete user successfully', function () {
         ->assertJsonStructure([
             'message',
             'data'
+        ]);
+});
+
+test('User dont have access to delete user', function () {
+    $this->actingAs($this->user)
+        ->withHeader('Accept', 'application/json')
+        ->delete(route('users.delete', ['id' => $this->user->id]))
+        ->assertForbidden()
+        ->assertJsonStructure([
+            'message',
         ]);
 });
