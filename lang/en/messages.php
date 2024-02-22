@@ -78,5 +78,6 @@ return [
     'resource' => [
         'deleted' => 'Resource deleted successfully.',
         'not_found' => 'Resource not found.',
+        'cannot_delete_self' => 'You cannot delete yourself.',
     ]
 ];

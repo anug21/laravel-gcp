@@ -62,6 +62,13 @@ class UserController extends Controller
 
     public function destroy(int $id): JsonResponse
     {
+        if (auth()->user()->id === $id) {
+            return $this->response(
+                null,
+                __('messages.resource.cannot_delete_self'),
+                Response::HTTP_FORBIDDEN
+            );
+        }
         $user = User::find($id);
         if ($user) {
             $user->delete();

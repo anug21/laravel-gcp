@@ -126,10 +126,22 @@ test('Delete user validation exception - id not found', function () {
         ]);
 });
 
-test('Delete user successfully', function () {
+test('User can not delete himself', function () {
     $this->actingAs($this->user)
         ->withHeader('Accept', 'application/json')
         ->delete(route('users.update', ['id' => $this->user->id]))
+        ->assertForbidden()
+        ->assertJsonStructure([
+            'message',
+            'data'
+        ]);
+});
+
+test('Delete user successfully', function () {
+    $user = createUser();
+    $this->actingAs($this->user)
+        ->withHeader('Accept', 'application/json')
+        ->delete(route('users.update', ['id' => $user->id]))
         ->assertOk()
         ->assertJsonStructure([
             'message',
