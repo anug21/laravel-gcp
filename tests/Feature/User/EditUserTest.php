@@ -169,3 +169,46 @@ test('User dont have access to delete user', function () {
             'message',
         ]);
 });
+
+test('User resend invitation route url exists', function () {
+    $this->withHeader('Accept', 'application/json')
+        ->post('api/v1/users/1/resend-invite')->assertUnauthorized();
+});
+
+test('User resend invitation route exists', function () {
+    $this->withHeader('Accept', 'application/json')
+        ->post(route('users.resend.invite', ['id' => 1]))
+        ->assertUnauthorized();
+});
+
+test('User resend invitation exception - user not found', function () {
+    $this->actingAs(createSuperAdmin())
+        ->withHeader('Accept', 'application/json')
+        ->post(route('users.resend.invite', ['id' => fake()->randomDigitNot($this->user->id)]))
+        ->assertNotFound()
+        ->assertJsonStructure([
+            'message',
+            'data'
+        ]);
+});
+
+test('User resend invitation', function () {
+    $this->actingAs(createSuperAdmin())
+        ->withHeader('Accept', 'application/json')
+        ->post(route('users.resend.invite', ['id' => $this->user->id]))
+        ->assertOk()
+        ->assertJsonStructure([
+            'message',
+            'data'
+        ]);
+});
+
+test('User have no permission to resend invitation', function () {
+    $this->actingAs($this->user)
+        ->withHeader('Accept', 'application/json')
+        ->post(route('users.resend.invite', ['id' => $this->user->id]))
+        ->assertForbidden()
+        ->assertJsonStructure([
+            'message',
+        ]);
+});
