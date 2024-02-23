@@ -44,8 +44,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::patch('/users/{id}', [UserController::class, 'updateUser'])->name('users.update')->can('update user');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.delete')->can('delete user');
-    Route::get('/users/{id}', [UserController::class, 'get'])->name('users.get')->can('views user');
+    Route::get('/users/{id}', [UserController::class, 'get'])->name('users.get')->can('view user');
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view users');
+    Route::post('/users/{id}/resend-invite', [UserController::class, 'resendInvite'])
+        ->name('users.resend.invite')
+        ->can('view user');
 
     Route::controller(UserInvitationController::class)
         ->prefix('/invitations')

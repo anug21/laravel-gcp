@@ -54,4 +54,16 @@ class FileService
         $imageStream = $image->stream()->__toString();
         Storage::disk($disk)->put($path, $imageStream);
     }
+
+    public function deleteFiles(array $path = [], string $disk = ''): void
+    {
+        $disk = $disk ?: config('filesystems.default');
+        if (!empty($path)) {
+            foreach ($path as $image_path) {
+                if (Storage::disk($disk)->exists($image_path)) {
+                    Storage::disk($disk)->delete($image_path);
+                }
+            }
+        }
+    }
 }

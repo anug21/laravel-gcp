@@ -74,7 +74,8 @@ return [
             'subject' => 'You are invited to register at :service',
             'content' => ':admin_name has invited you to join :service as a :user_role. Join them to collaborate and reach new productivity peaks.',
             'action' => 'Accept invitation',
-        ]
+        ],
+        'sent' => 'Invitation sent successfully.',
     ],
     'resource' => [
         'deleted' => 'Resource deleted successfully.',
