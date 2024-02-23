@@ -7986,6 +7986,43 @@
 										"url": "{{base_url}}/users/12"
 									},
 									"response": []
+								},
+								{
+									"name": "Resend Invite",
+									"id": "6609c0b8-9318-485d-bac1-729a86db32a3",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user_token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/users/2000/resend-invite",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"users",
+												"2000",
+												"resend-invite"
+											],
+											"query": [
+												{
+													"key": "admin@example.com",
+													"value": null,
+													"type": "text",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"id": "31f16d8e-4607-4732-b446-96e0dc7b592f",
