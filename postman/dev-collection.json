@@ -5825,19 +5825,9 @@
 									"name": "Login",
 									"event": [
 										{
-											"listen": "prerequest",
-											"script": {
-												"id": "60cbc745-77c7-4591-98c0-a12dd036c733",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
 											"listen": "test",
 											"script": {
-												"id": "94b83010-bcdf-4102-8460-07e1c13c8b1a",
+												"id": "3af72307-ab05-41a1-8577-f8f71675926f",
 												"exec": [
 													"pm.test('Reponse code to be 200', function () {",
 													"    pm.expect(pm.response.code).to.be.equal(200);",
@@ -5848,8 +5838,20 @@
 													"    jsonData = JSON.parse(responseBody);",
 													"});",
 													"",
-													"pm.environment.set('user_token', jsonData.data.token);",
+													"//pm.environment.set('user_token', jsonData.data.token);",
+													"pm.globals.set(\"user_token\",  jsonData.data.token);",
+													"pm.globals.set(\"user_id\",  jsonData.data.id);",
 													"//console.log(pm.environment.get(\"user_token\"));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cc23ab52-b1fd-4cb1-89ca-20a4db4fda66",
+												"exec": [
+													""
 												],
 												"type": "text/javascript"
 											}
