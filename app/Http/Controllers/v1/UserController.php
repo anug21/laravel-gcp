@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Services\FileService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserListRequest;
 use App\Http\Resources\UserResource;
@@ -71,8 +72,27 @@ class UserController extends Controller
         }
         $user = User::find($id);
         if ($user) {
+            $user->roles()->detach();
+            $user->permissions()->detach();
+            $image = config('constants.user.profile_image.image_params.path') . $user->image_filename;
+            $thumbnail = config('constants.user.profile_image.thumbnail_params.path') . $user->image_filename;
+            (new FileService())->deleteFiles([
+                $image,
+                $thumbnail
+
+            ]);
             $user->delete();
             return $this->response(null, __('messages.resource.deleted'));
+        }
+        return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
+    }
+
+    public function resendInvite(int $id): JsonResponse
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->sendEmailVerificationNotification();
+            return $this->response(null, __('messages.invitation.sent'));
         }
         return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
     }
