@@ -7023,803 +7023,815 @@
 									"name": "User tests",
 									"item": [
 										{
-											"name": "Users",
-											"event": [
+											"name": "Edit user",
+											"item": [
 												{
-													"listen": "test",
-													"script": {
-														"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
-														"exec": [
-															"pm.test('Reponse code to be 200', function () {",
-															"    pm.expect(pm.response.code).to.be.equal(200);",
-															"});",
-															"",
-															"pm.test(\"Body is present\", function () {",
-															"    ((responseBody) !== undefined && (responseBody.length > 1));",
-															"    jsonData = JSON.parse(responseBody);",
-															"});"
+													"name": "Users",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+																"exec": [
+																	"pm.test('Reponse code to be 200', function () {",
+																	"    pm.expect(pm.response.code).to.be.equal(200);",
+																	"});",
+																	"",
+																	"pm.test(\"Body is present\", function () {",
+																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
+																	"    jsonData = JSON.parse(responseBody);",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "355d04bd-897c-43c4-9e84-83ba9b19e8ef",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "GET",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": []
+														},
+														"url": {
+															"raw": "{{base_url}}/users",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "1",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "perPage",
+																	"value": "2",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Edit User",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "8b64cdfd-dddd-4075-b84a-cbe6a1d90eb6",
+																"exec": [
+																	"pm.test(\"Response status code is 200\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"});\r",
+																	"\r",
+																	"pm.test(\"Response has all required fields\", function () {\r",
+																	"    const responseData = pm.response.json().data;\r",
+																	"\r",
+																	"    pm.expect(responseData).to.be.an('object');\r",
+																	"    pm.expect(responseData.email).to.exist;\r",
+																	"    pm.expect(responseData.email_verified_at).to.exist;\r",
+																	"    pm.expect(responseData.id).to.exist;\r",
+																	"    pm.expect(responseData.created_at).to.exist;\r",
+																	"    pm.expect(responseData.updated_at).to.exist;\r",
+																	"    pm.expect(responseData.first_name).to.exist;\r",
+																	"    pm.expect(responseData.last_name).to.exist;\r",
+																	"    pm.expect(responseData.birth_date).to.exist;\r",
+																	"    pm.expect(responseData.initials).to.exist;\r",
+																	"    pm.expect(responseData.has_subscribed).to.be.a('boolean');\r",
+																	"    pm.expect(responseData.roles).to.be.an('array').that.is.not.empty;\r",
+																	"    pm.expect(responseData.onboarded).to.be.a('boolean');\r",
+																	"    pm.expect(responseData.image).to.exist;\r",
+																	"    pm.expect(responseData.image_thumbnail).to.exist;\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+																	"    pm.expect(responseData.birth_date).to.satisfy((value) => value === null || !isNaN(Date.parse(value)), \"Birth date should be null or a valid date format\");\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "e7fb509b-e48e-4804-a4c8-d166717178e7",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json",
+																"type": "text"
+															}
 														],
-														"type": "text/javascript"
-													}
+														"body": {
+															"mode": "formdata",
+															"formdata": []
+														},
+														"url": "{{base_url}}/users/1659"
+													},
+													"response": []
+												},
+												{
+													"name": "Update User -when  names are valid and  role is admin",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "772ce517-4e0f-4c88-a143-91a8b6ef6bad",
+																"exec": [
+																	"pm.test(\"Response status code is 200\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"    \r",
+																	"});\r",
+																	"\r",
+																	"pm.test(\"Response has all required fields\", function () {\r",
+																	"    const responseData = pm.response.json();\r",
+																	"\r",
+																	"    pm.expect(responseData).to.be.an('object');\r",
+																	"    pm.expect(responseData.data).to.be.an('object');\r",
+																	"    pm.expect(responseData.data.first_name).to.exist;\r",
+																	"    pm.expect(responseData.data.last_name).to.exist;\r",
+																	"    pm.expect(responseData.data.role).to.exist;\r",
+																	"    \r",
+																	"});\r",
+																	"\r",
+																	"pm.test(\"Response time is less than 500ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "29aca164-3092-4ae8-80ac-463e0c9510d8",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"first_name\":\"Mateuz\",\n    \"last_name\": \"kuznik\",\n    \"role\": \"super_admin\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{base_url}}/users/1",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "first_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "last_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "role",
+																	"value": "super_admin",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Update User -when first name is blank",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "f606ff83-25ec-4ca5-8635-d9df6938126c",
+																"exec": [
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"The first name field is required.\");\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Status code is 422\", function () {\r",
+																	"    pm.response.to.have.status(422);\r",
+																	"});\r",
+																	"pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});\r",
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "5b68d278-943e-4c18-aaa0-38581163c1ea",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"first_name\":\"\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"super_admin\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{base_url}}/users/1",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "first_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "last_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "role",
+																	"value": "super_admin",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Update User -when role is blank",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "15528449-175d-44e6-a797-64a97c6ee071",
+																"exec": [
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"The role field is required.\");\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Status code is 422\", function () {\r",
+																	"    pm.response.to.have.status(422);\r",
+																	"});\r",
+																	"pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});\r",
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "7ac2e533-4430-46a4-9348-0aa20782c4d8",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{base_url}}/users/1",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "first_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "last_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "role",
+																	"value": "super_admin",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Update User -when  names are valid and  role is user",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "1733d193-18db-4104-b25f-0aff77834f92",
+																"exec": [
+																	"pm.test(\"Response status code is 200\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"    \r",
+																	"});\r",
+																	"\r",
+																	"pm.test(\"Response has all required fields\", function () {\r",
+																	"    const responseData = pm.response.json();\r",
+																	"\r",
+																	"    pm.expect(responseData).to.be.an('object');\r",
+																	"    pm.expect(responseData.data).to.be.an('object');\r",
+																	"    pm.expect(responseData.data.first_name).to.exist;\r",
+																	"    pm.expect(responseData.data.last_name).to.exist;\r",
+																	"    pm.expect(responseData.data.role).to.exist;\r",
+																	"    //pm.expect(responseData.created_at).to.exist;\r",
+																	"    //pm.expect(responseData.updated_at).to.exist;\r",
+																	"   // pm.expect(responseData.first_name).to.exist;\r",
+																	"   // pm.expect(responseData.last_name).to.exist;\r",
+																	"   // pm.expect(responseData.birth_date).to.exist;\r",
+																	"   // pm.expect(responseData.initials).to.exist;\r",
+																	"   // pm.expect(responseData.has_subscribed).to.exist;\r",
+																	"});\r",
+																	"\r",
+																	"pm.test(\"Response time is less than 500ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "bc75d4ec-5c59-4e91-9055-b3ae954cf565",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"user\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{base_url}}/users/1",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "first_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "last_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "role",
+																	"value": "super_admin",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Update User -when last name is blank",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "a81d676a-573b-4e83-98bd-9a88399a4dd2",
+																"exec": [
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"The last name field is required.\");\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Status code is 422\", function () {\r",
+																	"    pm.response.to.have.status(422);\r",
+																	"});\r",
+																	"pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});\r",
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "1d887583-85a4-40e9-bae3-f265c537dbea",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"\",\n    \"role\": \"super_admin\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{base_url}}/users/1",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "first_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "last_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "role",
+																	"value": "super_admin",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Update User -when role is invalid",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "71e58791-6e44-46e7-91e6-3a79e13034f4",
+																"exec": [
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"The selected role is invalid.\");\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Status code is 422\", function () {\r",
+																	"    pm.response.to.have.status(422);\r",
+																	"});\r",
+																	"pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});\r",
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "d31938a2-f05f-445c-bd5f-63536dded176",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "PATCH",
+														"header": [
+															{
+																"key": "Authorization",
+																"value": "",
+																"type": "text"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"admin\"\n}\n\n",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{base_url}}/users/1",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"users",
+																"1"
+															],
+															"query": [
+																{
+																	"key": "first_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "last_name",
+																	"value": "fname",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "role",
+																	"value": "super_admin",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
 												}
 											],
-											"id": "355d04bd-897c-43c4-9e84-83ba9b19e8ef",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "GET",
-												"header": [],
-												"body": {
-													"mode": "formdata",
-													"formdata": []
-												},
-												"url": {
-													"raw": "{{base_url}}/users",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users"
-													],
-													"query": [
-														{
-															"key": "page",
-															"value": "1",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "perPage",
-															"value": "2",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
+											"id": "2e325d7f-6041-41aa-9a15-085e2e19b77c"
 										},
 										{
-											"name": "Edit User",
-											"event": [
+											"name": "Delete user",
+											"item": [
 												{
-													"listen": "test",
-													"script": {
-														"id": "8b64cdfd-dddd-4075-b84a-cbe6a1d90eb6",
-														"exec": [
-															"pm.test(\"Response status code is 200\", function () {\r",
-															"    pm.response.to.have.status(200);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response has all required fields\", function () {\r",
-															"    const responseData = pm.response.json().data;\r",
-															"\r",
-															"    pm.expect(responseData).to.be.an('object');\r",
-															"    pm.expect(responseData.email).to.exist;\r",
-															"    pm.expect(responseData.email_verified_at).to.exist;\r",
-															"    pm.expect(responseData.id).to.exist;\r",
-															"    pm.expect(responseData.created_at).to.exist;\r",
-															"    pm.expect(responseData.updated_at).to.exist;\r",
-															"    pm.expect(responseData.first_name).to.exist;\r",
-															"    pm.expect(responseData.last_name).to.exist;\r",
-															"    pm.expect(responseData.birth_date).to.exist;\r",
-															"    pm.expect(responseData.initials).to.exist;\r",
-															"    pm.expect(responseData.has_subscribed).to.be.a('boolean');\r",
-															"    pm.expect(responseData.roles).to.be.an('array').that.is.not.empty;\r",
-															"    pm.expect(responseData.onboarded).to.be.a('boolean');\r",
-															"    pm.expect(responseData.image).to.exist;\r",
-															"    pm.expect(responseData.image_thumbnail).to.exist;\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-															"    pm.expect(responseData.birth_date).to.satisfy((value) => value === null || !isNaN(Date.parse(value)), \"Birth date should be null or a valid date format\");\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
+													"name": "Delete User - successful delete",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "9a3fe32d-1d11-4358-8510-becfad2f030a",
+																"exec": [
+																	"pm.test(\"Response status code is 200\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"    \r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 500ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+																	"});\r",
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"Resource deleted successfully.\");\r",
+																	"    });\r",
+																	" pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "13f327af-b2c9-433f-bf2d-91357a12b6ef",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "DELETE",
+														"header": [],
+														"url": "{{base_url}}/users/1344"
+													},
+													"response": []
+												},
+												{
+													"name": "Delete User - invalid user id",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "4dcd921c-4285-4ec4-8ffa-a5b968c75b45",
+																"exec": [
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"Resource not found.\");\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Status code is 404\", function () {\r",
+																	"    pm.response.to.have.status(404);\r",
+																	"});\r",
+																	"pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "b379cae2-19ce-4952-9a90-9b68f83ae46e",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "DELETE",
+														"header": [],
+														"url": "{{base_url}}/users/4000"
+													},
+													"response": []
+												},
+												{
+													"name": "Delete User - user not authenticated",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "8b758734-ca8e-4f77-96ea-8ea3434e482d",
+																"exec": [
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"Unauthenticated.\");\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Status code is 401\", function () {\r",
+																	"    pm.response.to.have.status(401);\r",
+																	"});\r",
+																	"pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "852640c0-cfc2-4461-b56b-bf65bcc26508",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "noauth"
+														},
+														"method": "DELETE",
+														"header": [],
+														"url": "{{base_url}}/users/12"
+													},
+													"response": []
 												}
 											],
-											"id": "e7fb509b-e48e-4804-a4c8-d166717178e7",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "GET",
-												"header": [
-													{
-														"key": "Accept",
-														"value": "application/json",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "formdata",
-													"formdata": []
-												},
-												"url": "{{base_url}}/users/1659"
-											},
-											"response": []
-										},
-										{
-											"name": "Update User -when  names are valid and  role is admin",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "772ce517-4e0f-4c88-a143-91a8b6ef6bad",
-														"exec": [
-															"pm.test(\"Response status code is 200\", function () {\r",
-															"    pm.response.to.have.status(200);\r",
-															"    \r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response has all required fields\", function () {\r",
-															"    const responseData = pm.response.json();\r",
-															"\r",
-															"    pm.expect(responseData).to.be.an('object');\r",
-															"    pm.expect(responseData.data).to.be.an('object');\r",
-															"    pm.expect(responseData.data.first_name).to.exist;\r",
-															"    pm.expect(responseData.data.last_name).to.exist;\r",
-															"    pm.expect(responseData.data.role).to.exist;\r",
-															"    \r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response time is less than 500ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "29aca164-3092-4ae8-80ac-463e0c9510d8",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"Mateuz\",\n    \"last_name\": \"kuznik\",\n    \"role\": \"super_admin\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "Update User -when  names are valid and  role is user",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "1733d193-18db-4104-b25f-0aff77834f92",
-														"exec": [
-															"pm.test(\"Response status code is 200\", function () {\r",
-															"    pm.response.to.have.status(200);\r",
-															"    \r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response has all required fields\", function () {\r",
-															"    const responseData = pm.response.json();\r",
-															"\r",
-															"    pm.expect(responseData).to.be.an('object');\r",
-															"    pm.expect(responseData.data).to.be.an('object');\r",
-															"    pm.expect(responseData.data.first_name).to.exist;\r",
-															"    pm.expect(responseData.data.last_name).to.exist;\r",
-															"    pm.expect(responseData.data.role).to.exist;\r",
-															"    //pm.expect(responseData.created_at).to.exist;\r",
-															"    //pm.expect(responseData.updated_at).to.exist;\r",
-															"   // pm.expect(responseData.first_name).to.exist;\r",
-															"   // pm.expect(responseData.last_name).to.exist;\r",
-															"   // pm.expect(responseData.birth_date).to.exist;\r",
-															"   // pm.expect(responseData.initials).to.exist;\r",
-															"   // pm.expect(responseData.has_subscribed).to.exist;\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Response time is less than 500ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "bc75d4ec-5c59-4e91-9055-b3ae954cf565",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"user\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "Update User -when first name is blank",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "f606ff83-25ec-4ca5-8635-d9df6938126c",
-														"exec": [
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The first name field is required.\");\r",
-															"    });\r",
-															"\r",
-															"    pm.test(\"Status code is 422\", function () {\r",
-															"    pm.response.to.have.status(422);\r",
-															"});\r",
-															"pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});\r",
-															"pm.test(\"Response time is less than 600ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-															"});\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "5b68d278-943e-4c18-aaa0-38581163c1ea",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"super_admin\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "Update User -when last name is blank",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "a81d676a-573b-4e83-98bd-9a88399a4dd2",
-														"exec": [
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The last name field is required.\");\r",
-															"    });\r",
-															"\r",
-															"    pm.test(\"Status code is 422\", function () {\r",
-															"    pm.response.to.have.status(422);\r",
-															"});\r",
-															"pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});\r",
-															"pm.test(\"Response time is less than 600ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-															"});\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "1d887583-85a4-40e9-bae3-f265c537dbea",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"\",\n    \"role\": \"super_admin\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "Update User -when role is blank",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "15528449-175d-44e6-a797-64a97c6ee071",
-														"exec": [
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The role field is required.\");\r",
-															"    });\r",
-															"\r",
-															"    pm.test(\"Status code is 422\", function () {\r",
-															"    pm.response.to.have.status(422);\r",
-															"});\r",
-															"pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});\r",
-															"pm.test(\"Response time is less than 600ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-															"});\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "7ac2e533-4430-46a4-9348-0aa20782c4d8",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "Update User -when role is invalid",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "71e58791-6e44-46e7-91e6-3a79e13034f4",
-														"exec": [
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"The selected role is invalid.\");\r",
-															"    });\r",
-															"\r",
-															"    pm.test(\"Status code is 422\", function () {\r",
-															"    pm.response.to.have.status(422);\r",
-															"});\r",
-															"pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});\r",
-															"pm.test(\"Response time is less than 600ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-															"});\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "d31938a2-f05f-445c-bd5f-63536dded176",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "PATCH",
-												"header": [
-													{
-														"key": "Authorization",
-														"value": "",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{\n    \"first_name\":\"Mohan\",\n    \"last_name\": \"Sharma\",\n    \"role\": \"admin\"\n}\n\n",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{base_url}}/users/1",
-													"host": [
-														"{{base_url}}"
-													],
-													"path": [
-														"users",
-														"1"
-													],
-													"query": [
-														{
-															"key": "first_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "last_name",
-															"value": "fname",
-															"type": "text",
-															"disabled": true
-														},
-														{
-															"key": "role",
-															"value": "super_admin",
-															"type": "text",
-															"disabled": true
-														}
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "Delete User - successful delete",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "9a3fe32d-1d11-4358-8510-becfad2f030a",
-														"exec": [
-															"pm.test(\"Response status code is 200\", function () {\r",
-															"    pm.response.to.have.status(200);\r",
-															"    \r",
-															"});\r",
-															"pm.test(\"Response time is less than 500ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-															"});\r",
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"Resource deleted successfully.\");\r",
-															"    });\r",
-															" pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "13f327af-b2c9-433f-bf2d-91357a12b6ef",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "DELETE",
-												"header": [],
-												"url": "{{base_url}}/users/1344"
-											},
-											"response": []
-										},
-										{
-											"name": "Delete User - invalid user id",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "4dcd921c-4285-4ec4-8ffa-a5b968c75b45",
-														"exec": [
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"Resource not found.\");\r",
-															"    });\r",
-															"\r",
-															"    pm.test(\"Status code is 404\", function () {\r",
-															"    pm.response.to.have.status(404);\r",
-															"});\r",
-															"pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});\r",
-															"pm.test(\"Response time is less than 600ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "b379cae2-19ce-4952-9a90-9b68f83ae46e",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "bearer",
-													"bearer": {
-														"token": "{{user_token}}"
-													}
-												},
-												"method": "DELETE",
-												"header": [],
-												"url": "{{base_url}}/users/4000"
-											},
-											"response": []
-										},
-										{
-											"name": "Delete User - user not authenticated",
-											"event": [
-												{
-													"listen": "test",
-													"script": {
-														"id": "8b758734-ca8e-4f77-96ea-8ea3434e482d",
-														"exec": [
-															"pm.test(\"Body matches string\", function () {\r",
-															"    pm.expect(pm.response.text()).to.include(\"Unauthenticated.\");\r",
-															"    });\r",
-															"\r",
-															"    pm.test(\"Status code is 401\", function () {\r",
-															"    pm.response.to.have.status(401);\r",
-															"});\r",
-															"pm.test(\"Content-Type is present\", function () {\r",
-															"    pm.response.to.have.header(\"Content-Type\");\r",
-															"});\r",
-															"pm.test(\"Response time is less than 600ms\", function () {\r",
-															"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-															"});"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"id": "852640c0-cfc2-4461-b56b-bf65bcc26508",
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "noauth"
-												},
-												"method": "DELETE",
-												"header": [],
-												"url": "{{base_url}}/users/12"
-											},
-											"response": []
+											"id": "8f77abf4-b6f7-4d05-a87a-2f6986fc0efa"
 										}
 									],
 									"id": "203145eb-795e-48e0-a855-5d34e15fab2f"
