@@ -6092,7 +6092,7 @@
 											"formdata": [
 												{
 													"key": "email",
-													"value": "wth@yopmail.com",
+													"value": "aditya08@yopmail.com",
 													"type": "text",
 													"description": "{{user_email}}"
 												},
@@ -7834,6 +7834,11 @@
 												}
 											],
 											"id": "8f77abf4-b6f7-4d05-a87a-2f6986fc0efa"
+										},
+										{
+											"name": "New Folder",
+											"item": [],
+											"id": "7e7f84ce-3294-49c3-aa23-32dee295790c"
 										}
 									],
 									"id": "203145eb-795e-48e0-a855-5d34e15fab2f"
