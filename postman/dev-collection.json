@@ -8006,7 +8006,7 @@
 															"mode": "raw",
 															"raw": ""
 														},
-														"url": "{{base_url}}/users/350/resend-invite"
+														"url": "{{base_url}}/users/{{user_id}}/resend-invite"
 													},
 													"response": [
 														{
