@@ -7854,6 +7854,199 @@
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
 																	"});",
+																	"pm.globals.set('user_id', pm.response.json().data.id);"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "6265f3d4-2037-4d71-88d8-796154d27e05",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": []
+														},
+														"url": {
+															"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"invitations"
+															],
+															"query": [
+																{
+																	"key": "email",
+																	"value": "{{$randomEmail}}"
+																},
+																{
+																	"key": "role",
+																	"value": "user"
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Invite user - when user id is of pending user",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+																"exec": [
+																	"pm.test('Reponse code to be 200', function () {",
+																	"    pm.expect(pm.response.code).to.be.equal(200);",
+																	"});",
+																	"",
+																	"pm.test(\"Body is present\", function () {",
+																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
+																	"    jsonData = JSON.parse(responseBody);",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "a79fc514-d6ec-491a-9ed2-3d1f60f23791",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": []
+														},
+														"url": {
+															"raw": "{{base_url}}/invitations?email=leonora29@hotmail.com&role=user",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"invitations"
+															],
+															"query": [
+																{
+																	"key": "email",
+																	"value": "leonora29@hotmail.com"
+																},
+																{
+																	"key": "role",
+																	"value": "user"
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Invite user - when user id is not of pending user",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+																"exec": [
+																	"pm.test('Reponse code to be 200', function () {",
+																	"    pm.expect(pm.response.code).to.be.equal(200);",
+																	"});",
+																	"",
+																	"pm.test(\"Body is present\", function () {",
+																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
+																	"    jsonData = JSON.parse(responseBody);",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "aaaec335-fee5-48a2-8e4e-e51ed56036ab",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": []
+														},
+														"url": {
+															"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"invitations"
+															],
+															"query": [
+																{
+																	"key": "email",
+																	"value": "{{$randomEmail}}"
+																},
+																{
+																	"key": "role",
+																	"value": "user"
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Invite user Copy",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+																"exec": [
+																	"pm.test('Reponse code to be 200', function () {",
+																	"    pm.expect(pm.response.code).to.be.equal(200);",
+																	"});",
+																	"",
+																	"pm.test(\"Body is present\", function () {",
+																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
+																	"    jsonData = JSON.parse(responseBody);",
+																	"});",
 																	"",
 																	"",
 																	"pm.globals.set('user_id', pm.response.json().data.id);"
