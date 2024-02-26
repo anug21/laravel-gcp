@@ -8038,11 +8038,11 @@
 															"script": {
 																"id": "ed940fef-ab3c-4757-8af0-fb10ffbcb49c",
 																"exec": [
-																	"pm.test(\"Status code is 404\", function () {\r",
-																	"    pm.response.to.have.status(404);\r",
+																	"pm.test(\"Status code is 422\", function () {\r",
+																	"    pm.response.to.have.status(422);\r",
 																	"});\r",
 																	"pm.test(\"Body matches string\", function () {\r",
-																	"    pm.expect(pm.response.text()).to.include(\"Resource not found.\")\r",
+																	"    pm.expect(pm.response.text()).to.include(\"The selected id is invalid.\")\r",
 																	"});\r",
 																	"pm.test(\"Content-Type is present\", function () {\r",
 																	"    pm.response.to.have.header(\"Content-Type\");\r",
