@@ -41,9 +41,9 @@ class UserInvitationController extends Controller
     public function store(UserInvitationRequest $request, UserInvitationService $userInvitationService): JsonResponse
     {
         $invitation = $userInvitationService->create($request->safe()->toArray());
-
+        $data = app()->environment(['testing', 'local', 'staging']) ? ['id' => $invitation->id] : null;
         return $this->response(
-            [],
+            [$data],
             __('messages.invitation.created', [
                 'email' => $invitation->email,
                 'expiration' => $invitation->expires_at->format('r')
