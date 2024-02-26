@@ -7856,7 +7856,7 @@
 																	"});",
 																	"",
 																	"",
-																	"pm.globals.set('user_id', pm.response.json().id);"
+																	"pm.globals.set('user_id', pm.response.json().data.id);"
 																],
 																"type": "text/javascript"
 															}
@@ -8006,7 +8006,7 @@
 															"mode": "raw",
 															"raw": ""
 														},
-														"url": "{{base_url}}/users/351/resend-invite"
+														"url": "{{base_url}}/users/{{user_id}}/resend-invite"
 													},
 													"response": [
 														{
