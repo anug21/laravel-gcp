@@ -20,8 +20,12 @@ test('Get profile user not found', function () {
     $user = createSuperAdmin();
     $this->actingAs($user)
         ->withHeader('Accept', 'application/json')
-        ->get(route('users.get', ['id' => fake()->randomDigitNot($this->user->id)]))
-        ->assertNotFound();
+        ->get(route('users.get', ['id' => fake()->randomDigit()]))
+        ->assertJsonValidationErrorFor('id')
+        ->assertJsonStructure([
+            'message',
+            'errors' => ['id']
+        ]);
 });
 
 test('Get profile successfully', function () {
@@ -130,10 +134,10 @@ test('Delete user validation exception - id not found', function () {
     $this->actingAs(createSuperAdmin())
         ->withHeader('Accept', 'application/json')
         ->delete(route('users.delete', ['id' => fake()->randomDigitNot($this->user->id)]))
-        ->assertNotFound()
+        ->assertJsonValidationErrorFor('id')
         ->assertJsonStructure([
             'message',
-            'data'
+            'errors' => ['id']
         ]);
 });
 
@@ -185,10 +189,10 @@ test('User resend invitation exception - user not found', function () {
     $this->actingAs(createSuperAdmin())
         ->withHeader('Accept', 'application/json')
         ->post(route('users.resend.invite', ['id' => fake()->randomDigitNot($this->user->id)]))
-        ->assertNotFound()
+        ->assertJsonValidationErrorFor('id')
         ->assertJsonStructure([
             'message',
-            'data'
+            'errors' => ['id']
         ]);
 });
 
