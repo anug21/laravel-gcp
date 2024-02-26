@@ -8491,13 +8491,13 @@
 											"formdata": []
 										},
 										"url": {
-											"raw": "{{base_url}}/invitations/{{id}}",
+											"raw": "{{base_url}}/invitations/{{user_id}}",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"invitations",
-												"{{id}}"
+												"{{user_id}}"
 											],
 											"query": [
 												{
