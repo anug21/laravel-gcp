@@ -26,9 +26,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.delete')->can('delete user');
     Route::get('/users/{id}', [UserController::class, 'get'])->name('users.get')->can('view user');
     Route::get('/users', [UserController::class, 'index'])->name('users.index')->can('view users');
-    Route::post('/users/{id}/resend-invite', [UserController::class, 'resendInvite'])
-        ->name('users.resend.invite')
-        ->can('view user');
 });
 
 Route::get('/features', [FeatureController::class, 'index'])->name('features.index');

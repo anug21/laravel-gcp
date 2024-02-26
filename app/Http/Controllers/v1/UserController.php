@@ -91,14 +91,4 @@ class UserController extends Controller
         }
         return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
     }
-
-    public function resendInvite(ResendUserInviteRequest $request): JsonResponse
-    {
-        $user = UserInvitation::find($request->validated('id'));
-        if ($user) {
-            $user->sendEmailVerificationNotification();
-            return $this->response(null, __('messages.invitation.sent'));
-        }
-        return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
-    }
 }
