@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1;
 
 use App\Services\FileService;
+use App\Models\UserInvitation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserIdRequest;
 use App\Http\Requests\UserListRequest;
@@ -14,6 +15,7 @@ use App\Traits\HttpResponse;
 use App\Traits\SearchableIndex;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\ResendUserInviteRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -90,9 +92,9 @@ class UserController extends Controller
         return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
     }
 
-    public function resendInvite(UserIdRequest $request): JsonResponse
+    public function resendInvite(ResendUserInviteRequest $request): JsonResponse
     {
-        $user = User::find($request->validated('id'));
+        $user = UserInvitation::find($request->validated('id'));
         if ($user) {
             $user->sendEmailVerificationNotification();
             return $this->response(null, __('messages.invitation.sent'));
