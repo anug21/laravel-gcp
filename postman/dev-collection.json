@@ -7874,7 +7874,7 @@
 															"mode": "raw",
 															"raw": ""
 														},
-														"url": "{{base_url}}/users/1377/resend-invite"
+														"url": "{{base_url}}/users/350/resend-invite"
 													},
 													"response": [
 														{
@@ -7934,7 +7934,7 @@
 															"mode": "raw",
 															"raw": ""
 														},
-														"url": "{{base_url}}/users/4/resend-invite"
+														"url": "{{base_url}}/users/2000/resend-invite"
 													},
 													"response": [
 														{
