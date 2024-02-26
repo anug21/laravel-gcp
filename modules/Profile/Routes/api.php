@@ -7,7 +7,7 @@ use Modules\Profile\Http\Controllers\v1\ProfileNotificationController;
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::controller(ProfileController::class)
-        ->prefix('api/v2/profile')
+        ->prefix('api/v1/profile')
         ->group(function () {
             Route::get('/', 'show')->name('profile.show');
             Route::patch('/', 'update')->name('profile.update');

@@ -2,7 +2,7 @@
 
 use Modules\UserInvitation\Http\Controllers\v1\UserInvitationController;
 
-Route::group(['prefix' => 'api/v2', 'middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['prefix' => 'api/v1', 'middleware' => ['auth:sanctum', 'verified']], function () {
     Route::controller(UserInvitationController::class)
         ->prefix('/invitations')
         ->group(function () {
