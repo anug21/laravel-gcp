@@ -7153,7 +7153,7 @@
 															"mode": "formdata",
 															"formdata": []
 														},
-														"url": "{{base_url}}/users/{{user_id}}"
+														"url": "{{base_url}}/users/1391"
 													},
 													"response": []
 												},
@@ -7210,7 +7210,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\n    \"first_name\":\"Mateuz\",\n    \"last_name\": \"kuznik\",\n    \"role\": \"super_admin\"\n}\n\n",
+															"raw": "{\n    \"first_name\":\"leonardo\",\n    \"last_name\": \"Dicaprio\",\n    \"role\": \"super_admin\"\n}\n\n",
 															"options": {
 																"raw": {
 																	"language": "json"
@@ -7218,13 +7218,13 @@
 															}
 														},
 														"url": {
-															"raw": "{{base_url}}/users/{{user_id}}",
+															"raw": "{{base_url}}/users/1391",
 															"host": [
 																"{{base_url}}"
 															],
 															"path": [
 																"users",
-																"{{user_id}}"
+																"1391"
 															],
 															"query": [
 																{
