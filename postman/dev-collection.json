@@ -7887,7 +7887,10 @@
 																	"pm.variables.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 																	"var uid = pm.variables.get(\"UID\");\r",
 																	"var newuser_email = 'user_' + uid + '@yopmail.com';\r",
+																	"\r",
+																	"\r",
 																	"pm.environment.set(\"newuser_email\", newuser_email);\r",
+																	"console.log(newuser_email)\r",
 																	"\r",
 																	""
 																],
