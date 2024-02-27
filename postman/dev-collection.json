@@ -8038,7 +8038,7 @@
 															"script": {
 																"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
 																"exec": [
-																	""
+																	"pm.variables.set(\"newuser_email\", 'shalini@gmail.com');"
 																],
 																"type": "text/javascript"
 															}
@@ -8056,7 +8056,7 @@
 															"formdata": []
 														},
 														"url": {
-															"raw": "{{base_url}}/invitations?email={{newuser_email}}&role=user",
+															"raw": "{{base_url}}/invitations?email=newuser222@gmail&role=user",
 															"host": [
 																"{{base_url}}"
 															],
@@ -8066,7 +8066,7 @@
 															"query": [
 																{
 																	"key": "email",
-																	"value": "{{newuser_email}}"
+																	"value": "newuser222@gmail"
 																},
 																{
 																	"key": "role",
@@ -8141,126 +8141,6 @@
 														}
 													},
 													"response": []
-												},
-												{
-													"name": "Resend Invite - When  admin user is logged in and user id is of pending user",
-													"event": [
-														{
-															"listen": "test",
-															"script": {
-																"id": "af7ede2b-ad53-412f-8427-ade24773fd1e",
-																"exec": [
-																	"pm.test(\"Status code is 200\", function () {\r",
-																	"    pm.response.to.have.status(200);\r",
-																	"});\r",
-																	"pm.test(\"Body matches string\", function () {\r",
-																	"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\")\r",
-																	"});\r",
-																	"pm.test(\"Content-Type is present\", function () {\r",
-																	"    pm.response.to.have.header(\"Content-Type\");\r",
-																	"});\r",
-																	"pm.test(\"Response time is less than 600ms\", function () {\r",
-																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-																	"});"
-																],
-																"type": "text/javascript"
-															}
-														}
-													],
-													"id": "62b9b634-15e3-4765-a74b-05add301ecaa",
-													"protocolProfileBehavior": {
-														"disableBodyPruning": true
-													},
-													"request": {
-														"method": "POST",
-														"header": [],
-														"body": {
-															"mode": "raw",
-															"raw": ""
-														},
-														"url": "{{base_url}}/users/{{user_id}}/resend-invite"
-													},
-													"response": [
-														{
-															"id": "3b2aa39f-d61e-4f20-9fdf-5bdb30aea139",
-															"name": "Default",
-															"originalRequest": {
-																"method": "POST",
-																"header": [],
-																"body": {
-																	"mode": "raw",
-																	"raw": ""
-																},
-																"url": "{{url}}//api/v1/users/2/resend-invite"
-															},
-															"code": 403,
-															"_postman_previewlanguage": null,
-															"header": null,
-															"cookie": [],
-															"responseTime": null,
-															"body": "{\n    \"message\": \"Access Denied\"\n}"
-														}
-													]
-												},
-												{
-													"name": "resend invite - When admin user is logged in and user id not of pending user",
-													"event": [
-														{
-															"listen": "test",
-															"script": {
-																"id": "ed940fef-ab3c-4757-8af0-fb10ffbcb49c",
-																"exec": [
-																	"pm.test(\"Status code is 422\", function () {\r",
-																	"    pm.response.to.have.status(422);\r",
-																	"});\r",
-																	"pm.test(\"Body matches string\", function () {\r",
-																	"    pm.expect(pm.response.text()).to.include(\"The selected id is invalid.\")\r",
-																	"});\r",
-																	"pm.test(\"Content-Type is present\", function () {\r",
-																	"    pm.response.to.have.header(\"Content-Type\");\r",
-																	"});\r",
-																	"pm.test(\"Response time is less than 600ms\", function () {\r",
-																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
-																	"});"
-																],
-																"type": "text/javascript"
-															}
-														}
-													],
-													"id": "13c47686-4479-4c30-ac0b-4757e79e874c",
-													"protocolProfileBehavior": {
-														"disableBodyPruning": true
-													},
-													"request": {
-														"method": "POST",
-														"header": [],
-														"body": {
-															"mode": "raw",
-															"raw": ""
-														},
-														"url": "{{base_url}}/users/2000/resend-invite"
-													},
-													"response": [
-														{
-															"id": "9464c057-90a5-44ca-9bd4-e0a2a9296be2",
-															"name": "Default",
-															"originalRequest": {
-																"method": "POST",
-																"header": [],
-																"body": {
-																	"mode": "raw",
-																	"raw": ""
-																},
-																"url": "{{url}}//api/v1/users/4000/resend-invite"
-															},
-															"code": 404,
-															"_postman_previewlanguage": null,
-															"header": null,
-															"cookie": [],
-															"responseTime": null,
-															"body": "{\n    \"data\": null,\n    \"message\": \"Resource not found.\"\n}"
-														}
-													]
 												}
 											],
 											"id": "7e7f84ce-3294-49c3-aa23-32dee295790c"
