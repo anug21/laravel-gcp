@@ -7865,7 +7865,10 @@
 															"script": {
 																"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
 																"exec": [
-																	""
+																	"pm.variables.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
+																	"var uid = pm.variables.get(\"UID\");\r",
+																	"var newuser_email = 'user_' + uid + '@yopmail.com';\r",
+																	"pm.variables.set(\"newuser_email\", newuser_email);"
 																],
 																"type": "text/javascript"
 															}
@@ -7883,7 +7886,7 @@
 															"formdata": []
 														},
 														"url": {
-															"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
+															"raw": "{{base_url}}/invitations?email={{newuser_email}}&role=user",
 															"host": [
 																"{{base_url}}"
 															],
@@ -7893,7 +7896,7 @@
 															"query": [
 																{
 																	"key": "email",
-																	"value": "{{$randomEmail}}"
+																	"value": "{{newuser_email}}"
 																},
 																{
 																	"key": "role",
@@ -7947,7 +7950,7 @@
 															"formdata": []
 														},
 														"url": {
-															"raw": "{{base_url}}/invitations?email=joel.weissnat28@hotmail.com&role=user",
+															"raw": "{{base_url}}/invitations?email={{newuser_email}}&role=user",
 															"host": [
 																"{{base_url}}"
 															],
@@ -7957,7 +7960,7 @@
 															"query": [
 																{
 																	"key": "email",
-																	"value": "joel.weissnat28@hotmail.com"
+																	"value": "{{newuser_email}}"
 																},
 																{
 																	"key": "role",
