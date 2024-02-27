@@ -7862,7 +7862,17 @@
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
 																	"});",
-																	"//"
+																	"",
+																	"pm.test(\"Body matches string\", function () {",
+																	"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\");",
+																	"    });",
+																	"pm.test(\"Content-Type is present\", function () {",
+																	"    pm.response.to.have.header(\"Content-Type\");",
+																	"});",
+																	"pm.test(\"Response time is less than 600ms\", function () {",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);",
+																	"});",
+																	"/"
 																],
 																"type": "text/javascript"
 															}
@@ -8585,7 +8595,7 @@
 											"formdata": []
 										},
 										"url": {
-											"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
+											"raw": "{{base_url}}/invitations?email=leela@yopmail.com&role=user",
 											"host": [
 												"{{base_url}}"
 											],
@@ -8595,7 +8605,7 @@
 											"query": [
 												{
 													"key": "email",
-													"value": "{{$randomEmail}}"
+													"value": "leela@yopmail.com"
 												},
 												{
 													"key": "role",
