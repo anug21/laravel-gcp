@@ -7042,7 +7042,8 @@
 																	"pm.test(\"Body is present\", function () {",
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
-																	"});"
+																	"});",
+																	"pm.globals.set('user_id', pm.response.json().data.id);"
 																],
 																"type": "text/javascript"
 															}
@@ -7152,7 +7153,7 @@
 															"mode": "formdata",
 															"formdata": []
 														},
-														"url": "{{base_url}}/users/1659"
+														"url": "{{base_url}}/users/{{user_id}}"
 													},
 													"response": []
 												},
