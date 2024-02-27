@@ -7043,7 +7043,13 @@
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
 																	"});",
-																	"pm.globals.set('user_id', pm.response.json().data.id);"
+																	"//pm.globals.set('user_id', pm.response.json().data.id);",
+																	"",
+																	"jsonData = JSON.parse(responseBody);",
+																	"",
+																	"value =jsonData.data[0].first_name",
+																	"",
+																	"console.log(value)"
 																],
 																"type": "text/javascript"
 															}
