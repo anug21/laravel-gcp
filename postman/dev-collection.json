@@ -7218,13 +7218,13 @@
 															}
 														},
 														"url": {
-															"raw": "{{base_url}}/users/1701",
+															"raw": "{{base_url}}/users/{{user_id}}",
 															"host": [
 																"{{base_url}}"
 															],
 															"path": [
 																"users",
-																"1701"
+																"{{user_id}}"
 															],
 															"query": [
 																{
