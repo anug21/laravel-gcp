@@ -7946,7 +7946,7 @@
 															"formdata": []
 														},
 														"url": {
-															"raw": "{{base_url}}/invitations?email=evie1@yahoo.com&role=user",
+															"raw": "{{base_url}}/invitations?email=joel.weissnat28@hotmail.com&role=user",
 															"host": [
 																"{{base_url}}"
 															],
@@ -7956,7 +7956,7 @@
 															"query": [
 																{
 																	"key": "email",
-																	"value": "evie1@yahoo.com"
+																	"value": "joel.weissnat28@hotmail.com"
 																},
 																{
 																	"key": "role",
