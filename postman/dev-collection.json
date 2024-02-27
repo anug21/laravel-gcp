@@ -7885,7 +7885,7 @@
 																	"pm.variables.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 																	"var uid = pm.variables.get(\"UID\");\r",
 																	"var newuser_email = 'user_' + uid + '@yopmail.com';\r",
-																	"pm.variables.set(\"newuser_email\", newuser_email);"
+																	"pm.environment.set(\"newuser_email\", newuser_email);"
 																],
 																"type": "text/javascript"
 															}
@@ -8042,7 +8042,7 @@
 															"formdata": []
 														},
 														"url": {
-															"raw": "{{base_url}}/invitations?email={{$randomEmail}}&role=user",
+															"raw": "{{base_url}}/invitations?email={{newuser_email}}&role=user",
 															"host": [
 																"{{base_url}}"
 															],
@@ -8052,7 +8052,7 @@
 															"query": [
 																{
 																	"key": "email",
-																	"value": "{{$randomEmail}}"
+																	"value": "{{newuser_email}}"
 																},
 																{
 																	"key": "role",
