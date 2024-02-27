@@ -8397,7 +8397,26 @@
 													"pm.test(\"Body is present\", function () {",
 													"    ((responseBody) !== undefined && (responseBody.length > 1));",
 													"    jsonData = JSON.parse(responseBody);",
-													"});"
+													"});",
+													"",
+													"pm.environment.set(\"pending_user_id\", \"id\");",
+													"",
+													"jsonData = JSON.parse(responseBody);",
+													"",
+													"value =jsonData.data[0].id",
+													"",
+													"console.log(value)",
+													"pm.environment.set(\"pending_user_id\", value);"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6870050e-d958-42fb-bb7d-98c2fdcb7e23",
+												"exec": [
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -8543,13 +8562,13 @@
 											"formdata": []
 										},
 										"url": {
-											"raw": "{{base_url}}/invitations/{{user_id}}",
+											"raw": "{{base_url}}/invitations/{{pending_user_id}}",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"invitations",
-												"{{user_id}}"
+												"{{pending_user_id}}"
 											],
 											"query": [
 												{
