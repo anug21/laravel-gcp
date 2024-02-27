@@ -7874,9 +7874,8 @@
 																	"    pm.expect(responseData.data[0].id).to.exist;",
 																	"})",
 																	"",
+																	"",
 																	"})",
-																	"",
-																	"",
 																	"",
 																	"",
 																	""
@@ -8014,71 +8013,7 @@
 													"response": []
 												},
 												{
-													"name": "Invite user - resend invite to a user who is not in pending user list",
-													"event": [
-														{
-															"listen": "test",
-															"script": {
-																"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
-																"exec": [
-																	"pm.test('Reponse code to be 200', function () {",
-																	"    pm.expect(pm.response.code).to.be.equal(200);",
-																	"});",
-																	"",
-																	"pm.test(\"Body is present\", function () {",
-																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
-																	"    jsonData = JSON.parse(responseBody);",
-																	"});"
-																],
-																"type": "text/javascript"
-															}
-														},
-														{
-															"listen": "prerequest",
-															"script": {
-																"id": "7ee40fbc-a75c-40b5-b7c9-7d1e15514ca7",
-																"exec": [
-																	"pm.variables.set(\"newuser_email\", 'shalini@gmail.com');"
-																],
-																"type": "text/javascript"
-															}
-														}
-													],
-													"id": "aaaec335-fee5-48a2-8e4e-e51ed56036ab",
-													"protocolProfileBehavior": {
-														"disableBodyPruning": true
-													},
-													"request": {
-														"method": "POST",
-														"header": [],
-														"body": {
-															"mode": "formdata",
-															"formdata": []
-														},
-														"url": {
-															"raw": "{{base_url}}/invitations?email=newuser222@gmail&role=user",
-															"host": [
-																"{{base_url}}"
-															],
-															"path": [
-																"invitations"
-															],
-															"query": [
-																{
-																	"key": "email",
-																	"value": "newuser222@gmail"
-																},
-																{
-																	"key": "role",
-																	"value": "user"
-																}
-															]
-														}
-													},
-													"response": []
-												},
-												{
-													"name": "User Invitations Copy",
+													"name": "User Invitations",
 													"event": [
 														{
 															"listen": "test",
@@ -8093,7 +8028,13 @@
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
 																	"});",
-																	"pm.globals.set('user_id', pm.response.json().id);"
+																	"",
+																	"jsonData = JSON.parse(responseBody);",
+																	"",
+																	"value =jsonData.data[0].id",
+																	"",
+																	"console.log(value)",
+																	"pm.environment.set(\"pending_user_id\", value);"
 																],
 																"type": "text/javascript"
 															}
@@ -8117,6 +8058,71 @@
 															],
 															"path": [
 																"invitations"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "1",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "perPage",
+																	"value": "2",
+																	"type": "text",
+																	"disabled": true
+																},
+																{
+																	"key": "search",
+																	"value": "@",
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "Delete invitation",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "45459a75-2f38-4dc4-9a36-292a3c3f3d7a",
+																"exec": [
+																	"pm.test('Reponse code to be 200', function () {",
+																	"    pm.expect(pm.response.code).to.be.equal(200);",
+																	"});",
+																	"",
+																	"pm.test(\"Body is present\", function () {",
+																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
+																	"    jsonData = JSON.parse(responseBody);",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "86958328-7362-405c-b74f-eef925526504",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "DELETE",
+														"header": [],
+														"body": {
+															"mode": "formdata",
+															"formdata": []
+														},
+														"url": {
+															"raw": "{{base_url}}/invitations/{{pending_user_id}}",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"invitations",
+																"{{pending_user_id}}"
 															],
 															"query": [
 																{
