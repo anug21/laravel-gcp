@@ -7217,13 +7217,14 @@
 															}
 														},
 														"url": {
-															"raw": "{{base_url}}/users/1",
+															"raw": "{{base_url}}/users/1701/resend-invite",
 															"host": [
 																"{{base_url}}"
 															],
 															"path": [
 																"users",
-																"1"
+																"1701",
+																"resend-invite"
 															],
 															"query": [
 																{
@@ -8334,13 +8335,13 @@
 											}
 										},
 										"url": {
-											"raw": "{{base_url}}/users/1",
+											"raw": "{{base_url}}/users/1701",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"users",
-												"1"
+												"1701"
 											],
 											"query": [
 												{
