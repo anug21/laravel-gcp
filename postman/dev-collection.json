@@ -7217,14 +7217,13 @@
 															}
 														},
 														"url": {
-															"raw": "{{base_url}}/users/1701/resend-invite",
+															"raw": "{{base_url}}/users/1701",
 															"host": [
 																"{{base_url}}"
 															],
 															"path": [
 																"users",
-																"1701",
-																"resend-invite"
+																"1701"
 															],
 															"query": [
 																{
@@ -7908,7 +7907,7 @@
 													"response": []
 												},
 												{
-													"name": "Invite user - when user id is of pending user",
+													"name": "Invite user - resend Invite to a pending user",
 													"event": [
 														{
 															"listen": "test",
@@ -7972,7 +7971,7 @@
 													"response": []
 												},
 												{
-													"name": "Invite user - when user id is not of pending user",
+													"name": "Invite user - resend invite to a user who is not in pending user list",
 													"event": [
 														{
 															"listen": "test",
