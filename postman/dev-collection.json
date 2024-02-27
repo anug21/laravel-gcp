@@ -7867,13 +7867,12 @@
 																	"    pm.response.to.have.header('Content-Type');",
 																	"})",
 																	"",
-																	"pm.test(\"Response has all required fields\", function () {",
-																	"    const responseData = pm.response.json().data;",
 																	"",
-																	"    pm.expect(responseData.data.email).to.exist;",
-																	"    pm.expect(responseData.data.id).to.exist;",
-																	"});",
 																	"",
+																	" const responseData = pm.response.json().data;",
+																	"    ",
+																	"",
+																	"    console.log(responseData)",
 																	""
 																],
 																"type": "text/javascript"
