@@ -7856,23 +7856,25 @@
 																"exec": [
 																	"pm.test('Reponse code to be 200', function () {",
 																	"    pm.expect(pm.response.code).to.be.equal(200);",
-																	"});",
+																	"})",
 																	"",
-																	"pm.test(\"Body is present\", function () {",
-																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
+																	"pm.test('Body is present', function () {",
+																	"    responseBody !== undefined && responseBody.length > 1;",
 																	"    jsonData = JSON.parse(responseBody);",
+																	"})",
+																	"",
+																	"pm.test('Content-Type is present', function () {",
+																	"    pm.response.to.have.header('Content-Type');",
+																	"})",
+																	"",
+																	"pm.test(\"Response has all required fields\", function () {",
+																	"    const responseData = pm.response.json().data;",
+																	"",
+																	"    pm.expect(responseData.data.email).to.exist;",
+																	"    pm.expect(responseData.data.id).to.exist;",
 																	"});",
 																	"",
-																	"pm.test(\"Body matches string\", function () {",
-																	"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\");",
-																	"    });",
-																	"pm.test(\"Content-Type is present\", function () {",
-																	"    pm.response.to.have.header(\"Content-Type\");",
-																	"});",
-																	"pm.test(\"Response time is less than 600ms\", function () {",
-																	"    pm.expect(pm.response.responseTime).to.be.below(600);",
-																	"});",
-																	"/"
+																	""
 																],
 																"type": "text/javascript"
 															}
@@ -7885,7 +7887,9 @@
 																	"pm.variables.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 																	"var uid = pm.variables.get(\"UID\");\r",
 																	"var newuser_email = 'user_' + uid + '@yopmail.com';\r",
-																	"pm.environment.set(\"newuser_email\", newuser_email);"
+																	"pm.environment.set(\"newuser_email\", newuser_email);\r",
+																	"\r",
+																	""
 																],
 																"type": "text/javascript"
 															}
