@@ -7862,7 +7862,7 @@
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
 																	"});",
-																	"pm.globals.set('user_id', pm.response.json().data.id);"
+																	"//"
 																],
 																"type": "text/javascript"
 															}
@@ -7929,6 +7929,17 @@
 																	"pm.test(\"Body is present\", function () {",
 																	"    ((responseBody) !== undefined && (responseBody.length > 1));",
 																	"    jsonData = JSON.parse(responseBody);",
+																	"});",
+																	"",
+																	"",
+																	"pm.test(\"Body matches string\", function () {",
+																	"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\");",
+																	"    });",
+																	"pm.test(\"Content-Type is present\", function () {",
+																	"    pm.response.to.have.header(\"Content-Type\");",
+																	"});",
+																	"pm.test(\"Response time is less than 600ms\", function () {",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);",
 																	"});"
 																],
 																"type": "text/javascript"
