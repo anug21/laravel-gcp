@@ -7753,7 +7753,7 @@
 														},
 														"method": "DELETE",
 														"header": [],
-														"url": "{{base_url}}/users/1377"
+														"url": "{{base_url}}/users/{{user_id}}"
 													},
 													"response": []
 												},
@@ -7836,7 +7836,7 @@
 														},
 														"method": "DELETE",
 														"header": [],
-														"url": "{{base_url}}/users/12"
+														"url": "{{base_url}}/users/{{user_id}}"
 													},
 													"response": []
 												}
