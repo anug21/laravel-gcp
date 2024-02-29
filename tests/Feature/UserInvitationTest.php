@@ -102,3 +102,11 @@ test('Unverified user can not resend invite without logged in', function () {
         ->post(route('invitations.resend'))
         ->assertUnauthorized();
 });
+
+test('Resend invite - with route url', function () {
+    createUser();
+    $this->withHeader('Accept', 'application/json')
+        ->post('api/v1/invitations/resend')
+        ->assertUnauthorized();
+});
+
