@@ -18,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Arr;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserInvitationController extends Controller
 {
@@ -75,5 +76,19 @@ class UserInvitationController extends Controller
     {
         $service->invalidate($request->validated()['id']);
         return $this->response([], __('messages.invitation.deleted'));
+    }
+
+    public function resend(): JsonResponse
+    {
+        try {
+            $user = auth()->user();
+            if ($user->hasVerifiedEmail()) {
+                return $this->response(null, __('messages.user.email_already_verified'));
+            }
+            $user->sendEmailVerificationNotification();
+            return $this->response(null, __('messages.invitation.sent'));
+        } catch (\Exception $e) {
+            return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
+        }
     }
 }
