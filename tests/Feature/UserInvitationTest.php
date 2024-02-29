@@ -73,3 +73,32 @@ test('Cannot verify expired invitation', function () {
     $this->get(route('users.invitation.verify', $invitation->signature))
         ->assertRedirectContains(config('frontend.invitation_fail_redirect'));
 });
+
+test('Unverified user can resend invite', function () {
+    $user = createUser();
+    $user->email_verified_at = null;
+    $user->save();
+    $this->actingAs($user)
+        ->post(route('invitations.resend'))
+        ->assertOk()
+        ->assertJsonFragment([
+            'data' => null,
+            'message' => __('messages.invitation.sent')
+        ]);
+});
+
+test('Already verified user can not resend invite', function () {
+    $this->actingAs(createUser())
+        ->post(route('invitations.resend'))
+        ->assertOk()
+        ->assertJsonFragment([
+            'data' => null,
+            'message' => __('messages.user.email_already_verified')
+        ]);
+});
+
+test('Unverified user can not resend invite without logged in', function () {
+    $this->withHeader('Accept', 'application/json')
+        ->post(route('invitations.resend'))
+        ->assertUnauthorized();
+});
