@@ -8461,7 +8461,7 @@
 																	"    jsonData = JSON.parse(responseBody);\r",
 																	"});\r",
 																	"pm.test(\"Body matches string\", function () {\r",
-																	"    pm.expect(pm.response.text()).to.include(\"User e-mail already marked as verified\");\r",
+																	"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\");\r",
 																	"    });\r",
 																	"    pm.test(\"Content-Type is present\", function () {\r",
 																	"    pm.response.to.have.header(\"Content-Type\");\r",
