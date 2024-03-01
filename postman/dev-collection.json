@@ -8445,7 +8445,7 @@
 											"name": "Resend Invite after sign up",
 											"item": [
 												{
-													"name": "invitations/resend Copy",
+													"name": "Invitation resend",
 													"event": [
 														{
 															"listen": "test",
@@ -8479,13 +8479,19 @@
 														"disableBodyPruning": true
 													},
 													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
 														"method": "POST",
 														"header": [],
 														"body": {
 															"mode": "raw",
 															"raw": ""
 														},
-														"url": "https://61a933df-bc24-4d92-9cfb-caf83df7da04.mock.pstmn.io/invitations/resend"
+														"url": "{{base_url}}/invitations/resend"
 													},
 													"response": [
 														{
