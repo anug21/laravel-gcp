@@ -6493,7 +6493,7 @@
 									]
 								},
 								{
-									"name": "/invitations/resend",
+									"name": "Invitations Resend",
 									"event": [
 										{
 											"listen": "test",
@@ -6539,7 +6539,7 @@
 											"mode": "raw",
 											"raw": ""
 										},
-										"url": "{{url}}//invitations/resend"
+										"url": "{{base_url}}/invitations/resend"
 									},
 									"response": [
 										{
