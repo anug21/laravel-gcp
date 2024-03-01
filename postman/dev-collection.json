@@ -10731,6 +10731,43 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "invitations/resend Copy",
+			"id": "166c0cb2-f2d3-4b17-b490-e6bb25597cbe",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://61a933df-bc24-4d92-9cfb-caf83df7da04.mock.pstmn.io/invitations/resend"
+			},
+			"response": [
+				{
+					"id": "f4da3496-637d-449c-a854-084330d03267",
+					"name": "Default",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "{{url}}/invitations/resend"
+					},
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n    \"data\": null,\n    \"message\": \"User e-mail already marked as verified\"\n}"
+				}
+			]
 		}
 	],
 	"event": [
