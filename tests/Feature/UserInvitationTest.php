@@ -109,4 +109,3 @@ test('Resend invite - with route url', function () {
         ->post('api/v1/invitations/resend')
         ->assertUnauthorized();
 });
-
