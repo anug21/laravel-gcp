@@ -92,8 +92,8 @@ test('Password format validations', function () {
     $responseConsecutiveCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
         'email' => $email,
-        'password' => 'P@sssword1',
-        'password_confirmation' => 'P@sssword1',
+        'password' => 'P@sssssword1',
+        'password_confirmation' => 'P@sssssword1',
     ]);
 
     $responseConsecutiveCharsPassword->assertInvalid();
@@ -101,8 +101,8 @@ test('Password format validations', function () {
     $responseSequentialIncCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
         'email' => $email,
-        'password' => 'P@ssword123',
-        'password_confirmation' => 'P@sssword123',
+        'password' => 'P@ssword12345',
+        'password_confirmation' => 'P@sssword12345',
     ]);
 
     $responseSequentialIncCharsPassword->assertInvalid();
@@ -110,8 +110,8 @@ test('Password format validations', function () {
     $responseSequentialDecCharsPassword = $this->post(route('register'), [
         'first_name' => 'Test',
         'email' => $email,
-        'password' => 'P@ssword321',
-        'password_confirmation' => 'P@sssword321',
+        'password' => 'P@ssword54321',
+        'password_confirmation' => 'P@sssword54321',
     ]);
 
     $responseSequentialDecCharsPassword->assertInvalid();
