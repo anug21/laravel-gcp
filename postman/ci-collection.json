@@ -3357,7 +3357,7 @@
 													"    pm.response.to.have.status(422);",
 													"});",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.text()).to.include(\"The password must not contain more than 2 consecutive identical characters.\");",
+													"    pm.expect(pm.response.text()).to.include(\"The password must not contain more than 4 consecutive identical characters.\");",
 													" });   ",
 													"pm.test(\"Content-Type is present\", function () {",
 													"    pm.response.to.have.header(\"Content-Type\");",
@@ -3382,8 +3382,8 @@
 											"script": {
 												"id": "990e5e57-b150-4232-a44c-c90299e10c88",
 												"exec": [
-													"pm.variables.set(\"password\", \"Admin@333\");\r",
-													"pm.variables.set(\"password_confirmation\",\"Admin@333\");\r",
+													"pm.variables.set(\"password\", \"Admin@33333\");\r",
+													"pm.variables.set(\"password_confirmation\",\"Admin@33333\");\r",
 													"pm.environment.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
