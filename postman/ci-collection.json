@@ -3633,7 +3633,7 @@
 													"    pm.response.to.have.status(422);",
 													"});",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.json().errors.password[0]).to.include(\"The password must not contain more than 2 sequential increasing/decreasing characters.\");",
+													"    pm.expect(pm.response.json().errors.password[0]).to.include(\"The password must not contain more than 4 sequential increasing/decreasing characters.\");",
 													"});   ",
 													"pm.test(\"Content-Type is present\", function () {",
 													"    pm.response.to.have.header(\"Content-Type\");",
@@ -3650,8 +3650,8 @@
 											"script": {
 												"id": "990e5e57-b150-4232-a44c-c90299e10c88",
 												"exec": [
-													"pm.variables.set(\"password\", \"Coffee@1233\");\r",
-													"pm.variables.set(\"password_confirmation\",\"Coffee@1233\");\r",
+													"pm.variables.set(\"password\", \"Coffee@12345\");\r",
+													"pm.variables.set(\"password_confirmation\",\"Coffee@12345\");\r",
 													"pm.environment.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
@@ -3902,7 +3902,7 @@
 													"})",
 													"",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.json().errors.password[0]).to.include(\"The password must not contain more than 2 sequential increasing/decreasing characters.\");",
+													"    pm.expect(pm.response.json().errors.password[0]).to.include(\"The password must not contain more than 4 sequential increasing/decreasing characters.\");",
 													"});",
 													"",
 													"pm.test('Content-Type is present', function () {",
@@ -3923,8 +3923,8 @@
 											"script": {
 												"id": "990e5e57-b150-4232-a44c-c90299e10c88",
 												"exec": [
-													"pm.variables.set(\"password\", \"Coffee@765\");\r",
-													"pm.variables.set(\"password_confirmation\",\"Coffee@765\");\r",
+													"pm.variables.set(\"password\", \"Coffee@76543\");\r",
+													"pm.variables.set(\"password_confirmation\",\"Coffee@76543\");\r",
 													"pm.environment.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
