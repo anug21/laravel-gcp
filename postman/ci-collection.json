@@ -3346,7 +3346,7 @@
 									]
 								},
 								{
-									"name": "Sign Up Api shows validation for password with 3 consecutive identical chars",
+									"name": "Sign Up Api shows validation for password with more than 4  consecutive identical chars",
 									"event": [
 										{
 											"listen": "test",
@@ -3622,7 +3622,7 @@
 									]
 								},
 								{
-									"name": "Sign Up Api shows validation for password with more than 2 increasing numbers",
+									"name": "Sign Up Api shows validation for password with more than 4 increasing numbers",
 									"event": [
 										{
 											"listen": "test",
@@ -3890,7 +3890,7 @@
 									]
 								},
 								{
-									"name": "Sign Up Api shows validation for password with 3more than 2  decreasing  numbers",
+									"name": "Sign Up Api shows validation for password with 3more than 4  decreasing  numbers",
 									"event": [
 										{
 											"listen": "test",
@@ -4163,7 +4163,7 @@
 									]
 								},
 								{
-									"name": "Sign Up Api shows validation for password with more than 2 increasing letters",
+									"name": "Sign Up Api shows validation for password with more than 4 increasing letters",
 									"event": [
 										{
 											"listen": "test",
@@ -4174,7 +4174,7 @@
 													"    pm.response.to.have.status(422);",
 													"});",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.json().errors.password[0]).to.include( \"The password must not contain more than 2 sequential increasing/decreasing characters.\");",
+													"    pm.expect(pm.response.json().errors.password[0]).to.include( \"The password must not contain more than 4 sequential increasing/decreasing characters.\");",
 													" });   ",
 													"pm.test(\"Content-Type is present\", function () {",
 													"    pm.response.to.have.header(\"Content-Type\");",
@@ -4439,7 +4439,7 @@
 									]
 								},
 								{
-									"name": "Sign Up Api shows validation for password with more than 2 decreasing letters",
+									"name": "Sign Up Api shows validation for password with more than 4 decreasing letters",
 									"event": [
 										{
 											"listen": "test",
@@ -4450,7 +4450,7 @@
 													"    pm.response.to.have.status(422);",
 													"});",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.json().errors.password[0]).to.include( \"The password must not contain more than 2 sequential increasing/decreasing characters.\");",
+													"    pm.expect(pm.response.json().errors.password[0]).to.include( \"The password must not contain more than 4 sequential increasing/decreasing characters.\");",
 													" });   ",
 													"pm.test(\"Content-Type is present\", function () {",
 													"    pm.response.to.have.header(\"Content-Type\");",
