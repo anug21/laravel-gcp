@@ -41,7 +41,12 @@ workflows:
   version: 2
   ci-cd:
     jobs:
-      - ci
+      - ci:
+          filters:
+            branches:
+              only:
+                - main
+                - staging
       - cd:
           requires:
             - ci
