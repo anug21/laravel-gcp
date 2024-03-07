@@ -3357,7 +3357,7 @@
 													"    pm.response.to.have.status(422);",
 													"});",
 													"pm.test(\"Body matches string\", function () {",
-													"    pm.expect(pm.response.text()).to.include(\"The password must not contain more than 4 consecutive identical characters.\");",
+													"    pm.expect(pm.response.text()).to.include(\"The password must not contain more than 2 consecutive identical characters.\");",
 													" });   ",
 													"pm.test(\"Content-Type is present\", function () {",
 													"    pm.response.to.have.header(\"Content-Type\");",
