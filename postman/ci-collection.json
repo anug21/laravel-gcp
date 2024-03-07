@@ -3346,7 +3346,7 @@
 									]
 								},
 								{
-									"name": "Sign Up Api shows validation for password with more than 4  consecutive identical chars",
+									"name": "Sign Up Api shows validation for password with more than 2  consecutive identical chars",
 									"event": [
 										{
 											"listen": "test",
