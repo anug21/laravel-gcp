@@ -2,6 +2,7 @@
 
 namespace Modules\UserInvitation\Http\Controllers\v1;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Modules\UserInvitation\Models\UserInvitation;
 use Modules\UserInvitation\Http\Requests\UserInvitationDeleteRequest;
@@ -90,5 +91,14 @@ class UserInvitationController extends Controller
         } catch (\Exception $e) {
             return $this->response(null, __('messages.resource.not_found'), Response::HTTP_NOT_FOUND);
         }
+    }
+
+    public function resendInvite(string $email): JsonResponse
+    {
+        $user = User::query()->where('email', $email)->first();
+        if (!empty($user) && !$user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+        }
+        return $this->response(null, __('messages.invitation.sent'));
     }
 }

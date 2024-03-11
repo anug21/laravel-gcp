@@ -16,3 +16,6 @@ Route::group(['prefix' => 'api/v1', 'middleware' => ['auth:sanctum']], function 
             Route::post('/resend', 'resend')->name('invitations.resend');
         });
 });
+Route::post('api/v1/invitations/resend/{email}', [UserInvitationController::class, 'resendInvite'])
+    ->middleware(['throttle:6,1'])
+    ->name('invite.resend');
