@@ -1,6 +1,11 @@
 <?php
 
-uses(Tests\TestCase::class)->in( __DIR__ );
+uses(
+    Tests\TestCase::class,
+    Illuminate\Foundation\Testing\RefreshDatabase::class
+)->beforeEach(function () {
+    $this->seed();
+});
 
 test('User can resend invite immediately after signup - with route url', function () {
     $this->withHeader('Accept', 'application/json')
