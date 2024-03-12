@@ -8976,7 +8976,7 @@
 									"request": {
 										"method": "POST",
 										"header": [],
-										"url": "{{base_url}}/invitations/resend/{{user_email}}"
+										"url": "{{base_url}}/invitations/resend/useremail@yopmail.com"
 									},
 									"response": []
 								}
