@@ -3382,8 +3382,8 @@
 											"script": {
 												"id": "990e5e57-b150-4232-a44c-c90299e10c88",
 												"exec": [
-													"pm.variables.set(\"password\", \"Admin@33333\");\r",
-													"pm.variables.set(\"password_confirmation\",\"Admin@33333\");\r",
+													"pm.variables.set(\"password\", \"Admin@333\");\r",
+													"pm.variables.set(\"password_confirmation\",\"Admin@333\");\r",
 													"pm.environment.set(\"UID\", Math.floor(Math.random() * Math.floor(99999)));\r",
 													"var uid = pm.environment.get(\"UID\");\r",
 													"var email = 'user_' + uid + '@yopmail.com';\r",
