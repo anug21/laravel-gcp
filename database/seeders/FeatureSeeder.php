@@ -19,9 +19,9 @@ class FeatureSeeder extends Seeder
 
         foreach ($features as $feature) {
             DB::statement(
-                "
-                INSERT INTO features (name, scope, value, created_at, updated_at)
-                VALUES ('{$feature}Feature', '__global', 'true', NOW(), NOW());"
+                "INSERT INTO features (name, scope, value, created_at, updated_at)
+                VALUES ('{$feature}Feature', '__global', 'true', NOW(), NOW())
+                ON CONFLICT DO NOTHING"
             );
         }
     }
