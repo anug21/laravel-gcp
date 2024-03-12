@@ -8966,6 +8966,19 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "User resend invite after signup - without login",
+									"id": "98223d8a-a661-4e04-b19b-9762467ea49a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": "{{base_url}}/invitations/resend/{{user_email}}"
+									},
+									"response": []
 								}
 							],
 							"id": "16a37861-380b-4a93-afb9-2f2ac4315716",
