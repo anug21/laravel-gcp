@@ -8624,14 +8624,14 @@
 														"method": "POST",
 														"header": [],
 														"url": {
-															"raw": "{{base_url}}/invitations/resend/useremail@yopmail.com",
+															"raw": "{{base_url}}/invitations/resend/invalidemail@yopmail.com",
 															"host": [
 																"{{base_url}}"
 															],
 															"path": [
 																"invitations",
 																"resend",
-																"useremail@yopmail.com"
+																"invalidemail@yopmail.com"
 															],
 															"query": [
 																{
