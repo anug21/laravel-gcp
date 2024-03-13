@@ -8720,6 +8720,44 @@
 										}
 									},
 									"response": []
+								},
+								{
+									"name": "Resend Invite Copy",
+									"id": "725653ab-531c-4cbf-ad4d-ac2e68a87f73",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user_token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "{{base_url}}/invitations/resend/{email}",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"",
+												"invitations",
+												"resend",
+												"{email}"
+											],
+											"query": [
+												{
+													"key": "admin@example.com",
+													"value": null,
+													"type": "text",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
 								}
 							],
 							"id": "31f16d8e-4607-4732-b446-96e0dc7b592f",
