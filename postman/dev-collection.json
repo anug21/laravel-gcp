@@ -8516,7 +8516,7 @@
 													]
 												},
 												{
-													"name": "User resend invite after signup - without login",
+													"name": "User resend invite after signup - without login - valid id",
 													"event": [
 														{
 															"listen": "test",
@@ -8546,6 +8546,71 @@
 														}
 													],
 													"id": "725653ab-531c-4cbf-ad4d-ac2e68a87f73",
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"auth": {
+															"type": "bearer",
+															"bearer": {
+																"token": "{{user_token}}"
+															}
+														},
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{base_url}}/invitations/resend/useremail@yopmail.com",
+															"host": [
+																"{{base_url}}"
+															],
+															"path": [
+																"invitations",
+																"resend",
+																"useremail@yopmail.com"
+															],
+															"query": [
+																{
+																	"key": "admin@example.com",
+																	"value": null,
+																	"type": "text",
+																	"disabled": true
+																}
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "User resend invite after signup - without login - invalid id",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "4e03d2db-8e2b-4fc6-9d92-68c62434c2ed",
+																"exec": [
+																	"pm.test('Reponse code to be 200', function () {\r",
+																	"    pm.expect(pm.response.code).to.be.equal(200);\r",
+																	"});\r",
+																	"\r",
+																	"pm.test(\"Body is present\", function () {\r",
+																	"    ((responseBody) !== undefined && (responseBody.length > 1));\r",
+																	"    jsonData = JSON.parse(responseBody);\r",
+																	"});\r",
+																	"pm.test(\"Body matches string\", function () {\r",
+																	"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\");\r",
+																	"    });\r",
+																	"    pm.test(\"Content-Type is present\", function () {\r",
+																	"    pm.response.to.have.header(\"Content-Type\");\r",
+																	"});\r",
+																	"pm.test(\"Response time is less than 600ms\", function () {\r",
+																	"    pm.expect(pm.response.responseTime).to.be.below(600);\r",
+																	"});"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"id": "7b5dbbbc-cf77-40e8-ae08-0eede4a6883f",
 													"protocolProfileBehavior": {
 														"disableBodyPruning": true
 													},
