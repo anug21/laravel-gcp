@@ -8722,7 +8722,21 @@
 									"response": []
 								},
 								{
-									"name": "Resend Invite Copy",
+									"name": "User resend invite after signup - without login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "4e03d2db-8e2b-4fc6-9d92-68c62434c2ed",
+												"exec": [
+													"pm.test(\"Body matches string\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Invitation sent successfully.\");\r",
+													"    });"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"id": "725653ab-531c-4cbf-ad4d-ac2e68a87f73",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true
@@ -8737,15 +8751,14 @@
 										"method": "POST",
 										"header": [],
 										"url": {
-											"raw": "{{base_url}}/invitations/resend/{email}",
+											"raw": "{{base_url}}/invitations/resend/useremail@yopmail.com",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
-												"",
 												"invitations",
 												"resend",
-												"{email}"
+												"useremail@yopmail.com"
 											],
 											"query": [
 												{
@@ -9007,6 +9020,29 @@
 								},
 								{
 									"name": "User resend invite after signup - without login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "5a46c4d4-a45f-49b4-b1f6-cab5f666a188",
+												"exec": [
+													"pm.test(\"Response status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"    \r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response has all required fields\", function () {\r",
+													"    const responseData = pm.response.json();\r",
+													"})\r",
+													"\r",
+													"pm.test(\"Response time is less than 500ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
 									"id": "98223d8a-a661-4e04-b19b-9762467ea49a",
 									"protocolProfileBehavior": {
 										"disableBodyPruning": true
