@@ -26,13 +26,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"<string>\",\n  \"password\": \"<string>\"\n}",
-					"options": {
-						"raw": {
-							"headerFamily": "json",
-							"language": "json"
-						}
-					}
+					"raw": "{\n  \"email\": \"neem+{{$randomInt}}@yopmail.com\",\n  \"password\": \"Test@4426\"\n}"
 				},
 				"url": {
 					"raw": "{{baseUrl}}/register",
