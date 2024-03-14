@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://staging-fl-platform-api.herokuapp.com/api/v1
 paths:
-  /regiter:
+  /register:
     post:
       requestBody:
         required: true
