@@ -29,7 +29,7 @@ class PasswordValidationServiceProvider extends ServiceProvider
                 ->rules([
                     'not_current',
                     'no_email',
-                    'max_consecutive:4',
+                    'max_consecutive:2',
                     'max_sequential:4',
                     'max_keyboard_sequential:4'
                 ])
