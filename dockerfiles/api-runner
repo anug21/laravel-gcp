@@ -2,7 +2,10 @@
 
 composer install
 
-composer run dev
+php artisan migrate --force --seed
+php artisan cache:clear
+
+#composer run dev
 
 git config --global --add safe.directory /var/www/html
 git config core.filemode false
