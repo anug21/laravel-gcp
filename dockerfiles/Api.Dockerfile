@@ -8,9 +8,10 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 #COPY php.ini /usr/bin
-RUN chmod -R 777 storage bootstrap
-RUN chown -R www-data:www-data storage bootstrap
 
 RUN sed -i "s/80/${PORT}/g" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+RUN chmod -R 777 storage bootstrap
+RUN chown -R www-data:www-data storage bootstrap
+RUN a2enmod rewrite
 
 ENTRYPOINT ["/var/www/html/dockerfiles/api-runner"]
