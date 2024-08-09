@@ -17,13 +17,13 @@ class FeatureController extends Controller
     public function index(): View
     {
         return view('features.list', [
-            'features' => Feature::for('__global')->all()
+            'features' => Feature::for('__global')->all(),
         ]);
     }
 
     public function toggle(Request $request)
     {
-        if (!$request->has('featureName') || !in_array($request->featureName, Feature::defined())) {
+        if (! $request->has('featureName') || ! in_array($request->featureName, Feature::defined())) {
             return Redirect::route('admin.features.index');
         }
 
@@ -41,7 +41,7 @@ class FeatureController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        if (!$request->has('featureName') || empty(trim($request->featureName))) {
+        if (! $request->has('featureName') || empty(trim($request->featureName))) {
             return Redirect::route('admin.features.create')->with(
                 'notification',
                 new NotificationVO(
@@ -63,14 +63,15 @@ class FeatureController extends Controller
             );
         }
 
-        Feature::define($request->featureName, (bool)$request->active);
+        Feature::define($request->featureName, (bool) $request->active);
         Feature::for('__global')->active($request->featureName); // resolve once to save in DB
+
         return Redirect::route('admin.features.index');
     }
 
     public function destroy(Request $request): RedirectResponse
     {
-        if (!$request->has('featureName') || !in_array($request->featureName, Feature::defined())) {
+        if (! $request->has('featureName') || ! in_array($request->featureName, Feature::defined())) {
             return Redirect::route('admin.features.index');
         }
 
